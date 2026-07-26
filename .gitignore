@@ -1,0 +1,14 @@
+# Dependencias y compilación
+node_modules/
+dist/
+coverage/
+
+# Configuración local y secretos
+.env
+.env.*
+!.env.example
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+.vscode/
