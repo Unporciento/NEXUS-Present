@@ -18,7 +18,7 @@ NEXUS Present no es una presentación concreta: es una base modular, rápida y m
 | IA principal | Codex |
 | Documentación | README · CHANGELOG · AI_HANDOFF · SECURITY |
 | Último respaldo | 26/07/2026 — copia local inicial |
-| Próxima fase | Definir núcleo arquitectónico y estructura de carpetas |
+| Próxima fase | Definir núcleo arquitectónico y el diseño del módulo Laboratorio |
 
 ## Principios
 
@@ -46,3 +46,4 @@ docs/            # Decisiones y guía de arquitectura
 - [Registro de cambios](CHANGELOG.md)
 - [Guía de continuidad para IA](AI_HANDOFF.md)
 - [Política de seguridad](SECURITY.md)
+- [Especificación del Laboratorio](docs/LABORATORY.md)
