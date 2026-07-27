@@ -10,3 +10,4 @@ Todos los cambios relevantes de NEXUS Present se documentarán aquí.
 - Ficha técnica de proyecto.
 - Documentación de arranque y propuesta de arquitectura.
 - Especificación obligatoria del módulo Laboratorio para una fase futura.
+- Estándar de desarrollo eficiente del proyecto.

@@ -47,3 +47,4 @@ docs/            # Decisiones y guía de arquitectura
 - [Guía de continuidad para IA](AI_HANDOFF.md)
 - [Política de seguridad](SECURITY.md)
 - [Especificación del Laboratorio](docs/LABORATORY.md)
+- [Estándar de desarrollo eficiente](docs/DEVELOPMENT_STANDARD.md)

@@ -10,6 +10,7 @@ La fase actual es de diseño. Aún no se implementan efectos visuales ni funcion
 
 ## Decisiones vigentes
 
+- Este proyecto adopta [DEVELOPMENT_STANDARD.md](docs/DEVELOPMENT_STANDARD.md).
 - El motor y el contenido deben permanecer separados.
 - Se privilegian estabilidad, rendimiento y compatibilidad.
 - Toda nueva funcionalidad debe ser modular y documentada.
