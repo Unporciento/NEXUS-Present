@@ -1,49 +1,14 @@
 # NEXUS Present
 
-Motor reutilizable para crear presentaciones HTML profesionales.
+Motor modular para crear, organizar y reproducir presentaciones web narrativas e interactivas. La V1 desarrolla exclusivamente motor y reproductor; el contenido se define como datos validados, nunca dentro de la lógica visual.
 
-NEXUS Present no es una presentación concreta: es una base modular, rápida y mantenible para producirlas. El contenido vive separado del motor para conservar la reutilización y reducir la complejidad.
+## Estado
 
-## Ficha técnica
-
-| Campo | Valor |
-| --- | --- |
-| Proyecto | NEXUS Present |
-| Repositorio | https://github.com/Unporciento/NEXUS-Present |
-| Producción | Pendiente de publicación en GitHub Pages |
-| Estado | En diseño arquitectónico |
-| Versión | 0.1.0 |
-| Última auditoría | 26/07/2026 |
-| Responsable | Usuario |
-| IA principal | Codex |
-| Documentación | README · CHANGELOG · AI_HANDOFF · SECURITY |
-| Último respaldo | 26/07/2026 — copia local inicial |
-| Próxima fase | Definir núcleo arquitectónico y el diseño del módulo Laboratorio |
-
-## Principios
-
-- Separación estricta entre el motor de presentación y el contenido.
-- Arquitectura modular y fácil de mantener.
-- Prioridad a estabilidad, rendimiento y compatibilidad.
-- Sin efectos visuales hasta consolidar una base robusta.
-- Identidad visual propia, elegante y moderna, diferenciada del resto del ecosistema.
-
-## Arquitectura propuesta
-
-```text
-src/
-  core/          # Ciclo de vida, renderizado y navegación
-  components/    # Componentes visuales reutilizables
-  themes/        # Tokens y temas de identidad visual
-  content/       # Datos de cada presentación, fuera del motor
-  plugins/       # Extensiones opcionales
-  styles/        # Estilos base y utilidades
-docs/            # Decisiones y guía de arquitectura
-```
+Fundación documental y contractual de Fase 1, pendiente de revisión. No contiene código de producción, PWA ni publicación activa.
 
 ## Documentación
 
-- [Registro de cambios](CHANGELOG.md)
-- [Guía de continuidad para IA](AI_HANDOFF.md)
-- [Política de seguridad](SECURITY.md)
-- [Especificación del Laboratorio](docs/LABORATORY.md)
+- [Ficha técnica](FICHA_TECNICA.md) · [Continuidad](AI_HANDOFF.md) · [Cambios](CHANGELOG.md) · [Licencia](LICENSE)
+- [Arquitectura](docs/ARCHITECTURE.md) · [Contrato de presentación](docs/PRESENTATION_CONTRACT.md) · [Contrato de escenas](docs/SCENE_CONTRACT.md)
+- [Estados](docs/STATE_CATALOG.md) · [Accesibilidad](docs/ACCESSIBILITY.md) · [Seguridad](docs/SECURITY.md) · [Publicación](docs/PUBLISHING.md)
+- [Estándar de desarrollo](docs/DEVELOPMENT_STANDARD.md) · [Decisiones](docs/DECISIONS.md) · [Laboratorio futuro](docs/LABORATORY.md)

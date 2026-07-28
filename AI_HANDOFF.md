@@ -6,23 +6,20 @@ NEXUS Present es un motor reutilizable para presentaciones HTML profesionales. N
 
 ## Estado actual
 
-La fase actual es de diseño. Aún no se implementan efectos visuales ni funcionalidades complejas.
+La Fundación documental y contractual está en `phase-1/foundation`. No iniciar código, PWA, páginas ni publicación hasta aprobar esta fase.
 
 ## Decisiones vigentes
 
-- El motor y el contenido deben permanecer separados.
-- Se privilegian estabilidad, rendimiento y compatibilidad.
-- Toda nueva funcionalidad debe ser modular y documentada.
-- La identidad visual se definirá mediante temas y tokens, no mediante reglas dispersas.
-- El módulo Laboratorio es obligatorio en una fase futura: diagnostica en modo seguro, no modifica datos ni transmite información sin consentimiento.
+- El motor, las presentaciones, temas y recursos permanecen separados.
+- `PRESENTATION_CONTRACT.md` y `SCENE_CONTRACT.md` son la fuente de verdad antes de implementar escenas.
+- La V1 es motor y reproductor; editor, nube, sincronización y Laboratorio son posteriores.
+- Este proyecto adopta `docs/DEVELOPMENT_STANDARD.md`.
 
 ## Siguiente intervención recomendada
 
-1. Confirmar la estructura de carpetas definitiva.
-2. Definir la arquitectura y los límites de privacidad del Laboratorio.
-3. Elegir el stack mínimo de HTML, CSS y JavaScript.
-4. Implementar el núcleo de renderizado con una presentación de ejemplo aislada.
-5. Añadir pruebas básicas de compatibilidad antes de efectos visuales.
+1. Revisar y aprobar la documentación de Fase 1.
+2. Decidir el destino del PR #1 sin fusionarlo a `main`.
+3. Autorizar explícitamente la Fase 2 antes de código.
 
 ## Mantenimiento de la ficha técnica
 

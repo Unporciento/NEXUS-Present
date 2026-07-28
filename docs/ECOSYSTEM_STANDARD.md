@@ -8,4 +8,4 @@ Todos los proyectos siguen esta secuencia obligatoria:
 4. Fase 1
 5. Código
 
-No se inicia código antes de que documentación y arquitectura estén definidas.
+No se inicia código antes de que documentación y arquitectura estén definidas. Para NEXUS, las reglas operativas están en `DEVELOPMENT_STANDARD.md`.

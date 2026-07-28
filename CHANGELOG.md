@@ -10,3 +10,10 @@ Todos los cambios relevantes de NEXUS Present se documentarán aquí.
 - Ficha técnica de proyecto.
 - Documentación de arranque y propuesta de arquitectura.
 - Especificación obligatoria del módulo Laboratorio para una fase futura.
+
+## [0.1.0-foundation] — 2026-07-28
+
+### Añadido
+
+- Fundación documental, contratos y verificadores de Fase 1.
+- Licencia propietaria explícita y estrategia de arquitectura estática.
