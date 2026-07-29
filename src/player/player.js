@@ -4,7 +4,7 @@ import { createNavigation } from './navigation.js';
 import { createStateMachine } from './state-machine.js';
 
 export function createPlayer({ engineVersion = '1.0.0' } = {}) {
-  const machine = createStateMachine(), events = createEventBus(); let document = null, navigation = null;
+  const machine = createStateMachine(), events = createEventBus(), cleanups = new Set(); let document = null, navigation = null;
   const emitScene = () => events.emit('scene-changed', { index: navigation.index, sceneId: navigation.scene.id, progress: navigation.progress });
   const fail = (diagnostics) => { machine.transition('error'); events.emit('player-error', { diagnostics }); return { valid: false, diagnostics }; };
   return {
@@ -21,7 +21,8 @@ export function createPlayer({ engineVersion = '1.0.0' } = {}) {
     pause() { if (!machine.can('paused')) return false; machine.transition('paused'); events.emit('presentation-paused'); return true; },
     resume() { if (!machine.can('presenting')) return false; machine.transition('presenting'); events.emit('presentation-resumed'); return true; },
     restart() { if (!navigation || !['presenting','completed','paused'].includes(machine.state)) return false; navigation.restart(); if (machine.state !== 'presenting') machine.transition(machine.state === 'completed' ? 'presenting' : 'presenting'); emitScene(); return true; },
-    destroy() { if (machine.state === 'destroyed') return; machine.transition('destroyed'); document = null; navigation = null; events.emit('player-destroyed'); events.clear(); },
+    destroy() { if (machine.state === 'destroyed') return; machine.transition('destroyed'); [...cleanups].forEach((cleanup) => cleanup()); cleanups.clear(); document = null; navigation = null; events.emit('player-destroyed'); events.clear(); },
+    addCleanup(cleanup) { cleanups.add(cleanup); return () => cleanups.delete(cleanup); },
     getState() { return machine.state; }, getProgress() { return navigation?.progress ?? { current: 0, total: 0, ratio: 0 }; }, getScene() { return navigation?.scene ?? null; }, subscribe: events.subscribe
   };
 }
