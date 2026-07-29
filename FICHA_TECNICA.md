@@ -5,8 +5,8 @@
 | Proyecto | NEXUS Present |
 | Repositorio | https://github.com/Unporciento/NEXUS-Present |
 | Producción | GitHub Pages no activado |
-| Estado | Fase 4: temas, escenas y demo, cierre de rama en curso |
-| Versión | 0.4.0 |
+| Estado | Fase 5B: formularios guiados, cierre en revisión |
+| Versión | 0.5.2 |
 | Última auditoría | 29/07/2026 |
 | Responsable | Usuario |
 | IA principal | Codex |

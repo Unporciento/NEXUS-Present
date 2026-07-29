@@ -1,5 +1,9 @@
 # Registro de cambios
 
+## [0.5.2] — 2026-07-29
+
+- Cierre de Studio 5B con diálogo accesible, limpieza de listeners, pruebas DOM mínimas y revisión responsive emulada.
+
 ## [0.4.0] — 2026-07-29
 
 - Temas `neutral` y `nexus`, layouts y renderers visuales desacoplados.

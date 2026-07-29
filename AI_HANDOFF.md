@@ -2,7 +2,7 @@
 
 ## Estado actual
 
-Fase 5A implementa solo estado y controlador. Leer [STUDIO_PLAN.md](docs/STUDIO_PLAN.md), [STUDIO_CONTRACT.md](docs/STUDIO_CONTRACT.md), [STUDIO_STATE.md](docs/STUDIO_STATE.md), [PLAYER_CONTRACT.md](docs/PLAYER_CONTRACT.md) y `ROADMAP.md` antes de autorizar 5B.
+Fase 5B implementa formularios guiados y diálogo local. Leer [STUDIO_UI.md](docs/STUDIO_UI.md), [STUDIO_CONTRACT.md](docs/STUDIO_CONTRACT.md), [STUDIO_STATE.md](docs/STUDIO_STATE.md) y [PLAYER_CONTRACT.md](docs/PLAYER_CONTRACT.md). Preview es 5C; exportación es 5D; onboarding completo es 5E.
 
 ## Límites firmes
 

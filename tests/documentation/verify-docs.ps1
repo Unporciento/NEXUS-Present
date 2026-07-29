@@ -14,7 +14,7 @@ foreach ($relative in $required) {
   if (-not (Test-Path -LiteralPath $path)) { $errors.Add("Missing: $relative"); continue }
   if ((Get-Content -LiteralPath $path).Count -gt 400) { $errors.Add("Over 400 lines: $relative") }
 }
-$forbiddenUi = Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object { ($_.Extension -in '.html','.css' -and $_.Name -notin 'index.html','styles.css') -or ($_.Extension -in '.js','.mjs' -and $_.FullName -notmatch '[\\/](src[\\/](contracts|player|ui|input|themes|layouts|media|studio)|tests|demo|tools)[\\/]' -and $_.Name -ne 'app.js') }
+$forbiddenUi = Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object { ($_.Extension -in '.html','.css' -and $_.Name -notin 'index.html','studio.html','styles.css') -or ($_.Extension -in '.js','.mjs' -and $_.FullName -notmatch '[\\/](src[\\/](contracts|player|ui|input|themes|layouts|media|studio)|tests|demo|tools)[\\/]' -and $_.Name -notin 'app.js','studio.js') }
 if ($forbiddenUi) { $errors.Add('Unexpected production code is present.') }
 $secretPattern = '(gh[pousr]_[A-Za-z0-9_]{20,}|github_pat_|AKIA[0-9A-Z]{16}|BEGIN( RSA| EC| OPENSSH)? PRIVATE KEY)'
 Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object { $_.Extension -eq '.md' -or $_.Name -eq 'LICENSE' } | ForEach-Object {
@@ -34,6 +34,6 @@ $required | Where-Object { $_ -like '*.md' } | ForEach-Object {
   }
 }
 $main = git -c "safe.directory=$Root" -C $Root rev-parse main 2>$null
-if ($main -ne 'fefc4d0effe6fa6f15def4f01b53b10e5eccd3f8') { $errors.Add('main moved from the approved Phase 4 completion commit.') }
+if ($main -ne 'cf81eaa0d3018eaba7e5f0dc9974d95c0caf2bff') { $errors.Add('main moved from the approved Phase 5A completion commit.') }
 if ($errors.Count) { $errors | ForEach-Object { Write-Error $_ }; exit 1 }
 Write-Output 'Documentation verification passed.'
