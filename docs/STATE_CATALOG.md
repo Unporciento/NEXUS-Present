@@ -18,3 +18,5 @@ Los estados futuros de recurso ausente, formato incompatible, sin conexión, act
 En Fase 4, recurso visual sin alternativa muestra fallback; renderer ausente muestra escena segura; fallo de renderer ofrece continuar o reiniciar. Carga, error, finalización y destrucción se comunican por texto, no solo por color.
 
 Los fixtures declaran `idle`, `loading`, `ready`, `failed` y `unsupported`. Solo `failed` y `unsupported` muestran fallback recuperable; ningún estado expone códigos técnicos aislados.
+
+PreviewBridge usa `idle`, `validating`, `invalid`, `transforming`, `rendering`, `ready`, `stale`, `recoverable-error`, `fatal-error` y `destroyed`. `stale` conserva el preview anterior pero declara que no está actualizado; `invalid` nunca inicia Player. La tabla operativa completa está en [PREVIEW_BRIDGE.md](PREVIEW_BRIDGE.md).

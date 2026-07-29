@@ -34,6 +34,8 @@ No implementa Studio, Presenter completo, segunda pantalla, temas, multimedia av
 
 Fase 4 añadió renderers públicos visuales y layouts, sin cambiar las responsabilidades del Player Core. Los estados de recurso faltante, renderer no soportado y error de renderer se representan con mensajes recuperables. El hotfix posterior a 5B solo corrige tokens, contraste y jerarquía visual; no incorpora PreviewBridge ni capacidades de 5C.
 
+En Fase 5C, PreviewBridge reutiliza esta misma implementación dentro del Studio. El Player recibe exclusivamente `PublicPresentationDocument`, enlaza teclado y tacto al contenedor embebido y conserva navegación, progreso, reinicio, temas, movimiento reducido, completed y destroy. No existe un Player paralelo.
+
 ```js
 const player = createPlayer();
 player.loadPresentation(publicDocument);

@@ -1,5 +1,12 @@
 # Registro de cambios
 
+## [0.5.4] — 2026-07-29
+
+- PreviewBridge desacoplado con validación fuente/pública y exclusión de datos privados.
+- Studio con panel de validación, preview explícito, estado stale y Player real embebido.
+- Ciclo de vida de cierre/reapertura, teclado aislado, responsive y pruebas de destroy.
+- Corrección reproducible del color de profundidad para los temas `neutral` y `nexus`.
+
 ## [0.5.3] — 2026-07-29
 
 - Hotfix visual: tokens completos, contraste AA orientativo, controles legibles y navegación del Player separada del progreso.

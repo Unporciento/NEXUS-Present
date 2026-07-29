@@ -13,3 +13,11 @@ La eliminación usa `<dialog>` local con Cancelar/Eliminar, Escape seguro, fallb
 Revisión visual del hotfix 29/07/2026: Chrome real de escritorio mediante HTTP local, con tamaños emulados 320×568, 390×844, 768×1024, 1024×768, 1366×768 y 1920×1080. Sin desbordamiento horizontal; controles visibles de 44 px; foco contrastado; footer y año correctos; columnas apiladas bajo 800 px; temas `neutral` y `nexus` legibles y diálogo visible. Se revisó zoom de Chrome al 200 %. No fue prueba física móvil ni validación con lector de pantalla real.
 
 Capacidades reales de bloques: muestra tipos permitidos y edita texto de `heading` y `paragraph`; no ofrece CRUD completo. Preview queda reservado a 5C, exportación a 5D y onboarding completo a 5E.
+
+## Fase 5C
+
+Studio añade un panel de validación y un botón explícito `Previsualizar`. PreviewBridge valida y transforma; StudioApp nunca crea manualmente un documento público. Tras editar, la vista queda `stale` y conserva el Player anterior hasta una actualización manual.
+
+En escritorio, editor y preview conviven desde 1100 px. En móvil, los controles `Editar` y `Previsualizar` muestran una sola vista a la vez. El panel de errores agrupa diagnósticos contractuales y permite enfocar metadatos o seleccionar la escena afectada cuando la ruta lo permite.
+
+Abrir, actualizar, cerrar y reabrir destruye la instancia anterior. El teclado del Player se enlaza al contenedor de preview y no navega mientras el foco está en formularios. Exportación, almacenamiento y publicación continúan ausentes.

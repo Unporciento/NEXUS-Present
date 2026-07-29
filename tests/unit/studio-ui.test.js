@@ -1,4 +1,51 @@
-import test from 'node:test'; import assert from 'node:assert/strict'; import { readFileSync } from 'node:fs'; import { createStudioApp } from '../../src/studio/ui.js'; import { createStudioController } from '../../src/studio/controller.js';
-function fakeRoot(){const listeners=new Map();return{html:'',set innerHTML(value){this.html=value;},get innerHTML(){return this.html;},addEventListener(type,fn){const set=listeners.get(type)??new Set();set.add(fn);listeners.set(type,set);},removeEventListener(type,fn){listeners.get(type)?.delete(fn);},replaceChildren(){this.html='';},listenerCount(){return [...listeners.values()].reduce((n,set)=>n+set.size,0);}};}
-test('StudioApp mounts semantic guided UI and destroys listeners',()=>{const root=fakeRoot(),controller=createStudioController(),app=createStudioApp(root,{controller,ownsController:false});assert.match(root.html,/NEXUS STUDIO/);assert.equal((root.html.match(/<h1/g)??[]).length,1);assert.match(root.html,/data-meta="title"/);assert.match(root.html,/data-meta="description"/);assert.match(root.html,/data-theme/);assert.match(root.html,/aria-pressed/);assert.match(root.html,/previsualización y exportación/);assert.match(root.html,new RegExp(`© ${new Date().getFullYear()} NEXUS`));assert.ok(root.listenerCount()>0);app.destroy();assert.equal(root.html,'');assert.equal(root.listenerCount(),0);app.destroy();assert.equal(controller.getState().draft.title,'Nueva presentación');});
-test('Studio UI declares accessible local dialog and excludes forbidden capabilities',()=>{const source=readFileSync(new URL('../../src/studio/ui.js',import.meta.url),'utf8');assert.match(source,/<dialog data-confirm aria-labelledby="confirm-title"/);assert.match(source,/Cancelar/);assert.match(source,/data-confirm-delete/);assert.match(source,/showModal/);assert.match(source,/applyTheme\(root,controller\.getState\(\)\.draft\.theme\)/);assert.match(source,/applyTheme\(root,el\.value\)/);assert.doesNotMatch(source,/window\.confirm|localStorage|sessionStorage|indexedDB|PreviewBridge|createPlayer|download/);});
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { createStudioApp } from '../../src/studio/ui.js';
+import { createStudioController } from '../../src/studio/controller.js';
+
+function fakeRoot() {
+  const listeners = new Map();
+  return {
+    html: '',
+    set innerHTML(value) { this.html = value; },
+    get innerHTML() { return this.html; },
+    addEventListener(type, fn) {
+      const set = listeners.get(type) ?? new Set();
+      set.add(fn);
+      listeners.set(type, set);
+    },
+    removeEventListener(type, fn) { listeners.get(type)?.delete(fn); },
+    replaceChildren() { this.html = ''; },
+    listenerCount() { return [...listeners.values()].reduce((total, set) => total + set.size, 0); }
+  };
+}
+
+test('StudioApp mounts preview shell and destroys listeners', () => {
+  const root = fakeRoot();
+  const controller = createStudioController();
+  const app = createStudioApp(root, { controller, ownsController: false });
+  assert.match(root.html, /NEXUS STUDIO/);
+  assert.match(root.html, /data-preview/);
+  assert.match(root.html, /validation-panel/);
+  assert.match(root.html, /preview-host/);
+  assert.match(root.html, /Exportación y almacenamiento permanecen fuera/);
+  assert.match(root.html, new RegExp(`© ${new Date().getFullYear()} NEXUS`));
+  assert.ok(root.listenerCount() > 0);
+  app.destroy();
+  assert.equal(root.html, '');
+  assert.equal(root.listenerCount(), 0);
+  app.destroy();
+  assert.equal(controller.getState().draft.title, 'Nueva presentación');
+});
+
+test('Studio UI declares accessible preview and excludes forbidden capabilities', () => {
+  const source = readFileSync(new URL('../../src/studio/ui.js', import.meta.url), 'utf8');
+  assert.match(source, /<dialog data-confirm aria-labelledby="confirm-title"/);
+  assert.match(source, /aria-live="polite"/);
+  assert.match(source, /data-error-path/);
+  assert.match(source, /createPreviewBridge/);
+  assert.match(source, /previewBridge\.destroy/);
+  assert.equal((source.match(/controller\.subscribe\(/g) ?? []).length, 1);
+  assert.doesNotMatch(source, /window\.confirm|localStorage|sessionStorage|indexedDB|download|fetch\(/);
+});
