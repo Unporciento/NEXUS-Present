@@ -1,12 +1,14 @@
 # NEXUS Present
 
-NEXUS Present es un motor local y modular para crear y reproducir presentaciones web narrativas. El Player consume documentos públicos; Studio conserva el borrador fuente, ofrece previsualización segura y en 5D exporta una copia pública JSON local.
+NEXUS Present es un motor local y modular para crear y reproducir presentaciones web narrativas. Studio 1.0 permite crear, validar, previsualizar y descargar presentaciones estructuradas.
 
 ## Estado
 
-Fase 5D en rama de revisión visual: exportación JSON determinista y descarga local. No incluye importación, almacenamiento, empaquetado, publicación, PWA, Service Worker, cuentas ni Fase 5E.
+Fase 5E en rama de revisión visual: cierre profesional de Studio con onboarding, ayuda, lenguaje amigable, accesibilidad y responsive. No incluye importación, guardado de presentaciones, empaquetado, publicación, PWA, Service Worker ni cuentas.
 
 La especificación exacta está en [EXPORT_SERVICE.md](docs/EXPORT_SERVICE.md).
+
+El cierre de experiencia está descrito en [ONBOARDING.md](docs/ONBOARDING.md) y [HELP_SYSTEM.md](docs/HELP_SYSTEM.md).
 
 ## Uso de demostración
 

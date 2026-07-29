@@ -18,6 +18,9 @@
 | D-018 | Fase 5 será Studio guiado por contratos, no editor visual libre | aprobada |
 | D-019 | 5D exporta únicamente PublicPresentationDocument JSON determinista mediante servicio sin DOM y adaptador aislado | aprobada |
 | D-020 | Recursos relativos se conservan; rutas locales absolutas se rechazan; empaquetado queda fuera de 5D | aprobada |
+| D-021 | La única persistencia 5E es `nexus:onboarding-version`; nunca guarda presentaciones | aprobada |
+| D-022 | Los nombres amigables son una capa visual y no cambian identificadores contractuales | aprobada |
+| D-023 | El Player muestra copyright por defecto y solo Studio lo oculta mediante opción explícita | aprobada |
 | D-019 | Preview usa conversión pública y Player aislado; exportación es local | aprobada |
 | D-020 | Toda fase que modifica interfaz requiere revisión visual y aprobación antes del merge | aprobada |
 | D-021 | PreviewBridge es el único puente entre el borrador privado y el Player público; preview se actualiza de forma explícita | aprobada |

@@ -48,3 +48,9 @@ StudioApp mantiene una suscripción al Controller y otra al PreviewBridge. La UI
 `StudioApp → bindStudioExport → ExportService → BrowserDownloadAdapter`
 
 El servicio contractual es independiente del DOM y reutiliza `createPublicPresentation`. El adaptador no valida ni transforma datos; limita su responsabilidad a Blob, URL temporal, descarga y limpieza. No hay acceso a almacenamiento ni publicación. Consulta [EXPORT_SERVICE.md](EXPORT_SERVICE.md).
+
+## Cierre profesional — Fase 5E
+
+`StudioApp → bindStudioGuidance → OnboardingPreference`
+
+La guía no accede al Controller. Solo la preferencia versionada del tutorial usa almacenamiento local; los borradores continúan exclusivamente en memoria. `sceneLabels` mantiene separada la terminología visible de los contratos. `createPlayerView({ showCopyright })` conserva derechos por defecto y permite ocultarlos explícitamente al embeber el Player en Studio.

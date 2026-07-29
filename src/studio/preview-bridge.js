@@ -139,7 +139,13 @@ export function createPreviewBridge({
         const player = playerFactory();
         const renderers = createRendererRegistry();
         rendererFactory().forEach((renderer) => renderers.register(renderer));
-        viewFactory(container, { player, renderers, theme: converted.value.theme });
+        viewFactory(container, {
+          player,
+          renderers,
+          theme: converted.value.theme,
+          showCopyright: false,
+          embedded: true
+        });
         const loaded = player.loadPresentation(converted.value);
         if (!loaded.valid || !player.start()) throw new Error('Player rejected the public document.');
         player.addCleanup(keyboardBinder(container, player));
