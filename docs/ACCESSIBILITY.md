@@ -19,4 +19,6 @@ Se comprobaron zoom de Chrome al 200 %, teclado, ausencia de desbordamiento hori
 
 En 5C, `Previsualizar`, `Actualizar` y `Cerrar preview` tienen nombres textuales. El estado usa `role=status` y `aria-live=polite`; los diagnósticos son botones comprensibles que enfocan el campo o escena cuando es posible. Abrir preview mueve el foco a su contenedor y cerrar lo devuelve a la acción de edición.
 
+En 5D, `Exportar JSON` conserva un nombre textual, tamaño mínimo de 44 px y foco visible. Durante la operación se deshabilita y expone `aria-busy`; el resultado se anuncia con `role=status` y `aria-live=polite`. Un documento inválido remite el foco al panel de validación. No se afirma validación física con lector de pantalla.
+
 Los atajos se limitan al contenedor del Player y se ignoran sobre formularios. En móvil solo se muestra Editar o Previsualizar; todos los controles visibles mantienen al menos 44 px. La revisión fue en Chrome de escritorio con tamaños emulados, no lector de pantalla ni dispositivo físico.

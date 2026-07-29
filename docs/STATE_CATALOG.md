@@ -20,3 +20,16 @@ En Fase 4, recurso visual sin alternativa muestra fallback; renderer ausente mue
 Los fixtures declaran `idle`, `loading`, `ready`, `failed` y `unsupported`. Solo `failed` y `unsupported` muestran fallback recuperable; ningún estado expone códigos técnicos aislados.
 
 PreviewBridge usa `idle`, `validating`, `invalid`, `transforming`, `rendering`, `ready`, `stale`, `recoverable-error`, `fatal-error` y `destroyed`. `stale` conserva el preview anterior pero declara que no está actualizado; `invalid` nunca inicia Player. La tabla operativa completa está en [PREVIEW_BRIDGE.md](PREVIEW_BRIDGE.md).
+
+## Exportación local
+
+| Estado | Significado | Recuperación |
+| --- | --- | --- |
+| `idle` | Sin exportación en esta sesión | Exportar |
+| `validating` / `preparing` | Comprobación y serialización en curso | Esperar |
+| `invalid` | El borrador o documento público no cumple el contrato | Corregir y reintentar |
+| `downloading` | El navegador inicia la descarga | Esperar |
+| `exported` / `ready` | Archivo generado para el borrador actual | Volver a exportar |
+| `stale` | El borrador cambió tras exportarse | Exportar otra vez |
+| `recoverable-error` | Falló preparación, Blob, URL o descarga | Reintentar |
+| `destroyed` | Instancia liberada | Crear otra instancia |

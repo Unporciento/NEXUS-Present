@@ -1,5 +1,12 @@
 # Registro de cambios
 
+## [0.5.5] — 2026-07-29
+
+- ExportService determinista e independiente del DOM.
+- Descarga local con Blob y URL temporal revocada.
+- Botón `Exportar JSON`, estados accesibles y rechazo de rutas privadas absolutas.
+- Sin importación, almacenamiento, empaquetado ni publicación.
+
 ## [0.5.4] — 2026-07-29
 
 - PreviewBridge desacoplado con validación fuente/pública y exclusión de datos privados.

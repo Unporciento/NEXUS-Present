@@ -16,6 +16,8 @@
 | D-016 | Temas y layouts se desacoplan del Player Core mediante tokens y validación | aprobada |
 | D-017 | La identidad inicial usa azul profundo y acento funcional, sin fuentes externas | aprobada |
 | D-018 | Fase 5 será Studio guiado por contratos, no editor visual libre | aprobada |
+| D-019 | 5D exporta únicamente PublicPresentationDocument JSON determinista mediante servicio sin DOM y adaptador aislado | aprobada |
+| D-020 | Recursos relativos se conservan; rutas locales absolutas se rechazan; empaquetado queda fuera de 5D | aprobada |
 | D-019 | Preview usa conversión pública y Player aislado; exportación es local | aprobada |
 | D-020 | Toda fase que modifica interfaz requiere revisión visual y aprobación antes del merge | aprobada |
 | D-021 | PreviewBridge es el único puente entre el borrador privado y el Player público; preview se actualiza de forma explícita | aprobada |

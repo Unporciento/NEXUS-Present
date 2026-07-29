@@ -1,4 +1,4 @@
-# Studio UI — Fase 5B
+# Studio UI — Fases 5B–5D
 
 `studio.html` monta `StudioApp`, que se suscribe una sola vez a StudioController y representa shell, metadatos, lista, editor de escena, estado, undo/redo y eliminación confirmada. La UI solo despacha comandos; no accede al historial ni modifica el borrador.
 
@@ -12,7 +12,7 @@ La eliminación usa `<dialog>` local con Cancelar/Eliminar, Escape seguro, fallb
 
 Revisión visual del hotfix 29/07/2026: Chrome real de escritorio mediante HTTP local, con tamaños emulados 320×568, 390×844, 768×1024, 1024×768, 1366×768 y 1920×1080. Sin desbordamiento horizontal; controles visibles de 44 px; foco contrastado; footer y año correctos; columnas apiladas bajo 800 px; temas `neutral` y `nexus` legibles y diálogo visible. Se revisó zoom de Chrome al 200 %. No fue prueba física móvil ni validación con lector de pantalla real.
 
-Capacidades reales de bloques: muestra tipos permitidos y edita texto de `heading` y `paragraph`; no ofrece CRUD completo. Preview queda reservado a 5C, exportación a 5D y onboarding completo a 5E.
+Capacidades reales de bloques: muestra tipos permitidos y edita texto de `heading` y `paragraph`; no ofrece CRUD completo. Onboarding completo queda reservado a 5E.
 
 ## Fase 5C
 
@@ -20,4 +20,8 @@ Studio añade un panel de validación y un botón explícito `Previsualizar`. Pr
 
 En escritorio, editor y preview conviven desde 1100 px. En móvil, los controles `Editar` y `Previsualizar` muestran una sola vista a la vez. El panel de errores agrupa diagnósticos contractuales y permite enfocar metadatos o seleccionar la escena afectada cuando la ruta lo permite.
 
-Abrir, actualizar, cerrar y reabrir destruye la instancia anterior. El teclado del Player se enlaza al contenedor de preview y no navega mientras el foco está en formularios. Exportación, almacenamiento y publicación continúan ausentes.
+Abrir, actualizar, cerrar y reabrir destruye la instancia anterior. El teclado del Player se enlaza al contenedor de preview y no navega mientras el foco está en formularios.
+
+## Fase 5D
+
+`Exportar JSON` permanece separado de `Previsualizar` y usa siempre el borrador actual. `bindStudioExport` conecta la UI con `ExportService` y `BrowserDownloadAdapter` sin introducir Blob o URLs en `StudioApp`. El estado se anuncia de forma moderada, se evita el doble clic durante la operación y los errores de validación remiten al panel existente. Consulta [EXPORT_SERVICE.md](EXPORT_SERVICE.md).

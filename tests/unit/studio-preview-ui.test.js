@@ -27,7 +27,7 @@ test('Studio preview UI provides responsive edit and preview modes with focus', 
   assert.match(styles, /preview-host:focus-visible/);
 });
 
-test('Studio preview remains free of export, storage and publication code', () => {
-  assert.doesNotMatch(ui, /localStorage|sessionStorage|indexedDB|download|Blob|URL\.createObjectURL|fetch\(/);
+test('Studio preview remains free of download, storage and publication internals', () => {
+  assert.doesNotMatch(ui, /localStorage|sessionStorage|indexedDB|Blob|URL\.createObjectURL|fetch\(/);
   assert.doesNotMatch(ui, /GitHub|ServiceWorker|navigator\.storage/);
 });
