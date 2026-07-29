@@ -34,6 +34,6 @@ $required | Where-Object { $_ -like '*.md' } | ForEach-Object {
   }
 }
 $main = git -c "safe.directory=$Root" -C $Root rev-parse main 2>$null
-if ($main -ne 'cf81eaa0d3018eaba7e5f0dc9974d95c0caf2bff') { $errors.Add('main moved from the approved Phase 5A completion commit.') }
+if ($main -ne 'ead39a667541bda7503c635653c74eeeb5e835b8') { $errors.Add('main moved from the approved Phase 5B completion commit.') }
 if ($errors.Count) { $errors | ForEach-Object { Write-Error $_ }; exit 1 }
 Write-Output 'Documentation verification passed.'
