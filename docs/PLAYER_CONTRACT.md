@@ -26,11 +26,13 @@ Teclado: flechas, Inicio, Fin y Escape, ignorando controles editables o interact
 
 El DOM Adapter conserva contenido semántico, foco visible, nombres accesibles, progreso comprensible y `aria-live` breve. `destroy` ejecuta limpiezas registradas, borra suscripciones y referencias internas, y bloquea navegación posterior.
 
+El área de progreso es visualmente independiente de los botones. Marca, estado, escena, controles, estados deshabilitados y footer consumen tokens del tema. En `completed`, permanece visible la última escena, el progreso conserva el total real, Anterior y Reiniciar siguen disponibles y Siguiente queda deshabilitado. La demo vigente confirma `7 de 7`; la combinación observada previamente `completed` + `1 de 4` + Siguiente activo no se reproduce con el adaptador actual.
+
 ## Límites de Fase 3
 
 No implementa Studio, Presenter completo, segunda pantalla, temas, multimedia avanzada, almacenamiento, publicación, PWA, Service Worker, Pages, backend, salas ni IA.
 
-Fase 4 añade renderers públicos visuales y layouts, sin cambiar las responsabilidades del Player Core. Los estados de recurso faltante, renderer no soportado y error de renderer se representan con mensajes recuperables.
+Fase 4 añadió renderers públicos visuales y layouts, sin cambiar las responsabilidades del Player Core. Los estados de recurso faltante, renderer no soportado y error de renderer se representan con mensajes recuperables. El hotfix posterior a 5B solo corrige tokens, contraste y jerarquía visual; no incorpora PreviewBridge ni capacidades de 5C.
 
 ```js
 const player = createPlayer();

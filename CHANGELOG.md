@@ -1,5 +1,9 @@
 # Registro de cambios
 
+## [0.5.3] — 2026-07-29
+
+- Hotfix visual: tokens completos, contraste AA orientativo, controles legibles y navegación del Player separada del progreso.
+
 ## [0.5.2] — 2026-07-29
 
 - Cierre de Studio 5B con diálogo accesible, limpieza de listeners, pruebas DOM mínimas y revisión responsive emulada.
