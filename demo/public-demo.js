@@ -1,9 +1,10 @@
-export const demoPresentation = {
-  contractVersion: '1.0.0', id: 'nexus-demo', version: '1.0.0', minimumEngineVersion: '1.0.0', title: 'NEXUS Demo', createdAt: '2026-07-29T00:00:00Z', updatedAt: '2026-07-29T00:00:00Z', theme: 'default', resources: [],
-  scenes: [
-    { id: 'scene-cover', type: 'cover', layout: 'hero', blocks: [{ id: 'block-cover', type: 'heading', text: 'NEXUS' }] },
-    { id: 'scene-statement', type: 'statement', layout: 'centered', blocks: [{ id: 'block-statement', type: 'heading', text: 'Narrativas web modulares' }, { id: 'block-copy', type: 'paragraph', text: 'Un Player validado, accesible y portátil.' }] },
-    { id: 'scene-content', type: 'content', layout: 'stack', blocks: [{ id: 'block-content', type: 'heading', text: 'Fase 3' }, { id: 'block-detail', type: 'paragraph', text: 'Navegación y ciclo de vida.' }] },
-    { id: 'scene-closing', type: 'closing', layout: 'centered', blocks: [{ id: 'block-closing', type: 'heading', text: 'Fin de la demostración' }] }
-  ]
-};
+const heading = (id, text) => ({ id, type: 'heading', text });
+export const demoPresentation = { contractVersion:'1.0.0',id:'nexus-demo',version:'1.0.0',minimumEngineVersion:'1.0.0',title:'El futuro de las presentaciones web',description:'Demostración pública y sintética de NEXUS.',createdAt:'2026-07-29T00:00:00Z',updatedAt:'2026-07-29T00:00:00Z',theme:'nexus',resources:[],scenes:[
+  {id:'scene-cover',type:'cover',layout:'hero',blocks:[heading('block-cover','NEXUS'),{id:'block-cover-copy',type:'paragraph',text:'El futuro de las presentaciones web.'}]},
+  {id:'scene-statement',type:'statement',layout:'centered',blocks:[heading('block-statement','Una historia, no una interfaz.'),{id:'block-statement-copy',type:'paragraph',text:'El contenido guía el ritmo; el sistema sostiene la claridad.'}]},
+  {id:'scene-content',type:'content',layout:'metric-focus',blocks:[heading('block-content','Claridad medible'),{id:'block-metric',type:'metric',text:'1',label:'narrativa coherente'},{id:'block-detail',type:'paragraph',text:'Un motor portable, con estados visibles y controles accesibles.'}]},
+  {id:'scene-media',type:'media',layout:'media-right',blocks:[heading('block-media','Recursos con propósito'),{id:'block-image',type:'image',src:'assets/demo-grid.svg',alt:'Gráfico sintético ascendente'},{id:'block-media-copy',type:'paragraph',text:'Un recurso local, pequeño y con alternativa visible cuando falla.'}]},
+  {id:'scene-comparison',type:'comparison',layout:'comparison',blocks:[heading('block-compare-title','Antes y después'),{id:'block-compare',type:'comparison',left:'Diapositivas aisladas',right:'Experiencia narrativa'}]},
+  {id:'scene-evidence',type:'evidence',layout:'evidence-grid',blocks:[{id:'block-evidence-metric',type:'metric',text:'44 px',label:'controles táctiles'},{id:'block-quote',type:'quote',text:'La calidad se percibe cuando el sistema desaparece.'}]},
+  {id:'scene-closing',type:'closing',layout:'closing-callout',blocks:[heading('block-closing','La próxima presentación empieza aquí.'),{id:'block-action',type:'callToAction',text:'NEXUS Present · demostración pública'}]}
+]};

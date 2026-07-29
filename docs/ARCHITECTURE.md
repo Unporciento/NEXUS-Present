@@ -27,3 +27,7 @@ El Player recibe un `PublicPresentationDocument`, lo clona y no lo muta. El Rend
 ## Futuro reservado
 
 Studio, Presenter, multimedia, temas, almacenamiento, PWA, publicación y Laboratory conservan su separación documental, pero no tienen implementación en esta fase.
+
+## Extensión visual de Fase 4
+
+`src/themes/` aplica tokens al contenedor de interfaz; `src/layouts/` valida composición; renderers transforman bloques públicos en HTML semántico. Esta capa no modifica el estado del Player ni accede a notas. La demostración queda en `demo/` y el estilo global en `styles.css`.
