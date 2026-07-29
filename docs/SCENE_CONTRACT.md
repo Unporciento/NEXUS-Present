@@ -22,3 +22,4 @@ Hooks opcionales: `getAccessibility`, `getReducedMotionBehavior`, `handleMissing
 - La escena declara nombre accesible, orden de foco, alternativa de contenido y comportamiento con movimiento reducido.
 - Recurso ausente: sustituto accesible, registro y continuidad de navegación.
 - Error recuperable: estado de escena, acción de reintento o salida; nunca bloqueo silencioso.
+- Las intenciones de movimiento son semánticas (`reveal`, `emphasize`, `compare`, `transition`, `focus`, `exit`); los temas deciden su representación o la omiten con movimiento reducido.

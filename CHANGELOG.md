@@ -17,3 +17,4 @@ Todos los cambios relevantes de NEXUS Present se documentarán aquí.
 
 - Fundación documental, contratos y verificadores de Fase 1.
 - Licencia propietaria explícita y estrategia de arquitectura estática.
+- Visión completa de NEXUS 1.0, recorridos de usuario y contrato de publicación.

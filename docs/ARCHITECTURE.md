@@ -2,7 +2,7 @@
 
 ## Límites
 
-NEXUS separa motor, presentación, tema y recursos. El motor no depende de la demostración; cualquier documento válido debe poder cargarse sin modificar el núcleo.
+NEXUS separa motor, Studio, Player, Presenter, Publisher, Laboratory, presentación, tema y recursos. El motor no depende de la demostración; cualquier documento válido debe poder cargarse sin modificar el núcleo.
 
 ```text
 src/
@@ -36,3 +36,5 @@ Estas carpetas son futuras: no se crean hasta contener archivos reales.
 ## Presentador y temas
 
 Notas, escena actual, siguiente escena, reloj y controles pertenecen a `presenter/`. La segunda ventana es futura, pero el contrato reserva esos datos. Los temas exponen tokens; las escenas no definen identidad global.
+
+Studio manipula solo `SourcePresentationDocument`; Player solo acepta `PublicPresentationDocument`. Publisher crea `PublicBundle` y llama a `PublishAdapter`; Laboratory valida y recomienda. Ningún pilar accede a las responsabilidades de otro mediante estado implícito.

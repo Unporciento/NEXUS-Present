@@ -12,5 +12,7 @@
 | Actualización disponible | conserva sesión y ofrece actualizar | activar cuando usuario acepte |
 | Recuperación segura | restaura último estado válido | descartar operación fallida |
 | 404 | página propia y regreso seguro | volver al inicio |
+| Publicación fallida | conserva última release activa | corregir, revalidar y reintentar |
+| Reversión | identifica release restaurada | confirmar operación trazable |
 
 Cada estado debe ser semántico, accesible por teclado, visible para lectores de pantalla y no revelar información sensible.

@@ -5,7 +5,8 @@ $required = @(
   'docs/ARCHITECTURE.md','docs/DEVELOPMENT_STANDARD.md','docs/PRESENTATION_CONTRACT.md',
   'docs/SCENE_CONTRACT.md','docs/STATE_CATALOG.md','docs/ACCESSIBILITY.md',
   'docs/SECURITY.md','docs/PUBLISHING.md','docs/DECISIONS.md',
-  'docs/ECOSYSTEM_STANDARD.md','docs/LABORATORY.md'
+  'docs/ECOSYSTEM_STANDARD.md','docs/LABORATORY.md','docs/PRODUCT_VISION_1_0.md',
+  'docs/USER_JOURNEYS.md','docs/PUBLICATION_CONTRACT.md'
 )
 $errors = [System.Collections.Generic.List[string]]::new()
 foreach ($relative in $required) {
@@ -22,6 +23,8 @@ Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object { $_.Extension -e
 foreach ($relative in @('README.md','AI_HANDOFF.md')) {
   if (-not (Select-String -LiteralPath (Join-Path $Root $relative) -Pattern 'DEVELOPMENT_STANDARD|PRESENTATION_CONTRACT' -Quiet)) { $errors.Add("Missing contract reference: $relative") }
 }
+if (-not (Select-String -LiteralPath (Join-Path $Root 'docs/PRODUCT_VISION_1_0.md') -Pattern 'Studio|Player|Presenter|Publisher|Laboratory' -Quiet)) { $errors.Add('Missing NEXUS pillar in product vision.') }
+if (-not (Select-String -LiteralPath (Join-Path $Root 'docs/PUBLICATION_CONTRACT.md') -Pattern 'PublicBundle|PublishAdapter' -Quiet)) { $errors.Add('Missing publication contract concepts.') }
 $required | Where-Object { $_ -like '*.md' } | ForEach-Object {
   $file = Join-Path $Root $_
   [regex]::Matches((Get-Content -LiteralPath $file -Raw), '\]\(([^)#]+)\)') | ForEach-Object {

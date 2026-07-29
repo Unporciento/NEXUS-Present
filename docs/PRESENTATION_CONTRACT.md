@@ -2,7 +2,7 @@
 
 ## Forma y versión
 
-El documento inicial es JSON UTF-8 validado localmente. No contiene funciones, código ejecutable, HTML arbitrario ni instrucciones evaluables. `contractVersion` usa SemVer y el motor rechaza versiones mayores no soportadas; versiones menores se aceptan solo con compatibilidad declarada.
+El documento inicial es JSON UTF-8 validado localmente. `SourcePresentationDocument` es editable localmente y puede contener notas y configuración editorial; `PublicPresentationDocument` deriva de él y elimina físicamente notas, historial, rutas locales y datos privados. Ninguno contiene funciones, código ejecutable, HTML arbitrario ni instrucciones evaluables.
 
 ## Campos
 
@@ -31,3 +31,5 @@ Una escena referencia recursos por `resourceId`; toda referencia debe existir y 
 ## Errores y privacidad
 
 La validación acumula errores por ruta de campo, código y mensaje; un documento inválido no inicia reproducción. Las notas de presentador se ocultan en la interfaz de audiencia, pero no constituyen confidencialidad criptográfica: un usuario con acceso al documento puede leerlas.
+
+La transformación Source → Public es validada y se rige por `PUBLICATION_CONTRACT.md`; no es una mera ocultación de interfaz.
