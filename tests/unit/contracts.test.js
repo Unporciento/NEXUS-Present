@@ -1,0 +1,18 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { createDefaultRegistry, createPublicPresentation, registerSceneType, validatePublicPresentation, validateSourcePresentation } from '../../src/contracts/index.js';
+
+const source = () => ({
+  contractVersion: '1.0.0', id: 'nexus-demo', version: '1.0.0', minimumEngineVersion: '1.0.0', title: 'Demo', createdAt: '2026-07-29T00:00:00Z', updatedAt: '2026-07-29T00:00:00Z', theme: 'nexus',
+  resources: [{ id: 'asset-hero', type: 'image', mime: 'image/png', url: 'assets/hero.png', alt: 'Hero' }],
+  scenes: [{ id: 'scene-cover', type: 'cover', layout: 'hero', blocks: [{ id: 'block-title', type: 'heading', text: 'Hello' }] }],
+  presenter: { notes: 'Private' }, editorial: { draft: true }, history: [{ at: '2026-07-29T00:00:00Z' }]
+});
+
+test.beforeEach(() => createDefaultRegistry());
+test('valid source and public documents validate', () => { const converted = createPublicPresentation(source()); assert.equal(converted.valid, true); assert.equal(validatePublicPresentation(converted.value).valid, true); });
+test('required fields, duplicate ids and unknown fields report diagnostics', () => { const value = source(); delete value.title; value.extra = true; value.scenes.push(structuredClone(value.scenes[0])); const codes = validateSourcePresentation(value).diagnostics.map((item) => item.code); assert.ok(codes.includes('invalid-title')); assert.ok(codes.includes('unknown-field')); assert.ok(codes.includes('duplicate-identifier')); });
+test('private editorial data is excluded without mutating source', () => { const value = source(), converted = createPublicPresentation(value); assert.equal(converted.value.presenter, undefined); assert.equal(converted.value.editorial, undefined); assert.equal(value.presenter.notes, 'Private'); });
+test('conversion is deterministic and rejects private asset references', () => { const value = source(); assert.deepEqual(createPublicPresentation(value).value, createPublicPresentation(value).value); value.resources[0].private = true; value.scenes[0].blocks[0].assetId = 'asset-hero'; assert.equal(createPublicPresentation(value).valid, false); });
+test('unsafe assets, incompatible versions and public notes fail', () => { const value = source(); value.resources[0].url = 'file:///secret.png'; value.minimumEngineVersion = '2.0.0'; value.presenter = { notes: 'bad' }; const codes = validatePublicPresentation(value).diagnostics.map((item) => item.code); assert.ok(codes.includes('unsafe-asset-url')); assert.ok(codes.includes('engine-major-incompatible')); assert.ok(codes.includes('private-field-public')); });
+test('scene registry rejects duplicate registration and invalid scene combinations', () => { assert.equal(registerSceneType({ typeId: 'cover' }).valid, false); const value = source(); value.scenes[0].layout = 'split'; value.scenes[0].blocks[0].type = 'video'; const codes = validateSourcePresentation(value).diagnostics.map((item) => item.code); assert.ok(codes.includes('unsupported-layout')); assert.ok(codes.includes('unsupported-block')); });
