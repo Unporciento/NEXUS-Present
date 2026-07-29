@@ -16,3 +16,5 @@ La máquina del Player usa `idle`, `loading`, `ready`, `presenting`, `paused`, `
 Los estados futuros de recurso ausente, formato incompatible, sin conexión, actualización, 404 y recuperación segura siguen reservados por el contrato general; todavía no tienen UI productiva en Fase 3.
 
 En Fase 4, recurso visual sin alternativa muestra fallback; renderer ausente muestra escena segura; fallo de renderer ofrece continuar o reiniciar. Carga, error, finalización y destrucción se comunican por texto, no solo por color.
+
+Los fixtures declaran `idle`, `loading`, `ready`, `failed` y `unsupported`. Solo `failed` y `unsupported` muestran fallback recuperable; ningún estado expone códigos técnicos aislados.

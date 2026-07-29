@@ -20,3 +20,5 @@ Abrir `index.html` desde un servidor estático local. El Player carga el documen
 ## Límites vigentes
 
 El contenido se valida antes de cargarlo. El DOM Adapter solo representa contenido público. Los tipos no registrados y los fallos recuperables de renderer muestran un estado seguro. El teclado y los gestos táctiles son adaptadores externos, siempre con controles visibles como alternativa.
+
+La demo incluye un SVG sintético local y fallback de imagen; vídeo permanece como placeholder, sin reproducción automática, audio ni streaming.
