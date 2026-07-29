@@ -8,7 +8,7 @@ Su resultado central será un informe de diagnóstico en texto plano, claro y re
 
 ## Estado
 
-Requisito aprobado para una fase futura. Esta documentación no implementa código ni habilita diagnósticos todavía.
+Requisito aprobado para una fase futura. No forma parte de la V1 inicial y esta documentación no implementa código ni habilita diagnósticos todavía.
 
 ## Principios de seguridad
 
