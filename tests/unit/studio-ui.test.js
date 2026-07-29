@@ -27,9 +27,11 @@ test('StudioApp mounts preview shell and destroys listeners', () => {
   const app = createStudioApp(root, { controller, ownsController: false });
   assert.match(root.html, /NEXUS STUDIO/);
   assert.match(root.html, /data-preview/);
+  assert.match(root.html, /data-export>Exportar JSON/);
+  assert.match(root.html, /id="export-status" role="status" aria-live="polite"/);
   assert.match(root.html, /validation-panel/);
   assert.match(root.html, /preview-host/);
-  assert.match(root.html, /Exportación y almacenamiento permanecen fuera/);
+  assert.match(root.html, /La exportación es local/);
   assert.match(root.html, new RegExp(`© ${new Date().getFullYear()} NEXUS`));
   assert.ok(root.listenerCount() > 0);
   app.destroy();
@@ -47,5 +49,6 @@ test('Studio UI declares accessible preview and excludes forbidden capabilities'
   assert.match(source, /createPreviewBridge/);
   assert.match(source, /previewBridge\.destroy/);
   assert.equal((source.match(/controller\.subscribe\(/g) ?? []).length, 1);
-  assert.doesNotMatch(source, /window\.confirm|localStorage|sessionStorage|indexedDB|download|fetch\(/);
+  assert.match(source, /bindStudioExport/);
+  assert.doesNotMatch(source, /window\.confirm|localStorage|sessionStorage|indexedDB|Blob|createObjectURL|fetch\(/);
 });

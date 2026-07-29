@@ -42,3 +42,9 @@ StudioController → StudioApp → PreviewBridge → PublicPresentationDocument
 ```
 
 StudioApp mantiene una suscripción al Controller y otra al PreviewBridge. La UI no crea documentos públicos ni controla internamente el Player. El bridge no conoce selección, historial, dirty state ni formularios. La referencia contractual completa está en [PREVIEW_BRIDGE.md](PREVIEW_BRIDGE.md).
+
+## Exportación local — Fase 5D
+
+`StudioApp → bindStudioExport → ExportService → BrowserDownloadAdapter`
+
+El servicio contractual es independiente del DOM y reutiliza `createPublicPresentation`. El adaptador no valida ni transforma datos; limita su responsabilidad a Blob, URL temporal, descarga y limpieza. No hay acceso a almacenamiento ni publicación. Consulta [EXPORT_SERVICE.md](EXPORT_SERVICE.md).

@@ -1,6 +1,7 @@
 import { getSceneType } from '../contracts/index.js';
 import { applyTheme, themes } from '../themes/themes.js';
 import { createStudioController } from './controller.js';
+import { bindStudioExport } from './export-ui.js';
 import { createPreviewBridge } from './preview-bridge.js';
 
 const sceneTypes = ['cover', 'statement', 'content', 'media', 'comparison', 'evidence', 'closing'];
@@ -46,8 +47,10 @@ function shell() {
               <button type="button" data-redo>Rehacer</button>
             </div>
             <button type="button" data-preview>Previsualizar</button>
+            <button type="button" data-export>Exportar JSON</button>
+            <p id="export-status" role="status" aria-live="polite"></p>
             <section id="validation-panel" class="validation-panel" aria-labelledby="validation-title"></section>
-            <p>Exportación y almacenamiento permanecen fuera de esta fase.</p>
+            <p>La exportación es local. Almacenamiento y publicación permanecen fuera de esta fase.</p>
           </aside>
         </div>
       </section>
@@ -310,6 +313,7 @@ export function createStudioApp(root, {
 
   const stopController = controller.subscribe(renderStudio);
   const stopPreview = previewBridge.subscribe(renderPreview);
+  const exportUi = bindStudioExport(root, controller);
   renderStudio(controller.getState());
   renderPreview(previewBridge.getState());
 
@@ -320,6 +324,7 @@ export function createStudioApp(root, {
       destroyed = true;
       stopController();
       stopPreview();
+      exportUi.destroy();
       removers.forEach((remove) => remove());
       if (ownsPreviewBridge) previewBridge.destroy();
       if (ownsController) controller.destroy();
