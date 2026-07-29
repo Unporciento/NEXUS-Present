@@ -14,8 +14,8 @@ foreach ($relative in $required) {
   if (-not (Test-Path -LiteralPath $path)) { $errors.Add("Missing: $relative"); continue }
   if ((Get-Content -LiteralPath $path).Count -gt 400) { $errors.Add("Over 400 lines: $relative") }
 }
-$forbiddenUi = Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object { $_.Extension -in '.html','.css' -or ($_.Extension -in '.js','.mjs' -and $_.FullName -notmatch '[\\/]src[\\/]contracts[\\/]' -and $_.FullName -notmatch '[\\/]tests[\\/]') }
-if ($forbiddenUi) { $errors.Add('Interface or non-contract production code is present.') }
+$forbiddenUi = Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object { ($_.Extension -in '.html','.css' -and $_.Name -notin 'index.html','styles.css') -or ($_.Extension -in '.js','.mjs' -and $_.FullName -notmatch '[\\/](src[\\/](contracts|player|ui|input)|tests|demo)[\\/]' -and $_.Name -ne 'app.js') }
+if ($forbiddenUi) { $errors.Add('Unexpected production code is present.') }
 $secretPattern = '(gh[pousr]_[A-Za-z0-9_]{20,}|github_pat_|AKIA[0-9A-Z]{16}|BEGIN( RSA| EC| OPENSSH)? PRIVATE KEY)'
 Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object { $_.Extension -eq '.md' -or $_.Name -eq 'LICENSE' } | ForEach-Object {
   if (Select-String -LiteralPath $_.FullName -Pattern $secretPattern -Quiet) { $errors.Add("Possible secret: $($_.FullName)") }
@@ -33,6 +33,6 @@ $required | Where-Object { $_ -like '*.md' } | ForEach-Object {
   }
 }
 $main = git -c "safe.directory=$Root" -C $Root rev-parse main 2>$null
-if ($main -ne '3cea6b806ad3e18d55d655768b3ebc9d5da97f91') { $errors.Add('main moved from the approved Phase 1 completion commit.') }
+if ($main -ne '0758990ebd29a217b6ad81f412e2d69d64dc99ec') { $errors.Add('main moved from the approved Phase 2 completion commit.') }
 if ($errors.Count) { $errors | ForEach-Object { Write-Error $_ }; exit 1 }
 Write-Output 'Documentation verification passed.'

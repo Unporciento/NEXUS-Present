@@ -1,0 +1,1 @@
+:root{font-family:system-ui,sans-serif;color:#eef4ff;background:#07101f}body{margin:0;min-height:100vh;display:grid;place-items:center}.player{max-width:46rem;padding:2rem}button{padding:.7rem;margin:.2rem;font:inherit}#scene{min-height:12rem}button:focus-visible{outline:3px solid #e1b866;outline-offset:2px}@media(max-width:600px){.player{padding:1rem}button{min-height:44px}}

@@ -1,0 +1,8 @@
+export function createPlayerView(root, { player, renderers }) {
+  root.innerHTML = `<main class="player" aria-labelledby="player-title"><p id="player-status" role="status"></p><section id="scene" aria-live="polite"><h1 id="player-title"></h1><p id="scene-body"></p></section><nav aria-label="Presentación"><button id="previous" type="button">Anterior</button><span id="progress"></span><button id="next" type="button">Siguiente</button><button id="restart" type="button">Reiniciar</button></nav></main>`;
+  const $ = (id) => root.querySelector(`#${id}`), status = $('player-status'), title = $('player-title'), body = $('scene-body');
+  const update = () => { const scene = player.getScene(), progress = player.getProgress(); const renderer = renderers.get(scene?.type); const output = renderer ? renderer.render(scene) : { title: 'Escena no soportada', body: scene?.type ?? 'Sin escena' }; title.textContent = output.title; body.textContent = output.body; $('progress').textContent = `${progress.current} de ${progress.total}`; $('previous').disabled = progress.current <= 1; $('next').disabled = progress.current >= progress.total; };
+  $('previous').onclick = () => player.previous(); $('next').onclick = () => player.next(); $('restart').onclick = () => player.restart();
+  player.subscribe('presentation-loaded', () => { status.textContent = 'Lista'; update(); }); player.subscribe('scene-changed', update); player.subscribe('presentation-completed', () => { status.textContent = 'Presentación finalizada'; update(); }); player.subscribe('player-error', () => { status.textContent = 'Error al cargar la presentación'; });
+  return { update, destroy() { root.replaceChildren(); } };
+}
