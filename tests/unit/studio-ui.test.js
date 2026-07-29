@@ -55,5 +55,8 @@ test('Studio UI declares accessible preview and excludes forbidden capabilities'
   assert.equal((source.match(/controller\.subscribe\(/g) ?? []).length, 1);
   assert.match(source, /bindStudioExport/);
   assert.match(source, /bindStudioGuidance/);
+  assert.match(source, /<label>Diseño/);
+  assert.match(source, /layoutLabel\(layout\)/);
+  assert.doesNotMatch(source, /Tipo interno:/);
   assert.doesNotMatch(source, /window\.confirm|localStorage|sessionStorage|indexedDB|Blob|createObjectURL|fetch\(/);
 });

@@ -2,7 +2,7 @@
 
 ## Estado actual
 
-Fase 5E está implementándose en `phase-5e/studio-professional-closure` y debe detenerse para revisión visual. Leer [ONBOARDING.md](docs/ONBOARDING.md), [HELP_SYSTEM.md](docs/HELP_SYSTEM.md), [STUDIO_UI.md](docs/STUDIO_UI.md) y [PLAYER_CONTRACT.md](docs/PLAYER_CONTRACT.md).
+Fase 5E incluye un commit inicial y un cierre visual posterior en `phase-5e/studio-professional-closure`; debe detenerse para nueva revisión visual. Leer [ONBOARDING.md](docs/ONBOARDING.md), [HELP_SYSTEM.md](docs/HELP_SYSTEM.md), [STUDIO_UI.md](docs/STUDIO_UI.md) y [PLAYER_CONTRACT.md](docs/PLAYER_CONTRACT.md).
 
 ## Límites firmes
 

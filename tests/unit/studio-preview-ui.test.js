@@ -31,3 +31,10 @@ test('Studio preview remains free of download, storage and publication internals
   assert.doesNotMatch(ui, /localStorage|sessionStorage|indexedDB|Blob|URL\.createObjectURL|fetch\(/);
   assert.doesNotMatch(ui, /GitHub|ServiceWorker|navigator\.storage/);
 });
+
+test('Studio reserves the preview column only while preview is explicitly open', () => {
+  assert.match(ui, /dataset\.previewOpen = String\(previewOpen\)/);
+  assert.match(styles, /data-preview-open=true/);
+  assert.doesNotMatch(styles, /\.studio\[data-preview-state=ready\] \.studio-workspace/);
+  assert.match(styles, /\[hidden\] \{ display: none !important; \}/);
+});

@@ -5,7 +5,14 @@ import {
   ONBOARDING_KEY,
   ONBOARDING_VERSION
 } from '../../src/studio/onboarding.js';
-import { sceneLabel, sceneLabels } from '../../src/studio/labels.js';
+import { createStudioDraft } from '../../src/studio/controller.js';
+import { createExportService } from '../../src/studio/export-service.js';
+import {
+  layoutLabel,
+  layoutLabels,
+  sceneLabel,
+  sceneLabels
+} from '../../src/studio/labels.js';
 
 function storage() {
   const values = new Map();
@@ -66,4 +73,16 @@ test('friendly scene labels preserve internal identifiers', () => {
   assert.equal(sceneLabel('cover'), 'Portada');
   assert.equal(sceneLabel('unknown'), 'Escena');
   assert.equal(Object.keys(sceneLabels)[0], 'cover');
+});
+
+test('friendly layout labels preserve validation and exported contractual ids', () => {
+  assert.equal(layoutLabel('comparison'), 'Comparación');
+  assert.equal(layoutLabel('media-left'), 'Multimedia a la izquierda');
+  assert.equal(layoutLabel('closing-callout'), 'Cierre destacado');
+  assert.equal(Object.keys(layoutLabels).includes('hero'), true);
+  const draft = createStudioDraft();
+  const exported = createExportService().prepare(draft);
+  assert.equal(exported.ok, true);
+  assert.equal(exported.value.scenes[0].layout, 'hero');
+  assert.equal(draft.scenes[0].layout, 'hero');
 });

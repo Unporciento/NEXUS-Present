@@ -3,7 +3,7 @@ import { applyTheme, themes } from '../themes/themes.js';
 import { createStudioController } from './controller.js';
 import { bindStudioExport } from './export-ui.js';
 import { bindStudioGuidance } from './guidance-ui.js';
-import { sceneLabel } from './labels.js';
+import { layoutLabel, sceneLabel } from './labels.js';
 import { createPreviewBridge } from './preview-bridge.js';
 
 const sceneTypes = ['cover', 'statement', 'content', 'media', 'comparison', 'evidence', 'closing'];
@@ -142,13 +142,13 @@ function sceneEditor(scene) {
   return `<h1 id="studio-editor-title">Editar presentación</h1>
     <section aria-labelledby="scene-editor-title">
       <h2 id="scene-editor-title">${escape(sceneLabel(scene.type))}</h2>
-      <label>Layout
+      <label>Diseño
         <select data-layout>${definition.layouts.map((layout) =>
-          `<option ${layout === scene.layout ? 'selected' : ''}>${escape(layout)}</option>`).join('')}</select>
+          `<option value="${escape(layout)}" ${layout === scene.layout ? 'selected' : ''}>${escape(layoutLabel(layout))}</option>`).join('')}</select>
       </label>
       ${heading ? `<label>Título <input data-block="${escape(heading.id)}" value="${escape(heading.text)}"></label>` : ''}
       ${paragraph ? `<label>Texto <textarea data-block="${escape(paragraph.id)}">${escape(paragraph.text)}</textarea></label>` : ''}
-      <p>Edita los campos disponibles. Tipo interno: ${escape(scene.type)}.</p>
+      <p>Edita los campos disponibles para personalizar esta escena.</p>
     </section>`;
 }
 
@@ -256,7 +256,10 @@ export function createStudioApp(root, {
     const trigger = query('[data-preview]');
     if (trigger) trigger.textContent = previewState.status === 'stale' ? 'Actualizar vista previa' : 'Previsualizar';
     const main = query('.studio');
-    if (main) main.dataset.previewState = previewState.status;
+    if (main) {
+      main.dataset.previewState = previewState.status;
+      main.dataset.previewOpen = String(previewOpen);
+    }
   };
 
   const requestPreview = () => {

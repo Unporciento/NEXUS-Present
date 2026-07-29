@@ -3,13 +3,20 @@ import assert from 'node:assert/strict';
 import { bindStudioGuidance } from '../../src/studio/guidance-ui.js';
 
 function element(matches = () => false) {
+  const events = new Map();
   return {
     open: false,
     focused: 0,
     matches,
     focus() { this.focused += 1; },
     showModal() { this.open = true; },
-    close() { this.open = false; },
+    close() { this.open = false; (events.get('close') ?? []).forEach((listener) => listener()); },
+    addEventListener(type, listener) {
+      events.set(type, [...(events.get(type) ?? []), listener]);
+    },
+    removeEventListener(type, listener) {
+      events.set(type, (events.get(type) ?? []).filter((item) => item !== listener));
+    },
     setAttribute(name) { if (name === 'open') this.open = true; },
     removeAttribute(name) { if (name === 'open') this.open = false; },
     querySelector() { return this.start ?? null; }
@@ -68,4 +75,13 @@ test('help opens, repeats onboarding and can close with focus return', () => {
   assert.equal(fixture.help.open, false);
   assert.equal(fixture.onboarding.open, true);
   assert.equal(fixture.preference.resetCount, 1);
+});
+
+test('native dialog close such as Escape restores focus to Help', () => {
+  const fixture = setup(false);
+  bindStudioGuidance(fixture.root, { preference: fixture.preference });
+  const helpButton = element((selector) => selector === '[data-help]');
+  click(fixture.listeners, helpButton);
+  fixture.help.close();
+  assert.equal(helpButton.focused, 1);
 });

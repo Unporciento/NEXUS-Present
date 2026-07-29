@@ -21,6 +21,8 @@
 | D-021 | La única persistencia 5E es `nexus:onboarding-version`; nunca guarda presentaciones | aprobada |
 | D-022 | Los nombres amigables son una capa visual y no cambian identificadores contractuales | aprobada |
 | D-023 | El Player muestra copyright por defecto y solo Studio lo oculta mediante opción explícita | aprobada |
-| D-019 | Preview usa conversión pública y Player aislado; exportación es local | aprobada |
-| D-020 | Toda fase que modifica interfaz requiere revisión visual y aprobación antes del merge | aprobada |
-| D-021 | PreviewBridge es el único puente entre el borrador privado y el Player público; preview se actualiza de forma explícita | aprobada |
+| D-024 | Etiquetas de diseños centralizadas traducen la UI sin modificar IDs ni exportación | aprobada |
+| D-025 | La distribución amplia requiere preview explícitamente abierto; cerrar libera la columna | aprobada |
+| D-026 | Preview usa conversión pública y Player aislado; exportación es local | aprobada |
+| D-027 | Toda fase que modifica interfaz requiere revisión visual y aprobación antes del merge | aprobada |
+| D-028 | PreviewBridge es el único puente entre el borrador privado y el Player público; preview se actualiza de forma explícita | aprobada |

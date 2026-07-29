@@ -31,3 +31,7 @@ Abrir, actualizar, cerrar y reabrir destruye la instancia anterior. El teclado d
 El encabezado incorpora descripción, versión 1.0 y Ayuda. Onboarding y Ayuda se implementan en `bindStudioGuidance`; la única persistencia es la versión vista del tutorial. Los nombres de escenas son amigables sin cambiar identificadores. Los estados vacíos indican una acción y los términos de vista previa están unificados.
 
 En escritorio amplio, edición y vista previa coexisten sin forzar scroll interno en el panel de edición. En móvil, `Editar` y `Previsualizar` alternan áreas sin destruir el borrador. El Player embebido recibe `showCopyright: false`; el Player independiente conserva derechos. Consulta [ONBOARDING.md](ONBOARDING.md) y [HELP_SYSTEM.md](HELP_SYSTEM.md).
+
+La lista de diseños se obtiene del registro contractual y aplica nombres desde `layoutLabels`; el valor de cada opción sigue siendo el ID interno. La cuadrícula de dos columnas exige simultáneamente `data-preview-open=true` y un preview listo o desactualizado. Al cerrar la vista previa no queda una columna reservada.
+
+La captura inicial de título vacío se tomó antes de que el campo perdiera foco: el DOM visual cambió, pero el evento `change` aún no había confirmado el valor en StudioController. Tras blur, Controller y validación se actualizan de forma síncrona; no existía un defecto del validador.

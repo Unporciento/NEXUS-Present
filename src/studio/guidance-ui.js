@@ -40,6 +40,7 @@ export function bindStudioGuidance(root, {
     closeDialog(help);
     returnFocus?.focus?.();
   };
+  const restoreFocus = () => returnFocus?.focus?.();
   const click = (event) => {
     const target = event.target?.closest?.(
       '[data-help],[data-help-close],[data-repeat-onboarding],[data-onboarding-close]'
@@ -55,6 +56,8 @@ export function bindStudioGuidance(root, {
     }
   };
   root.addEventListener('click', click);
+  onboarding?.addEventListener?.('close', restoreFocus);
+  help?.addEventListener?.('close', restoreFocus);
   if (preference.shouldShow()) openOnboarding();
   return {
     openOnboarding,
@@ -63,6 +66,8 @@ export function bindStudioGuidance(root, {
       if (destroyed) return;
       destroyed = true;
       root.removeEventListener('click', click);
+      onboarding?.removeEventListener?.('close', restoreFocus);
+      help?.removeEventListener?.('close', restoreFocus);
       closeDialog(onboarding);
       closeDialog(help);
       returnFocus = null;
