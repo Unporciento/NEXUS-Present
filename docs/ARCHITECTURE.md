@@ -31,3 +31,14 @@ Studio, Presenter, multimedia, temas, almacenamiento, PWA, publicación y Labora
 ## Extensión visual de Fase 4
 
 `src/themes/` aplica tokens al contenedor de interfaz; `src/layouts/` valida composición; renderers transforman bloques públicos en HTML semántico. Esta capa no modifica el estado del Player ni accede a notas. La demostración queda en `demo/` y el estilo global en `styles.css`.
+
+## Studio y preview — Fases 5A–5C
+
+`src/studio/controller.js` es la autoridad del borrador y del historial privado. `src/studio/ui.js` representa edición, validación y modo responsive. `src/studio/preview-bridge.js` es el único puente hacia la conversión pública y el Player.
+
+```text
+StudioController → StudioApp → PreviewBridge → PublicPresentationDocument
+                                           → Player existente
+```
+
+StudioApp mantiene una suscripción al Controller y otra al PreviewBridge. La UI no crea documentos públicos ni controla internamente el Player. El bridge no conoce selección, historial, dirty state ni formularios. La referencia contractual completa está en [PREVIEW_BRIDGE.md](PREVIEW_BRIDGE.md).

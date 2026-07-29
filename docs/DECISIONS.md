@@ -18,3 +18,4 @@
 | D-018 | Fase 5 será Studio guiado por contratos, no editor visual libre | aprobada |
 | D-019 | Preview usa conversión pública y Player aislado; exportación es local | aprobada |
 | D-020 | Toda fase que modifica interfaz requiere revisión visual y aprobación antes del merge | aprobada |
+| D-021 | PreviewBridge es el único puente entre el borrador privado y el Player público; preview se actualiza de forma explícita | aprobada |

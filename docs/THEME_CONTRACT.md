@@ -1,6 +1,6 @@
 # Contrato de temas
 
-Un tema es `{ id, tokens }`. Además de fondo, superficie, texto y acento, exige tokens de borde, control, texto de control, deshabilitado, foco, estado y footer. La validación rechaza temas sin identificador o token obligatorio.
+Un tema es `{ id, tokens }`. Además de fondo, profundidad visual, superficie, texto y acento, exige tokens de borde, control, texto de control, deshabilitado, foco, estado y footer. `--nx-depth` evita que un Player embebido herede un resplandor incompatible con un tema claro. La validación rechaza temas sin identificador o token obligatorio.
 
 `neutral` es la base legible clara. `nexus` es la identidad inicial: azul profundo, superficies sobrias y acento dorado funcional. Ambos usan fuentes del sistema; no descargan fuentes externas.
 

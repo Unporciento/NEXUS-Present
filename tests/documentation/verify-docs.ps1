@@ -6,7 +6,7 @@ $required = @(
   'docs/SCENE_CONTRACT.md','docs/STATE_CATALOG.md','docs/ACCESSIBILITY.md',
   'docs/SECURITY.md','docs/PUBLISHING.md','docs/DECISIONS.md',
   'docs/ECOSYSTEM_STANDARD.md','docs/LABORATORY.md','docs/PRODUCT_VISION_1_0.md','docs/PLAYER_CONTRACT.md','docs/RESPONSIVE_REVIEW.md','docs/THEME_CONTRACT.md','docs/LAYOUT_CONTRACT.md',
-  'docs/USER_JOURNEYS.md','docs/PUBLICATION_CONTRACT.md'
+  'docs/USER_JOURNEYS.md','docs/PUBLICATION_CONTRACT.md','docs/PREVIEW_BRIDGE.md'
 )
 $errors = [System.Collections.Generic.List[string]]::new()
 foreach ($relative in $required) {
@@ -34,6 +34,6 @@ $required | Where-Object { $_ -like '*.md' } | ForEach-Object {
   }
 }
 $main = git -c "safe.directory=$Root" -C $Root rev-parse main 2>$null
-if ($main -ne 'ead39a667541bda7503c635653c74eeeb5e835b8') { $errors.Add('main moved from the approved Phase 5B completion commit.') }
+if ($main -ne '211f3c5abb360519381888c608f36267458198e2') { $errors.Add('main moved from the approved post-5B visual hotfix commit.') }
 if ($errors.Count) { $errors | ForEach-Object { Write-Error $_ }; exit 1 }
 Write-Output 'Documentation verification passed.'
