@@ -2,15 +2,14 @@
 
 | Id | Decisión | Estado |
 |---|---|---|
-| D-001 | V1 desarrolla motor y reproductor; editor es posterior | aprobada |
+| D-001 | V1 comienza por motor y reproductor; el editor es posterior | aprobada |
 | D-002 | Repositorio público `Unporciento/NEXUS-Present`, rama `main` | aprobada |
-| D-003 | Despliegue futuro estático mediante GitHub Pages | aprobada |
-| D-004 | Presentaciones como JSON validado, independientes del motor | aprobada |
+| D-003 | Publicación futura estática mediante GitHub Pages, sin acoplamiento actual | aprobada |
+| D-004 | Presentaciones como datos JSON validados e independientes del motor | aprobada |
 | D-005 | Licencia propietaria y derechos reservados | aprobada |
 | D-006 | Identidad técnica, editorial y cinematográfica moderada | aprobada |
-| D-007 | Laboratorio es futuro, no parte de V1 | aprobada |
-| D-008 | Fase 1 trabaja solo en `phase-1/foundation` | aprobada |
-| D-009 | NEXUS 1.0 incluye Studio, Player, Presenter, Publisher y Laboratory inicial | aprobada |
-| D-010 | Publicación se abstrae con PublishAdapter; GitHub Pages es candidato, no acoplamiento | aprobada |
-| D-011 | URL estable, releases versionadas y reversión trazable | aprobada |
-| D-012 | Studio usa Source y Player usa PublicPresentationDocument | aprobada |
+| D-007 | Laboratory es futuro y no altera datos sin autorización | aprobada |
+| D-012 | Studio usa Source y Player usa `PublicPresentationDocument` | aprobada |
+| D-013 | Player Core, Renderer Registry, DOM Adapter e Input Adapters permanecen separados | aprobada |
+| D-014 | `destroy` concentra liberación explícita de suscripciones y entradas | aprobada |
+| D-015 | La demo usa datos sintéticos públicos y no expone notas privadas | aprobada |

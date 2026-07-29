@@ -1,40 +1,29 @@
 # Arquitectura
 
-## Límites
+## Implementado en Fase 3
 
-NEXUS separa motor, Studio, Player, Presenter, Publisher, Laboratory, presentación, tema y recursos. El motor no depende de la demostración; cualquier documento válido debe poder cargarse sin modificar el núcleo.
+`src/contracts/` valida documentos públicos y compatibilidad. `src/player/` reúne la máquina de estados, navegación, eventos y ciclo de vida. `src/ui/player-view.js` es el DOM Adapter mínimo: pinta texto público, progreso y controles. `src/input/` adapta teclado y tacto sin tomar control de elementos interactivos. `demo/` solo contiene datos sintéticos; no es una dependencia del motor.
 
 ```text
 src/
-  core/            ciclo de vida, estado y eventos
-  contracts/       validación de documentos y escenas
-  presentation/    carga de datos estructurados
-  scenes/          tipos de escena registrados
-  navigation/      transiciones y progreso global
-  media/           carga y liberación de recursos
-  presenter/       notas y datos privados de presentación
-  accessibility/   foco, semántica y preferencias
-  storage/         preferencias encapsuladas
-  pwa/             manifest, caché y actualización futuros
-  ui/              controles de interfaz
-  styles/          tokens, temas y componentes
-tests/             pruebas no productivas por área
+  contracts/   validación, versión y datos públicos
+  player/      Player Core, estados, navegación y eventos
+  ui/          DOM Adapter
+  input/       adaptadores de teclado y tacto
+demo/          documento demostrativo
+tests/         contratos, Player, entradas, DOM simulado y documentos
 ```
 
-Estas carpetas son futuras: no se crean hasta contener archivos reales.
+El Player recibe un `PublicPresentationDocument`, lo clona y no lo muta. El Renderer Registry resuelve el tipo de escena. El DOM Adapter no valida, no navega globalmente por sí mismo y nunca recibe notas privadas. Los Input Adapters devuelven una función de limpieza que el Player ejecuta mediante `destroy`.
 
-## Reglas
+## Reglas mantenidas
 
-- HTML mínimo y semántico; sin JavaScript o CSS extensos incrustados.
-- Cada archivo queda bajo 400 líneas y una responsabilidad.
-- No hay dependencias circulares ni módulos acumuladores.
-- Componentes visuales no acceden a almacenamiento directamente.
-- El estado global mínimo contiene documento, escena activa, carga, conectividad y preferencias.
-- Eventos tienen nombre, origen y carga documentados; las escenas no controlan navegación global.
-- Recursos se declaran en el documento, se cargan progresivamente y se liberan al salir.
+- HTML mínimo y semántico; CSS y JavaScript fuera de HTML.
+- Un archivo, una responsabilidad y menos de 400 líneas.
+- Sin dependencias circulares, almacenamiento directo desde la UI ni dependencias de producción.
+- Eventos públicos pequeños; no incluyen documento completo ni notas privadas.
+- `destroy` elimina suscripciones, listeners registrados, referencias al documento y navegación; no se programan temporizadores.
 
-## Presentador y temas
+## Futuro reservado
 
-Notas, escena actual, siguiente escena, reloj y controles pertenecen a `presenter/`. La segunda ventana es futura, pero el contrato reserva esos datos. Los temas exponen tokens; las escenas no definen identidad global.
-
-Studio manipula solo `SourcePresentationDocument`; Player solo acepta `PublicPresentationDocument`. Publisher crea `PublicBundle` y llama a `PublishAdapter`; Laboratory valida y recomienda. Ningún pilar accede a las responsabilidades de otro mediante estado implícito.
+Studio, Presenter, multimedia, temas, almacenamiento, PWA, publicación y Laboratory conservan su separación documental, pero no tienen implementación en esta fase.

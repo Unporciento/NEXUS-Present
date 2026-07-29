@@ -1,20 +1,22 @@
 # Registro de cambios
 
-Todos los cambios relevantes de NEXUS Present se documentarán aquí.
+## [0.3.0] — 2026-07-29
+
+### Añadido
+
+- Player mínimo con estados, navegación, eventos y destrucción explícita.
+- Renderers de texto `cover`, `statement`, `content` y `closing`.
+- DOM Adapter, controles, progreso, teclado y swipe táctil opcional.
+- Demostración pública sintética, pruebas de contratos, Player, entradas y DOM simulado.
+
+### Límites
+
+- Sin Studio, Presenter completo, temas, multimedia avanzada, publicación, PWA, Service Worker o persistencia.
+
+## [0.2.0] — 2026-07-28
+
+- Núcleo contractual y validación de documentos públicos.
 
 ## [0.1.0] — 2026-07-26
 
-### Añadido
-
-- Definición inicial del producto y sus principios.
-- Ficha técnica de proyecto.
-- Documentación de arranque y propuesta de arquitectura.
-- Especificación obligatoria del módulo Laboratorio para una fase futura.
-
-## [0.1.0-foundation] — 2026-07-28
-
-### Añadido
-
-- Fundación documental, contratos y verificadores de Fase 1.
-- Licencia propietaria explícita y estrategia de arquitectura estática.
-- Visión completa de NEXUS 1.0, recorridos de usuario y contrato de publicación.
+- Arranque documental del proyecto.
