@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "node tools/local-server.js",
     "test": "node --test tests/unit/*.test.js",
     "verify:quick": "node --test tests/unit/*.test.js"
   }

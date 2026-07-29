@@ -1,26 +1,17 @@
 # AI HANDOFF — NEXUS Present
 
-## Propósito
-
-NEXUS Present es un motor reutilizable para presentaciones HTML profesionales. No debe acoplarse al contenido de una presentación individual.
-
 ## Estado actual
 
-La Fundación documental y contractual está en `phase-1/foundation`. La visión 1.0 incluye Studio, Player, Presenter, Publisher y Laboratory inicial. No iniciar código, PWA, páginas ni publicación hasta aprobar esta fase.
+Fase 3 implementa el Player mínimo en `phase-3/player-navigation`. Antes de continuar, leer [PLAYER_CONTRACT.md](docs/PLAYER_CONTRACT.md), [ARCHITECTURE.md](docs/ARCHITECTURE.md), [PRESENTATION_CONTRACT.md](docs/PRESENTATION_CONTRACT.md), [SCENE_CONTRACT.md](docs/SCENE_CONTRACT.md), [STATE_CATALOG.md](docs/STATE_CATALOG.md) y `CHANGELOG.md`.
 
-## Decisiones vigentes
+## Límites firmes
 
-- El motor, las presentaciones, temas y recursos permanecen separados.
-- `PRESENTATION_CONTRACT.md` y `SCENE_CONTRACT.md` son la fuente de verdad antes de implementar escenas.
-- La V1 incorpora Studio estructurado, Publisher y Laboratory inicial; editor libre, nube, cuentas, salas e IA siguen fuera de alcance.
-- SourcePresentationDocument y PublicPresentationDocument son contratos distintos; publicación usa PublishAdapter.
-- Este proyecto adopta `docs/DEVELOPMENT_STANDARD.md`.
+- El Player acepta solo documentos públicos validados y no debe mutarlos.
+- Notas privadas no llegan al DOM Adapter ni a eventos públicos.
+- Los adaptadores de teclado y tacto se registran como limpiezas del Player; `destroy` debe impedir actividad posterior.
+- No iniciar Fase 4 sin autorización explícita. No hay Studio, Presenter, PWA, Service Worker, Pages, publicación, almacenamiento, backend, salas ni IA.
+- Este proyecto adopta [DEVELOPMENT_STANDARD.md](docs/DEVELOPMENT_STANDARD.md).
 
-## Siguiente intervención recomendada
+## Próximo paso sugerido
 
-1. Revisar y aprobar la ampliación documental de Fase 1.
-2. Autorizar explícitamente Fase 2: validación y núcleo contractual.
-
-## Mantenimiento de la ficha técnica
-
-Al cerrar una fase, actualizar en `README.md`: estado, versión, última auditoría, último respaldo y próxima fase.
+Tras el cierre e integración aprobados de Fase 3, preparar únicamente el plan de Fase 4; no implementar módulos nuevos sin aprobación.

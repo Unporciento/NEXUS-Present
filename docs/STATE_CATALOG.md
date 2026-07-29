@@ -1,18 +1,16 @@
 # Catálogo de estados
 
-| Estado | Respuesta profesional | Recuperación |
-|---|---|---|
-| Carga | progreso accesible y sin bloqueo | cancelar o reintentar |
-| Vacío | explica ausencia de presentación | elegir documento válido |
-| Error | mensaje, id y detalle técnico seguro | reintentar o volver |
-| Recurso ausente | sustituto textual y escena navegable | reintentar/reemplazar posterior |
-| Formato incompatible | versión requerida y detectada | actualizar motor o documento |
-| Presentación inválida | errores acumulados por campo | corregir datos, no renderizar parcialmente |
-| Sin conexión | indica alcance offline real | reintentar al reconectar |
-| Actualización disponible | conserva sesión y ofrece actualizar | activar cuando usuario acepte |
-| Recuperación segura | restaura último estado válido | descartar operación fallida |
-| 404 | página propia y regreso seguro | volver al inicio |
-| Publicación fallida | conserva última release activa | corregir, revalidar y reintentar |
-| Reversión | identifica release restaurada | confirmar operación trazable |
+La máquina del Player usa `idle`, `loading`, `ready`, `presenting`, `paused`, `completed`, `error` y `destroyed`. Las transiciones no permitidas se rechazan; la referencia operativa es [PLAYER_CONTRACT.md](PLAYER_CONTRACT.md).
 
-Cada estado debe ser semántico, accesible por teclado, visible para lectores de pantalla y no revelar información sensible.
+| Estado | Interfaz mínima | Recuperación |
+|---|---|---|
+| `idle` | sin presentación activa | cargar documento válido |
+| `loading` | preparación interna | validación o error controlado |
+| `ready` | documento validado | iniciar |
+| `presenting` | escena, progreso y controles | navegar o pausar |
+| `paused` | sesión conservada | reanudar |
+| `completed` | aviso final y reinicio | reiniciar |
+| `error` | mensaje seguro, sin detalles sensibles | volver a cargar documento válido |
+| `destroyed` | interfaz y entradas liberadas | crear un Player nuevo |
+
+Los estados futuros de recurso ausente, formato incompatible, sin conexión, actualización, 404 y recuperación segura siguen reservados por el contrato general; todavía no tienen UI productiva en Fase 3.

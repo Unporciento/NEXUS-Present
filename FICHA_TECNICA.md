@@ -5,11 +5,11 @@
 | Proyecto | NEXUS Present |
 | Repositorio | https://github.com/Unporciento/NEXUS-Present |
 | Producción | GitHub Pages no activado |
-| Estado | Fundación contractual ampliada para NEXUS 1.0, en revisión |
-| Versión | 0.1.0 |
-| Última auditoría | 28/07/2026 |
+| Estado | Fase 3: Player mínimo, cierre formal en curso |
+| Versión | 0.3.0 |
+| Última auditoría | 29/07/2026 |
 | Responsable | Usuario |
 | IA principal | Codex |
 | Documentación | README · CHANGELOG · AI_HANDOFF · LICENSE · docs/ |
 | Último respaldo | 28/07/2026 — bundle verificado SHA-256 `1740A4ED…B84974E1` |
-| Próxima fase | Aprobación de Fase 1 antes del núcleo contractual |
+| Próxima fase | Plan aprobado de Fase 4, sin implementación |

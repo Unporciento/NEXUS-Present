@@ -1,15 +1,22 @@
 # NEXUS Present
 
-Estudio local para crear, organizar, presentar, publicar y compartir experiencias narrativas web. NEXUS 1.0 termina cuando una persona puede crear, presentar, publicar y compartir una presentación real mediante una URL.
+NEXUS Present es un motor local y modular para reproducir presentaciones web narrativas. La demostración incluida verifica el Player con cuatro escenas públicas: `cover`, `statement`, `content` y `closing`.
 
 ## Estado
 
-Fundación documental y contractual de Fase 1, pendiente de revisión. No contiene código de producción, PWA ni publicación activa.
+Fase 3 — Player y navegación, pendiente de cierre formal. No incluye Studio, Presenter completo, publicación, PWA, Service Worker, almacenamiento ni cuentas.
 
-## Documentación
+## Uso de demostración
 
-- [Ficha técnica](FICHA_TECNICA.md) · [Continuidad](AI_HANDOFF.md) · [Cambios](CHANGELOG.md) · [Licencia](LICENSE)
-- [Arquitectura](docs/ARCHITECTURE.md) · [Contrato de presentación](docs/PRESENTATION_CONTRACT.md) · [Contrato de escenas](docs/SCENE_CONTRACT.md)
-- [Estados](docs/STATE_CATALOG.md) · [Accesibilidad](docs/ACCESSIBILITY.md) · [Seguridad](docs/SECURITY.md) · [Publicación](docs/PUBLISHING.md)
-- [Estándar de desarrollo](docs/DEVELOPMENT_STANDARD.md) · [Decisiones](docs/DECISIONS.md) · [Laboratorio futuro](docs/LABORATORY.md)
-- [Visión 1.0](docs/PRODUCT_VISION_1_0.md) · [Recorridos](docs/USER_JOURNEYS.md) · [Contrato de publicación](docs/PUBLICATION_CONTRACT.md)
+Abrir `index.html` desde un servidor estático local. El Player carga el documento sintético de `demo/public-demo.js`; este contenido no contiene notas privadas ni datos personales.
+
+## Arquitectura y contratos
+
+- [Arquitectura](docs/ARCHITECTURE.md) y [contrato del Player](docs/PLAYER_CONTRACT.md).
+- [Contrato de presentación](docs/PRESENTATION_CONTRACT.md), [contrato de escenas](docs/SCENE_CONTRACT.md) y [catálogo de estados](docs/STATE_CATALOG.md).
+- [Revisión responsive](docs/RESPONSIVE_REVIEW.md), [accesibilidad](docs/ACCESSIBILITY.md) y [seguridad](docs/SECURITY.md).
+- [Estándar de desarrollo](docs/DEVELOPMENT_STANDARD.md), [ficha técnica](FICHA_TECNICA.md), [continuidad](AI_HANDOFF.md), [decisiones](docs/DECISIONS.md), [cambios](CHANGELOG.md) y [licencia](LICENSE).
+
+## Límites vigentes
+
+El contenido se valida antes de cargarlo. El DOM Adapter solo representa contenido público. Los tipos no registrados y los fallos recuperables de renderer muestran un estado seguro. El teclado y los gestos táctiles son adaptadores externos, siempre con controles visibles como alternativa.
