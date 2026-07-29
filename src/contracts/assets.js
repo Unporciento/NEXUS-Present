@@ -4,6 +4,8 @@ import { duplicateDiagnostics, validateIdentifier } from './identifiers.js';
 const MIME_BY_TYPE = { image: /^image\//, video: /^video\//, audio: /^audio\// };
 export function validateAssets(assets = [], usedAssetIds = [], isPublic = false) {
   const diagnostics = [...duplicateDiagnostics(assets, 'id', 'assets')];
+  const available = new Set(assets.map((asset) => asset?.id));
+  usedAssetIds.filter((id) => !available.has(id)).forEach((id) => diagnostics.push(diagnostic('missing-asset', 'scenes', `Referenced asset ${id} does not exist.`)));
   assets.forEach((asset, index) => {
     const path = `assets[${index}]`; diagnostics.push(...validateIdentifier('assetId', asset?.id, `${path}.id`));
     if (!MIME_BY_TYPE[asset?.type]?.test(asset?.mime ?? '')) diagnostics.push(diagnostic('incompatible-asset-mime', `${path}.mime`, 'Asset MIME does not match its type.'));
