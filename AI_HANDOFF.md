@@ -2,7 +2,7 @@
 
 ## Estado actual
 
-Fase 4 trabaja en `phase-4/scenes-themes-demo`. Leer [THEME_CONTRACT.md](docs/THEME_CONTRACT.md), [LAYOUT_CONTRACT.md](docs/LAYOUT_CONTRACT.md), [PLAYER_CONTRACT.md](docs/PLAYER_CONTRACT.md), [ARCHITECTURE.md](docs/ARCHITECTURE.md) y `CHANGELOG.md` antes de actuar.
+Fase 5A implementa solo estado y controlador. Leer [STUDIO_PLAN.md](docs/STUDIO_PLAN.md), [STUDIO_CONTRACT.md](docs/STUDIO_CONTRACT.md), [STUDIO_STATE.md](docs/STUDIO_STATE.md), [PLAYER_CONTRACT.md](docs/PLAYER_CONTRACT.md) y `ROADMAP.md` antes de autorizar 5B.
 
 ## Límites firmes
 
