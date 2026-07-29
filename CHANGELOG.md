@@ -1,5 +1,11 @@
 # Registro de cambios
 
+## [0.4.0] — 2026-07-29
+
+- Temas `neutral` y `nexus`, layouts y renderers visuales desacoplados.
+- Demo pública sintética de siete escenas y movimiento reducido.
+- Identidad inicial, footer con año automático y contrato de temas/layouts.
+
 ## [0.3.0] — 2026-07-29
 
 ### Añadido

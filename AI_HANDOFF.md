@@ -2,7 +2,7 @@
 
 ## Estado actual
 
-Fase 3 implementa el Player mínimo en `phase-3/player-navigation`. Antes de continuar, leer [PLAYER_CONTRACT.md](docs/PLAYER_CONTRACT.md), [ARCHITECTURE.md](docs/ARCHITECTURE.md), [PRESENTATION_CONTRACT.md](docs/PRESENTATION_CONTRACT.md), [SCENE_CONTRACT.md](docs/SCENE_CONTRACT.md), [STATE_CATALOG.md](docs/STATE_CATALOG.md) y `CHANGELOG.md`.
+Fase 4 trabaja en `phase-4/scenes-themes-demo`. Leer [THEME_CONTRACT.md](docs/THEME_CONTRACT.md), [LAYOUT_CONTRACT.md](docs/LAYOUT_CONTRACT.md), [PLAYER_CONTRACT.md](docs/PLAYER_CONTRACT.md), [ARCHITECTURE.md](docs/ARCHITECTURE.md) y `CHANGELOG.md` antes de actuar.
 
 ## Límites firmes
 

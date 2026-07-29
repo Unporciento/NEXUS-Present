@@ -30,6 +30,8 @@ El DOM Adapter conserva contenido semántico, foco visible, nombres accesibles, 
 
 No implementa Studio, Presenter completo, segunda pantalla, temas, multimedia avanzada, almacenamiento, publicación, PWA, Service Worker, Pages, backend, salas ni IA.
 
+Fase 4 añade renderers públicos visuales y layouts, sin cambiar las responsabilidades del Player Core. Los estados de recurso faltante, renderer no soportado y error de renderer se representan con mensajes recuperables.
+
 ```js
 const player = createPlayer();
 player.loadPresentation(publicDocument);

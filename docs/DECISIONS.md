@@ -13,3 +13,5 @@
 | D-013 | Player Core, Renderer Registry, DOM Adapter e Input Adapters permanecen separados | aprobada |
 | D-014 | `destroy` concentra liberación explícita de suscripciones y entradas | aprobada |
 | D-015 | La demo usa datos sintéticos públicos y no expone notas privadas | aprobada |
+| D-016 | Temas y layouts se desacoplan del Player Core mediante tokens y validación | aprobada |
+| D-017 | La identidad inicial usa azul profundo y acento funcional, sin fuentes externas | aprobada |

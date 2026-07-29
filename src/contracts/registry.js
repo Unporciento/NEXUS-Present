@@ -4,10 +4,10 @@ const SCENES = new Map();
 const BLOCKS = new Map();
 
 export const initialSceneTypes = [
-  ['cover', ['hero'], ['heading']], ['statement', ['centered'], ['heading', 'paragraph']],
-  ['content', ['stack', 'split'], ['heading', 'paragraph', 'list', 'image', 'metric']],
-  ['media', ['full', 'split'], ['image', 'video', 'heading']], ['comparison', ['split'], ['comparison', 'heading']],
-  ['evidence', ['stack'], ['metric', 'quote', 'image']], ['closing', ['centered'], ['heading', 'callToAction']]
+  ['cover', ['hero','centered'], ['heading','paragraph']], ['statement', ['centered','quote-focus'], ['heading', 'paragraph','quote']],
+  ['content', ['stack', 'split','centered','metric-focus'], ['heading', 'paragraph', 'list', 'image', 'metric']],
+  ['media', ['media-left','media-right'], ['image', 'video', 'heading','paragraph']], ['comparison', ['comparison'], ['comparison', 'heading']],
+  ['evidence', ['evidence-grid'], ['metric', 'quote', 'image']], ['closing', ['closing-callout','centered'], ['heading', 'callToAction']]
 ];
 
 export const initialBlockTypes = ['heading', 'paragraph', 'list', 'image', 'metric', 'quote', 'comparison', 'video', 'callToAction'];
