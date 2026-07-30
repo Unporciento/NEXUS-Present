@@ -7,7 +7,9 @@ $required = @(
   'docs/SECURITY.md','docs/PUBLISHING.md','docs/DECISIONS.md',
   'docs/ECOSYSTEM_STANDARD.md','docs/LABORATORY.md','docs/PRODUCT_VISION_1_0.md','docs/PLAYER_CONTRACT.md','docs/RESPONSIVE_REVIEW.md','docs/THEME_CONTRACT.md','docs/LAYOUT_CONTRACT.md',
   'docs/USER_JOURNEYS.md','docs/PUBLICATION_CONTRACT.md','docs/PREVIEW_BRIDGE.md',
-  'docs/EXPORT_SERVICE.md','docs/ONBOARDING.md','docs/HELP_SYSTEM.md'
+  'docs/EXPORT_SERVICE.md','docs/ONBOARDING.md','docs/HELP_SYSTEM.md',
+  'docs/PHASE_6_PLAN.md','docs/IMPORT_CONTRACT.md','docs/DRAFT_REPOSITORY.md',
+  'docs/STORAGE_MODEL.md','docs/MIGRATION_PLAN.md'
 )
 $errors = [System.Collections.Generic.List[string]]::new()
 foreach ($relative in $required) {
@@ -35,6 +37,6 @@ $required | Where-Object { $_ -like '*.md' } | ForEach-Object {
   }
 }
 $main = git -c "safe.directory=$Root" -C $Root rev-parse main 2>$null
-if ($main -ne 'b5fcc82cc45331d8d066d9a86cf9aafa5d4b40e9') { $errors.Add('main moved from the approved Phase 5D commit.') }
+if ($main -ne '8c108df87ce40747405f6dbd7092f582194ecfae') { $errors.Add('main moved from the approved Phase 5 complete commit.') }
 if ($errors.Count) { $errors | ForEach-Object { Write-Error $_ }; exit 1 }
 Write-Output 'Documentation verification passed.'
