@@ -2,6 +2,8 @@ import { getSceneType } from '../contracts/index.js';
 import { applyTheme, themes } from '../themes/themes.js';
 import { createStudioController } from './controller.js';
 import { bindStudioExport } from './export-ui.js';
+import { bindStudioGuidance } from './guidance-ui.js';
+import { layoutLabel, sceneLabel } from './labels.js';
 import { createPreviewBridge } from './preview-bridge.js';
 
 const sceneTypes = ['cover', 'statement', 'content', 'media', 'comparison', 'evidence', 'closing'];
@@ -24,8 +26,14 @@ const previewMessages = {
 function shell() {
   return `<main class="studio" data-studio-view="edit">
     <header>
-      <p class="brand">NEXUS STUDIO</p>
-      <p id="studio-status" role="status"></p>
+      <div>
+        <p class="brand">NEXUS STUDIO <span class="studio-version">1.0</span></p>
+        <p class="studio-description">Crea, valida y previsualiza presentaciones web estructuradas.</p>
+      </div>
+      <div class="studio-header-actions">
+        <p id="studio-status" role="status"></p>
+        <button type="button" data-help>Ayuda</button>
+      </div>
     </header>
     <nav class="studio-mode" aria-label="Vista del Studio">
       <button type="button" data-show-edit aria-pressed="true">Editar</button>
@@ -38,6 +46,10 @@ function shell() {
             <h2 id="scene-list-title">Escenas</h2>
             <button type="button" data-add>+ Añadir escena</button>
             <ol id="scene-list"></ol>
+            <div id="scene-empty" class="empty-state" hidden>
+              <p>Tu presentación necesita al menos una escena.</p>
+              <button type="button" data-add>Añadir primera escena</button>
+            </div>
           </aside>
           <section id="editor-panel" aria-labelledby="studio-editor-title"></section>
           <aside aria-labelledby="studio-actions-title">
@@ -46,8 +58,9 @@ function shell() {
               <button type="button" data-undo>Deshacer</button>
               <button type="button" data-redo>Rehacer</button>
             </div>
-            <button type="button" data-preview>Previsualizar</button>
-            <button type="button" data-export>Exportar JSON</button>
+            <button type="button" class="primary-action" data-preview>Previsualizar</button>
+            <button type="button" class="primary-action" data-export>Descargar presentación</button>
+            <small>Formato JSON · Las imágenes y videos todavía no se empaquetan.</small>
             <p id="export-status" role="status" aria-live="polite"></p>
             <section id="validation-panel" class="validation-panel" aria-labelledby="validation-title"></section>
             <p>La exportación es local. Almacenamiento y publicación permanecen fuera de esta fase.</p>
@@ -62,7 +75,7 @@ function shell() {
           </div>
           <div class="studio-action-row">
             <button type="button" data-refresh-preview>Actualizar</button>
-            <button type="button" data-close-preview>Cerrar preview</button>
+            <button type="button" data-close-preview>Cerrar vista previa</button>
           </div>
         </header>
         <p id="preview-status" role="status" aria-live="polite"></p>
@@ -78,6 +91,43 @@ function shell() {
       <button value="cancel">Cancelar</button>
       <button data-confirm-delete value="delete">Eliminar</button>
     </form>
+  </dialog>
+  <dialog class="guidance-dialog" data-onboarding aria-labelledby="onboarding-title">
+    <p class="eyebrow">PRIMEROS PASOS · VERSIÓN 1.0</p>
+    <h2 id="onboarding-title">Bienvenido a NEXUS Studio</h2>
+    <p>Crea, valida y previsualiza presentaciones web estructuradas.</p>
+    <ol>
+      <li>Define el título, la descripción y el tema.</li>
+      <li>Añade escenas y edita su contenido.</li>
+      <li>Corrige los avisos del panel Validación.</li>
+      <li>Abre la vista previa y recorre el Player.</li>
+      <li>Descarga la presentación en formato JSON.</li>
+    </ol>
+    <p>El tutorial puede repetirse en cualquier momento desde Ayuda.</p>
+    <div class="studio-action-row">
+      <button type="button" data-dialog-start data-onboarding-close>Omitir</button>
+      <button type="button" class="primary-action" data-onboarding-close>Comenzar</button>
+    </div>
+  </dialog>
+  <dialog class="guidance-dialog" data-help-dialog aria-labelledby="help-title">
+    <h2 id="help-title">Ayuda de NEXUS Studio</h2>
+    <p>Empieza con los datos generales, añade escenas y atiende la validación antes de previsualizar.</p>
+    <details open><summary>Tipos de escenas</summary>
+      <p>Portada, Declaración, Contenido, Multimedia, Comparación, Evidencia y Cierre.</p>
+    </details>
+    <details><summary>Temas y vista previa</summary>
+      <p>Elige Nexus o Neutral. Actualiza la vista previa después de editar.</p>
+    </details>
+    <details><summary>Descarga y límites</summary>
+      <p>Se descarga un JSON público. No se guardan borradores ni se empaquetan imágenes o videos.</p>
+    </details>
+    <details><summary>Preguntas frecuentes</summary>
+      <p>Si aparece un error, activa su mensaje para volver al campo correspondiente.</p>
+    </details>
+    <div class="studio-action-row">
+      <button type="button" data-dialog-start data-repeat-onboarding>Repetir tutorial</button>
+      <button type="button" data-help-close>Cerrar ayuda</button>
+    </div>
   </dialog>`;
 }
 
@@ -91,14 +141,14 @@ function sceneEditor(scene) {
   const paragraph = scene.blocks.find((block) => block.type === 'paragraph');
   return `<h1 id="studio-editor-title">Editar presentación</h1>
     <section aria-labelledby="scene-editor-title">
-      <h2 id="scene-editor-title">${escape(scene.type)}</h2>
-      <label>Layout
+      <h2 id="scene-editor-title">${escape(sceneLabel(scene.type))}</h2>
+      <label>Diseño
         <select data-layout>${definition.layouts.map((layout) =>
-          `<option ${layout === scene.layout ? 'selected' : ''}>${escape(layout)}</option>`).join('')}</select>
+          `<option value="${escape(layout)}" ${layout === scene.layout ? 'selected' : ''}>${escape(layoutLabel(layout))}</option>`).join('')}</select>
       </label>
       ${heading ? `<label>Título <input data-block="${escape(heading.id)}" value="${escape(heading.text)}"></label>` : ''}
       ${paragraph ? `<label>Texto <textarea data-block="${escape(paragraph.id)}">${escape(paragraph.text)}</textarea></label>` : ''}
-      <p>Bloques permitidos: ${definition.blocks.map(escape).join(', ')}.</p>
+      <p>Edita los campos disponibles para personalizar esta escena.</p>
     </section>`;
 }
 
@@ -113,7 +163,7 @@ function editorContent(state) {
         `<option ${theme === draft.theme ? 'selected' : ''}>${escape(theme)}</option>`).join('')}</select>
     </label>
     ${selected ? sceneEditor(selected).replace('<h1 id="studio-editor-title">Editar presentación</h1>', '') :
-      '<p>Selecciona una escena o añade una nueva.</p>'}`;
+      '<div class="empty-state"><p>Selecciona una escena para editarla o añade una nueva.</p><button type="button" data-add>Añadir escena</button></div>'}`;
 }
 
 function diagnosticsContent(state) {
@@ -179,11 +229,13 @@ export function createStudioApp(root, {
     if (status) status.textContent = `${state.valid ? 'Presentación válida' : 'Presentación con errores'} · ${state.dirty ? 'Cambios pendientes' : 'Sin cambios'}`;
     const list = query('#scene-list');
     if (list) list.innerHTML = state.draft.scenes.map((scene, index) => `<li>
-      <button type="button" data-select="${escape(scene.id)}" aria-pressed="${scene.id === state.selectedSceneId}">${index + 1}. ${escape(scene.type)}</button>
+      <button type="button" data-select="${escape(scene.id)}" aria-pressed="${scene.id === state.selectedSceneId}">${index + 1}. ${escape(sceneLabel(scene.type))}</button>
       <button type="button" data-up="${escape(scene.id)}" aria-label="Subir escena ${index + 1}" ${index ? '' : 'disabled'}>↑</button>
       <button type="button" data-down="${escape(scene.id)}" aria-label="Bajar escena ${index + 1}" ${index < state.draft.scenes.length - 1 ? '' : 'disabled'}>↓</button>
       <button type="button" data-remove="${escape(scene.id)}">Eliminar</button>
     </li>`).join('');
+    const empty = query('#scene-empty');
+    if (empty) empty.hidden = state.draft.scenes.length > 0;
     const editor = query('#editor-panel');
     if (editor) editor.innerHTML = editorContent(state);
     const validation = query('#validation-panel');
@@ -202,9 +254,12 @@ export function createStudioApp(root, {
     const refresh = query('[data-refresh-preview]');
     if (refresh) refresh.disabled = !previewState.canPreview;
     const trigger = query('[data-preview]');
-    if (trigger) trigger.textContent = previewState.status === 'stale' ? 'Actualizar preview' : 'Previsualizar';
+    if (trigger) trigger.textContent = previewState.status === 'stale' ? 'Actualizar vista previa' : 'Previsualizar';
     const main = query('.studio');
-    if (main) main.dataset.previewState = previewState.status;
+    if (main) {
+      main.dataset.previewState = previewState.status;
+      main.dataset.previewOpen = String(previewOpen);
+    }
   };
 
   const requestPreview = () => {
@@ -271,7 +326,7 @@ export function createStudioApp(root, {
     const dialog = query('[data-confirm]');
     const scene = controller.getState().draft.scenes.find((item) => item.id === pendingRemoval);
     const text = dialog?.querySelector('[data-confirm-text]');
-    if (text) text.textContent = `¿Eliminar la escena ${scene?.type}?`;
+    if (text) text.textContent = `¿Eliminar la escena ${sceneLabel(scene?.type)}?`;
     dialog?.showModal?.();
     if (dialog && !dialog.open) dialog.setAttribute('open', '');
     dialog?.querySelector('[data-confirm-delete]')?.focus();
@@ -314,6 +369,7 @@ export function createStudioApp(root, {
   const stopController = controller.subscribe(renderStudio);
   const stopPreview = previewBridge.subscribe(renderPreview);
   const exportUi = bindStudioExport(root, controller);
+  const guidanceUi = bindStudioGuidance(root);
   renderStudio(controller.getState());
   renderPreview(previewBridge.getState());
 
@@ -325,6 +381,7 @@ export function createStudioApp(root, {
       stopController();
       stopPreview();
       exportUi.destroy();
+      guidanceUi.destroy();
       removers.forEach((remove) => remove());
       if (ownsPreviewBridge) previewBridge.destroy();
       if (ownsController) controller.destroy();

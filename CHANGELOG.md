@@ -1,5 +1,15 @@
 # Registro de cambios
 
+## [1.0.0-rc] — 2026-07-29
+
+- Onboarding 1.0 omitible, repetible y con preferencia local limitada.
+- Ayuda integrada, nombres amigables y terminología unificada.
+- Estados vacíos, identidad Studio 1.0 y refinamiento responsive.
+- Opción explícita de copyright para Player independiente o embebido.
+- Sin guardado de presentaciones, importación, empaquetado ni publicación.
+- Auditoría final: diseños traducidos, columna de preview condicionada y foco restaurado al cerrar Ayuda con Escape.
+- La validación de título vacío se reprodujo correctamente después de confirmar el cambio; el validador no requirió modificación.
+
 ## [0.5.5] — 2026-07-29
 
 - ExportService determinista e independiente del DOM.

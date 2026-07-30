@@ -33,3 +33,13 @@ PreviewBridge usa `idle`, `validating`, `invalid`, `transforming`, `rendering`, 
 | `stale` | El borrador cambió tras exportarse | Exportar otra vez |
 | `recoverable-error` | Falló preparación, Blob, URL o descarga | Reintentar |
 | `destroyed` | Instancia liberada | Crear otra instancia |
+
+## Guía y ayuda
+
+| Estado | Significado | Acción |
+| --- | --- | --- |
+| tutorial pendiente | No existe la versión 1.0 vista | Mostrar onboarding |
+| tutorial visto | Coincide la versión guardada | Abrir Studio |
+| tutorial actualizado | La versión cambió | Mostrar nuevamente |
+| ayuda abierta | Referencia breve disponible | Cerrar o repetir tutorial |
+| almacenamiento no disponible | No puede recordarse la preferencia | Continuar sin bloquear |

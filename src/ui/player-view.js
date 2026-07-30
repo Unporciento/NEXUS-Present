@@ -1,8 +1,23 @@
 import { applyTheme } from '../themes/themes.js';
-export function createPlayerView(root, { player, renderers, theme = 'nexus' }) {
-  applyTheme(root, theme); root.innerHTML = `<main class="player" aria-labelledby="player-title"><header><p class="brand">NEXUS</p><p id="player-status" role="status"></p></header><section id="scene" aria-live="polite"><h1 id="player-title" class="sr-only"></h1><div id="scene-body"></div></section><footer><nav aria-label="Presentación"><button id="previous" type="button">Anterior</button><span id="progress"></span><button id="next" type="button">Siguiente</button><button id="restart" type="button">Reiniciar</button></nav><small>© <span id="year"></span> NEXUS. Todos los derechos reservados.</small></footer></main>`;
+const normalizeSceneHeading = (html, embedded) =>
+  html.replace(/<(\/?)h1(?=[\s>])/g, `<$1h${embedded ? 3 : 2}`);
+export function createPlayerView(root, {
+  player,
+  renderers,
+  theme = 'nexus',
+  showCopyright = true,
+  embedded = false
+}) {
+  applyTheme(root, theme); root.innerHTML = `<main class="player" aria-labelledby="player-title">
+    <header><p class="brand">NEXUS</p><p id="player-status" role="status"></p></header>
+    <section id="scene" aria-live="polite"><${embedded ? 'h3' : 'h1'} id="player-title" class="sr-only"></${embedded ? 'h3' : 'h1'}><div id="scene-body"></div></section>
+    <footer>
+      <nav aria-label="Presentación"><button id="previous" type="button">Anterior</button><span id="progress"></span><button id="next" type="button">Siguiente</button><button id="restart" type="button">Reiniciar</button></nav>
+      ${showCopyright ? '<small>© <span id="year"></span> NEXUS. Todos los derechos reservados.</small>' : ''}
+    </footer>
+  </main>`;
   const $ = (id) => root.querySelector(`#${id}`), status = $('player-status'), title = $('player-title'), body = $('scene-body'); const year = $('year'); if (year) year.textContent = new Date().getFullYear();
-  const update = () => { const scene = player.getScene(), progress = player.getProgress(), renderer = renderers.get(scene?.type); let output = { html: '<article class="scene"><h1>Escena no soportada</h1><p>Este tipo no está disponible.</p></article>' }; try { if (renderer) output = renderer.render(scene); } catch { status.textContent = 'No fue posible mostrar esta escena. Puedes continuar o reiniciar.'; output = { html: '<article class="scene"><h1>Escena no disponible</h1><p>Intenta continuar o reiniciar.</p></article>' }; } title.textContent = scene?.blocks?.find((item) => item.type === 'heading')?.text ?? 'NEXUS'; body.innerHTML = output.html; $('progress').textContent = `${progress.current} de ${progress.total}`; $('previous').disabled = progress.current <= 1; $('next').disabled = player.getState() === 'completed'; };
+  const update = () => { const scene = player.getScene(), progress = player.getProgress(), renderer = renderers.get(scene?.type); let output = { html: '<article class="scene"><h1>Escena no soportada</h1><p>Este tipo no está disponible.</p></article>' }; try { if (renderer) output = renderer.render(scene); } catch { status.textContent = 'No fue posible mostrar esta escena. Puedes continuar o reiniciar.'; output = { html: '<article class="scene"><h1>Escena no disponible</h1><p>Intenta continuar o reiniciar.</p></article>' }; } title.textContent = scene?.blocks?.find((item) => item.type === 'heading')?.text ?? 'NEXUS'; body.innerHTML = normalizeSceneHeading(output.html, embedded); $('progress').textContent = `${progress.current} de ${progress.total}`; $('previous').disabled = progress.current <= 1; $('next').disabled = player.getState() === 'completed'; };
   $('previous').onclick = () => player.previous(); $('next').onclick = () => player.next(); $('restart').onclick = () => player.restart();
   const subscriptions = [player.subscribe('presentation-loaded', () => { status.textContent = 'Presentación lista'; update(); }), player.subscribe('scene-changed', update), player.subscribe('presentation-completed', () => { status.textContent = 'Presentación finalizada. Puedes reiniciar.'; update(); }), player.subscribe('player-error', () => { status.textContent = 'No fue posible cargar la presentación. Revisa el documento e inténtalo de nuevo.'; })];
   const destroy = () => { subscriptions.forEach((unsubscribe) => unsubscribe()); root.replaceChildren(); }; player.addCleanup(destroy); return { update, destroy };

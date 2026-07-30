@@ -36,6 +36,8 @@ Fase 4 añadió renderers públicos visuales y layouts, sin cambiar las responsa
 
 En Fase 5C, PreviewBridge reutiliza esta misma implementación dentro del Studio. El Player recibe exclusivamente `PublicPresentationDocument`, enlaza teclado y tacto al contenedor embebido y conserva navegación, progreso, reinicio, temas, movimiento reducido, completed y destroy. No existe un Player paralelo.
 
+Fase 5E añade opciones explícitas de presentación: `showCopyright` es `true` por defecto y `embedded` es `false`. Studio usa `showCopyright: false` y `embedded: true`, conserva un único `h1` de página y adapta los encabezados internos del Player a la jerarquía del panel. El Player independiente mantiene un `h1` y su copyright.
+
 ```js
 const player = createPlayer();
 player.loadPresentation(publicDocument);
