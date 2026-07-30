@@ -44,7 +44,7 @@ export function validateSourcePresentation(document, engineVersion = '1.0.0') {
   if (!document || typeof document !== 'object') return result(diagnostics);
   diagnostics.push(...checkEngineCompatibility({ minimumEngineVersion: document.minimumEngineVersion, maximumEngineVersion: document.maximumEngineVersion, engineVersion }));
   if (Array.isArray(document.scenes)) { diagnostics.push(...duplicateDiagnostics(document.scenes, 'id', 'scenes')); document.scenes.forEach((scene, index) => diagnostics.push(...validateScene(scene, index).diagnostics)); }
-  const used = Array.isArray(document.scenes) ? document.scenes.flatMap((scene) => scene.blocks ?? []).flatMap((block) => block.assetId ? [block.assetId] : []) : [];
+  const used = Array.isArray(document.scenes) ? document.scenes.flatMap((scene) => scene.blocks ?? []).flatMap((block) => [block.assetId, block.posterAssetId, block.captionsAssetId].filter(Boolean)) : [];
   diagnostics.push(...validateAssets(document.resources ?? [], used).diagnostics);
   return result(diagnostics);
 }
@@ -55,7 +55,7 @@ export function validatePublicPresentation(document, engineVersion = '1.0.0') {
   if (document && typeof document === 'object') {
     diagnostics.push(...checkEngineCompatibility({ minimumEngineVersion: document.minimumEngineVersion, maximumEngineVersion: document.maximumEngineVersion, engineVersion }));
     if (Array.isArray(document.scenes)) { diagnostics.push(...duplicateDiagnostics(document.scenes, 'id', 'scenes')); document.scenes.forEach((scene, index) => diagnostics.push(...validateScene(scene, index).diagnostics)); }
-    const used = (document.scenes ?? []).flatMap((scene) => scene.blocks ?? []).flatMap((block) => block.assetId ? [block.assetId] : []);
+    const used = (document.scenes ?? []).flatMap((scene) => scene.blocks ?? []).flatMap((block) => [block.assetId, block.posterAssetId, block.captionsAssetId].filter(Boolean));
     diagnostics.push(...validateAssets(document.resources ?? [], used, true).diagnostics);
   }
   return result(diagnostics);

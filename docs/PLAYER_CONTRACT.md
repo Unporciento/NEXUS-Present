@@ -43,3 +43,11 @@ const player = createPlayer();
 player.loadPresentation(publicDocument);
 player.start();
 ```
+
+## Extensión de Fase 7
+
+Player Core no cambió de responsabilidad. El DOM Adapter puede recibir `resourceManager` y `transitionController`; ambos son opcionales, externos y se destruyen con la vista.
+
+Un bloque de imagen o video usa `assetId`. Renderer Registry emite estructura inerte y ResourceManager obtiene el Blob por repositorio, crea la Object URL y comunica `loading`, `ready`, `failed` o `unsupported`. Video usa controles nativos, pausa en pestaña oculta y se libera al cambiar de escena. Un fallo nunca cambia la máquina de estados del Player.
+
+Las transiciones `cut`, `fade`, `slide` y `focus` son breves, cancelables y no bloquean navegación. Movimiento reducido y pestaña oculta usan `cut`.

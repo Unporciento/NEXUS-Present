@@ -33,3 +33,10 @@
 | D-033 | Importación acepta solo PublicPresentationDocument estricto y crea un Source aislado | implementada |
 | D-034 | Fase 6 usa guardado manual; autosave continuo y sincronización quedan fuera | implementada |
 | D-035 | Backups y restauraciones son locales, versionados, validados y sin assets | implementada |
+| D-036 | Assets usan un store IndexedDB separado y referencias `assetId`; nunca rutas privadas | implementada |
+| D-037 | Hash SHA-256 y scope del borrador evitan duplicar el mismo Blob local | implementada |
+| D-038 | SVG se acepta solo bajo sanitización conservadora sin referencias externas | implementada |
+| D-039 | Video conserva controles nativos, precarga de metadata y no se transcodifica | implementada |
+| D-040 | Object URLs tienen referencias y se revocan en navegación o destroy | implementada |
+| D-041 | Movimiento usa un registro limitado, cancelable y reducido a cut cuando corresponde | implementada |
+| D-042 | Player Core permanece ajeno a IndexedDB, Blob, codecs y animación | implementada |

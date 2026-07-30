@@ -66,3 +66,17 @@ studio.html  → StudioApp + PersistenceSession → DraftRepository
 `ImportService` limita y valida archivos públicos antes de convertirlos. `draftKey` identifica el registro local y permanece separado del `id` contractual. `DraftRepository` valida SourcePresentationDocument y es la única capa que conoce el adaptador IndexedDB. La UI usa resultados estructurados; no accede a `indexedDB`.
 
 La base `nexus-present` contiene `drafts`, `recovery` y `meta`. Guardar compara `expectedRevision`, escribe la nueva revisión y su punto de recuperación en una transacción. `BroadcastChannel` solo avisa entre pestañas; la revisión almacenada es la autoridad.
+
+## Motor y multimedia — Fase 7
+
+```text
+Studio Assets UI → AssetRepository → AssetIndexedDbAdapter → assets
+PlayerView → ResourceManager → AssetRepository + ObjectUrlPool
+PlayerView → TransitionController → TransitionRegistry
+```
+
+El store `assets` se añadió mediante la versión 2 de la base. Documento y Blob permanecen separados: `assetId` es estable; `nexus-asset:` es una referencia lógica, no una ruta. El ResourceManager resuelve solo dentro del `draftKey`, comprueba capacidades, monta recursos y libera elementos, decoders y Object URLs en navegación o `destroy`.
+
+Renderer Registry continúa produciendo HTML semántico inerte. Los hooks `data-nexus-asset` no contienen código ni datos privados. El DOM Adapter coordina ResourceManager y transiciones, pero Player Core no conoce IndexedDB, Blob, video ni animaciones.
+
+Contratos detallados: [ASSET_ARCHITECTURE.md](ASSET_ARCHITECTURE.md), [MEDIA_CONTRACT.md](MEDIA_CONTRACT.md), [MOTION_SYSTEM.md](MOTION_SYSTEM.md) y [ENGINE_AUDIT_PHASE_7.md](ENGINE_AUDIT_PHASE_7.md).

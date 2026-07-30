@@ -52,3 +52,12 @@ PreviewBridge usa `idle`, `validating`, `invalid`, `transforming`, `rendering`, 
 - Biblioteca: carga, vacío, lista, error de importación, error de almacenamiento y confirmación de eliminación.
 
 Un error conserva el borrador en memoria. Conflicto no sobrescribe. Recovery solo se aplica por acción explícita.
+
+## Recursos y movimiento — Fase 7
+
+- Recurso: `idle`, `loading`, `ready`, `failed`, `unsupported`.
+- Importación de asset: validando, inspeccionando firma, sanitizando, calculando hash, guardando, listo o error recuperable.
+- Video: metadata pendiente, listo, reproducción controlada, pausado por usuario o pestaña oculta, fallo recuperable.
+- Transición: inactiva o activa; una navegación nueva cancela la activa. Movimiento reducido y pestaña oculta equivalen a `cut`.
+
+`failed` y `unsupported` conservan controles de navegación. Cuota no borra recursos existentes. `destroy` libera listeners, elementos multimedia y URLs temporales.

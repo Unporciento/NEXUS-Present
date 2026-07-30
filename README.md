@@ -1,10 +1,10 @@
 # NEXUS Present
 
-NEXUS Present es un motor local y modular para crear y reproducir presentaciones web narrativas. La candidata incorpora Biblioteca y Studio para importar, guardar, editar, validar, previsualizar y descargar presentaciones estructuradas.
+NEXUS Present es un motor local y modular para crear y reproducir presentaciones web narrativas. La candidata incorpora Biblioteca y Studio para importar, guardar, editar, validar, previsualizar y descargar presentaciones estructuradas con recursos locales.
 
 ## Estado
 
-Fase 6 implementada en el programa NEXUS 1.0 RC: importación JSON, IndexedDB, biblioteca, guardado manual, conflictos, backup y restauración. No incluye todavía assets reales, ZIP, publicación, PWA, Service Worker ni cuentas.
+Fase 7 implementada en el programa NEXUS 1.0 RC: imágenes locales, video, poster, subtítulos, store de assets, Object URLs revocables y transiciones cancelables. No incluye todavía ZIP, publicación, PWA, Service Worker ni cuentas.
 
 La especificación exacta está en [EXPORT_SERVICE.md](docs/EXPORT_SERVICE.md).
 
@@ -21,6 +21,7 @@ Abrir `library.html` para crear, importar y administrar borradores guardados en 
 ## Arquitectura y contratos
 
 - [Arquitectura](docs/ARCHITECTURE.md), [PreviewBridge](docs/PREVIEW_BRIDGE.md), [contrato del Player](docs/PLAYER_CONTRACT.md), [temas](docs/THEME_CONTRACT.md) y [layouts](docs/LAYOUT_CONTRACT.md).
+- [Recursos](docs/ASSET_ARCHITECTURE.md), [multimedia](docs/MEDIA_CONTRACT.md), [movimiento](docs/MOTION_SYSTEM.md) y [auditoría del motor](docs/ENGINE_AUDIT_PHASE_7.md).
 - [Contrato de presentación](docs/PRESENTATION_CONTRACT.md), [contrato de escenas](docs/SCENE_CONTRACT.md) y [catálogo de estados](docs/STATE_CATALOG.md).
 - [Revisión responsive](docs/RESPONSIVE_REVIEW.md), [accesibilidad](docs/ACCESSIBILITY.md) y [seguridad](docs/SECURITY.md).
 - [Estándar de desarrollo](docs/DEVELOPMENT_STANDARD.md), [ficha técnica](FICHA_TECNICA.md), [continuidad](AI_HANDOFF.md), [decisiones](docs/DECISIONS.md), [cambios](CHANGELOG.md) y [licencia](LICENSE).
@@ -29,4 +30,4 @@ Abrir `library.html` para crear, importar y administrar borradores guardados en 
 
 El contenido se valida antes de cargarlo. El DOM Adapter solo representa contenido público. Los tipos no registrados y los fallos recuperables de renderer muestran un estado seguro. El teclado y los gestos táctiles son adaptadores externos, siempre con controles visibles como alternativa.
 
-La demo incluye un SVG sintético local y fallback de imagen; vídeo permanece como placeholder, sin reproducción automática, audio ni streaming.
+Studio admite PNG, JPEG, WebP, SVG seguro, MP4, WebM y WebVTT. El navegador decide codecs de video; NEXUS no transcodifica, no reproduce con sonido automáticamente y libera cada recurso al cambiar de escena.

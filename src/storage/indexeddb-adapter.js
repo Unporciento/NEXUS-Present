@@ -1,3 +1,5 @@
+import { DATABASE_NAME, DATABASE_VERSION, upgradeDatabase } from './database-schema.js';
+
 const requestResult = (request) => new Promise((resolve, reject) => {
   request.onsuccess = () => resolve(request.result);
   request.onerror = () => reject(request.error ?? new Error('IndexedDB request failed'));
@@ -9,29 +11,10 @@ const transactionResult = (transaction) => new Promise((resolve, reject) => {
   transaction.onerror = () => {};
 });
 
-function createStores(database) {
-  if (!database.objectStoreNames.contains('drafts')) {
-    const drafts = database.createObjectStore('drafts', { keyPath: 'draftKey' });
-    drafts.createIndex('updatedAt', 'updatedAt');
-    drafts.createIndex('titleIndex', 'titleIndex');
-    drafts.createIndex('theme', 'theme');
-    drafts.createIndex('status', 'status');
-  }
-  if (!database.objectStoreNames.contains('recovery')) {
-    const recovery = database.createObjectStore('recovery', { keyPath: 'recoveryKey' });
-    recovery.createIndex('draftKey', 'draftKey');
-    recovery.createIndex('createdAt', 'createdAt');
-    recovery.createIndex('draftRevision', ['draftKey', 'revision'], { unique: true });
-  }
-  if (!database.objectStoreNames.contains('meta')) {
-    database.createObjectStore('meta', { keyPath: 'key' });
-  }
-}
-
 export function createIndexedDbAdapter({
   indexedDBApi = globalThis.indexedDB,
-  databaseName = 'nexus-present',
-  databaseVersion = 1
+  databaseName = DATABASE_NAME,
+  databaseVersion = DATABASE_VERSION
 } = {}) {
   let database = null;
   let destroyed = false;
@@ -50,7 +33,7 @@ export function createIndexedDbAdapter({
       if (!indexedDBApi?.open) throw Object.assign(new Error('IndexedDB unavailable'), { code: 'indexeddb-unavailable' });
       database = await new Promise((resolve, reject) => {
         const request = indexedDBApi.open(databaseName, databaseVersion);
-        request.onupgradeneeded = () => createStores(request.result);
+        request.onupgradeneeded = () => upgradeDatabase(request.result);
         request.onsuccess = () => resolve(request.result);
         request.onerror = () => reject(request.error ?? new Error('IndexedDB open failed'));
         request.onblocked = () => reject(Object.assign(new Error('IndexedDB upgrade blocked'), { code: 'upgrade-blocked' }));

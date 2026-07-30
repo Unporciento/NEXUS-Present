@@ -18,3 +18,27 @@ test('unsafe assets, incompatible versions and public notes fail', () => { const
 test('scene registry rejects duplicate registration and invalid scene combinations', () => { assert.equal(registerSceneType({ typeId: 'cover' }).valid, false); const value = source(); value.scenes[0].layout = 'split'; value.scenes[0].blocks[0].type = 'video'; const codes = validateSourcePresentation(value).diagnostics.map((item) => item.code); assert.ok(codes.includes('unsupported-layout')); assert.ok(codes.includes('unsupported-block')); });
 test('assets report missing references, MIME, alt text and duplicate blocks', () => { const value = source(); value.scenes[0].blocks.push({ id: 'block-title', type: 'image', assetId: 'asset-missing' }); value.resources[0].mime = 'video/mp4'; delete value.resources[0].alt; const diagnostics = validateSourcePresentation(value).diagnostics; const codes = diagnostics.map((item) => item.code); assert.ok(codes.includes('missing-asset')); assert.ok(codes.includes('incompatible-asset-mime')); assert.ok(codes.includes('missing-alt-text')); assert.ok(codes.includes('duplicate-identifier')); assert.ok(diagnostics.some((item) => item.path)); });
 test('private history is excluded and diagnostics accumulate', () => { const value = source(); value.extra = true; delete value.title; value.scenes[0].type = 'unknown'; const converted = createPublicPresentation(source()); assert.equal(converted.value.history, undefined); const diagnostics = validateSourcePresentation(value).diagnostics; assert.ok(diagnostics.length >= 3); assert.ok(diagnostics.every((item) => item.code && item.path && item.severity)); });
+test('asset ids include poster and captions references with safe local protocol', () => {
+  const value = source();
+  value.scenes = [{
+    id: 'scene-media',
+    type: 'media',
+    layout: 'media-right',
+    blocks: [{
+      id: 'block-video',
+      type: 'video',
+      assetId: 'asset-video',
+      posterAssetId: 'asset-poster',
+      captionsAssetId: 'asset-captions',
+      title: 'Demostración'
+    }]
+  }];
+  value.resources = [
+    { id: 'asset-video', type: 'video', mime: 'video/mp4', url: 'nexus-asset:asset-video' },
+    { id: 'asset-poster', type: 'image', mime: 'image/png', url: 'nexus-asset:asset-poster', alt: 'Poster' },
+    { id: 'asset-captions', type: 'captions', mime: 'text/vtt', url: 'nexus-asset:asset-captions' }
+  ];
+  assert.equal(validateSourcePresentation(value).valid, true);
+  value.resources[0].url = '../privado/video.mp4';
+  assert.equal(validateSourcePresentation(value).valid, false);
+});
