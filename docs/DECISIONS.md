@@ -26,10 +26,10 @@
 | D-026 | Preview usa conversión pública y Player aislado; exportación es local | aprobada |
 | D-027 | Toda fase que modifica interfaz requiere revisión visual y aprobación antes del merge | aprobada |
 | D-028 | PreviewBridge es el único puente entre el borrador privado y el Player público; preview se actualiza de forma explícita | aprobada |
-| D-029 | Fase 6 se divide en importación, repositorio, biblioteca, recuperación y cierre | propuesta para aprobación |
-| D-030 | IndexedDB será la persistencia de presentaciones; `localStorage` seguirá limitado al onboarding | propuesta para aprobación |
-| D-031 | `draftKey` local y `id` contractual son identidades distintas | propuesta para aprobación |
-| D-032 | Guardar usa revisión optimista y transacción atómica; no existe sobrescritura silenciosa | propuesta para aprobación |
-| D-033 | Importación acepta solo PublicPresentationDocument estricto y crea un Source aislado | propuesta para aprobación |
-| D-034 | Fase 6 usa guardado manual; autosave continuo y sincronización quedan fuera | propuesta para aprobación |
-| D-035 | Backups y restauraciones son locales, versionados, validados y sin assets | propuesta para aprobación |
+| D-029 | Fase 6 se divide en importación, repositorio, biblioteca, recuperación y cierre | implementada |
+| D-030 | IndexedDB será la persistencia de presentaciones; `localStorage` seguirá limitado al onboarding | implementada |
+| D-031 | `draftKey` local y `id` contractual son identidades distintas | implementada |
+| D-032 | Guardar usa revisión optimista y transacción atómica; no existe sobrescritura silenciosa | implementada |
+| D-033 | Importación acepta solo PublicPresentationDocument estricto y crea un Source aislado | implementada |
+| D-034 | Fase 6 usa guardado manual; autosave continuo y sincronización quedan fuera | implementada |
+| D-035 | Backups y restauraciones son locales, versionados, validados y sin assets | implementada |

@@ -33,6 +33,19 @@ button {
   font: inherit;
   font-weight: 650;
 }
+.button-link {
+  display: inline-flex;
+  min-height: 44px;
+  padding: .7rem 1rem;
+  align-items: center;
+  color: var(--nx-control-text);
+  background: var(--nx-control);
+  border: 1px solid var(--nx-border);
+  border-radius: .5rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+.button-link:focus-visible { outline: 3px solid var(--nx-focus); outline-offset: 3px; }
 button:hover:not(:disabled) { border-color: var(--nx-accent); }
 button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
   outline: 3px solid var(--nx-focus);
@@ -240,6 +253,48 @@ dialog::backdrop { background: #020814b3; }
   color: var(--nx-text);
   font-weight: 700;
   cursor: pointer;
+}
+.library {
+  min-height: 100vh;
+  padding: clamp(1rem, 4vw, 4rem);
+  color: var(--nx-text);
+  background: var(--nx-bg);
+}
+.library > header { padding-bottom: 1rem; border-bottom: 1px solid var(--nx-border); }
+.library > section, .privacy-note {
+  margin: 1rem 0;
+  padding: clamp(1rem, 3vw, 2rem);
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-border);
+  border-radius: var(--nx-radius);
+}
+.library-actions h2, .library h1 { margin-top: 0; }
+.draft-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+.draft-card {
+  display: grid;
+  align-content: space-between;
+  gap: 1rem;
+  min-width: 0;
+  padding: 1rem;
+  background: var(--nx-bg);
+  border: 1px solid var(--nx-border);
+  border-radius: var(--nx-radius);
+}
+.draft-card h3 { margin-top: 0; overflow-wrap: anywhere; }
+.library dialog label { display: grid; gap: .35rem; }
+.library dialog input {
+  min-height: 44px;
+  padding: .6rem;
+  color: var(--nx-control-text);
+  background: var(--nx-control);
+  border: 1px solid var(--nx-border);
+  border-radius: .5rem;
 }
 [hidden] { display: none !important; }
 @keyframes reveal {

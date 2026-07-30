@@ -43,3 +43,12 @@ PreviewBridge usa `idle`, `validating`, `invalid`, `transforming`, `rendering`, 
 | tutorial actualizado | La versión cambió | Mostrar nuevamente |
 | ayuda abierta | Referencia breve disponible | Cerrar o repetir tutorial |
 | almacenamiento no disponible | No puede recordarse la preferencia | Continuar sin bloquear |
+
+## Biblioteca y almacenamiento — Fase 6
+
+- Importación: `idle`, `reading`, `parsing`, `invalid`, `ready`, `destroyed`.
+- Repositorio: `closed`, `opening`, `ready`, `loading`, `saving`, `recovering`, `conflict`, `error`, `destroyed`.
+- Sesión Studio: `clean`, `dirty`, `saving`, `saved`, `conflict`, `error`, `destroyed`.
+- Biblioteca: carga, vacío, lista, error de importación, error de almacenamiento y confirmación de eliminación.
+
+Un error conserva el borrador en memoria. Conflicto no sobrescribe. Recovery solo se aplica por acción explícita.

@@ -54,3 +54,15 @@ El servicio contractual es independiente del DOM y reutiliza `createPublicPresen
 `StudioApp → bindStudioGuidance → OnboardingPreference`
 
 La guía no accede al Controller. Solo la preferencia versionada del tutorial usa almacenamiento local; los borradores continúan exclusivamente en memoria. `sceneLabels` mantiene separada la terminología visible de los contratos. `createPlayerView({ showCopyright })` conserva derechos por defecto y permite ocultarlos explícitamente al embeber el Player en Studio.
+
+## Importación y almacenamiento — Fase 6
+
+```text
+library.html → LibraryApp → ImportService → PublicToSourceConverter
+                          → DraftRepository → IndexedDbAdapter
+studio.html  → StudioApp + PersistenceSession → DraftRepository
+```
+
+`ImportService` limita y valida archivos públicos antes de convertirlos. `draftKey` identifica el registro local y permanece separado del `id` contractual. `DraftRepository` valida SourcePresentationDocument y es la única capa que conoce el adaptador IndexedDB. La UI usa resultados estructurados; no accede a `indexedDB`.
+
+La base `nexus-present` contiene `drafts`, `recovery` y `meta`. Guardar compara `expectedRevision`, escribe la nueva revisión y su punto de recuperación en una transacción. `BroadcastChannel` solo avisa entre pestañas; la revisión almacenada es la autoridad.

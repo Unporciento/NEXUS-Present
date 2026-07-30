@@ -35,7 +35,7 @@ test('StudioApp mounts preview shell and destroys listeners', () => {
   assert.match(root.html, /data-onboarding/);
   assert.match(root.html, /data-help-dialog/);
   assert.match(root.html, /NEXUS STUDIO <span class="studio-version">1.0/);
-  assert.match(root.html, /La exportación es local/);
+  assert.match(root.html, /El borrador se guarda en este navegador/);
   assert.match(root.html, new RegExp(`© ${new Date().getFullYear()} NEXUS`));
   assert.ok(root.listenerCount() > 0);
   app.destroy();
@@ -58,5 +58,7 @@ test('Studio UI declares accessible preview and excludes forbidden capabilities'
   assert.match(source, /<label>Diseño/);
   assert.match(source, /layoutLabel\(layout\)/);
   assert.doesNotMatch(source, /Tipo interno:/);
+  assert.match(source, /on\('input', '\[data-meta\]'/);
+  assert.match(source, /on\('input', '\[data-block\]'/);
   assert.doesNotMatch(source, /window\.confirm|localStorage|sessionStorage|indexedDB|Blob|createObjectURL|fetch\(/);
 });

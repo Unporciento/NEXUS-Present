@@ -1,5 +1,7 @@
 # Fase 6 — Importación y almacenamiento local
 
+Estado de implementación: completa en `phase-6/import-storage-library`, pendiente de integración en la rama del programa RC.
+
 ## Objetivo y resultado esperado
 
 Fase 6 permitirá importar una presentación pública JSON, convertirla en un borrador editable, conservarla localmente y administrarla desde una biblioteca. Todo permanece en el dispositivo. No existen nube, cuentas, sincronización remota ni publicación.
@@ -130,6 +132,14 @@ Los errores usan código estable, mensaje comprensible, ruta cuando corresponde 
 ## Exclusiones
 
 Fase 6 no incorpora imágenes o videos reales, ZIP, copia de assets, publicación, GitHub Pages, PWA, Service Worker, backend, cuentas, sincronización, colaboración ni IA. Autosave continuo queda fuera; solo podrá evaluarse después de medir el guardado manual y los conflictos.
+
+## Evidencia de cierre
+
+- Importación pública actual y entradas hostiles cubiertas por pruebas.
+- CRUD, recovery, backup, migraciones y conflictos cubiertos mediante adaptador contractual en Node.
+- IndexedDB real comprobado en Chrome mediante crear, guardar, recargar, renombrar, duplicar y eliminar.
+- Dos pestañas comprobaron aviso por BroadcastChannel y rechazo por `expectedRevision`.
+- La selección automatizada de archivo en Chrome quedó bloqueada por el permiso de la extensión para URLs locales; no es un fallo de NEXUS y la importación se valida con `File` real en Node.
 
 ## Riesgos pendientes
 

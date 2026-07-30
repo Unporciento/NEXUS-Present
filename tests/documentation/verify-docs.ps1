@@ -17,7 +17,7 @@ foreach ($relative in $required) {
   if (-not (Test-Path -LiteralPath $path)) { $errors.Add("Missing: $relative"); continue }
   if ((Get-Content -LiteralPath $path).Count -gt 400) { $errors.Add("Over 400 lines: $relative") }
 }
-$forbiddenUi = Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object { ($_.Extension -in '.html','.css' -and $_.Name -notin 'index.html','studio.html','styles.css') -or ($_.Extension -in '.js','.mjs' -and $_.FullName -notmatch '[\\/](src[\\/](contracts|player|ui|input|themes|layouts|media|studio)|tests|demo|tools)[\\/]' -and $_.Name -notin 'app.js','studio.js') }
+$forbiddenUi = Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object { ($_.Extension -in '.html','.css' -and $_.Name -notin 'index.html','studio.html','library.html','styles.css') -or ($_.Extension -in '.js','.mjs' -and $_.FullName -notmatch '[\\/](src[\\/](contracts|player|ui|input|themes|layouts|media|studio|import|storage|library)|tests|demo|tools)[\\/]' -and $_.Name -notin 'app.js','studio.js','library.js') }
 if ($forbiddenUi) { $errors.Add('Unexpected production code is present.') }
 $secretPattern = '(gh[pousr]_[A-Za-z0-9_]{20,}|github_pat_|AKIA[0-9A-Z]{16}|BEGIN( RSA| EC| OPENSSH)? PRIVATE KEY)'
 Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object { $_.Extension -eq '.md' -or $_.Name -eq 'LICENSE' } | ForEach-Object {
