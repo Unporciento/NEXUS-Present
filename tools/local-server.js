@@ -1,11 +1,12 @@
 import { createReadStream, statSync } from 'node:fs';
 import { createServer } from 'node:http';
-import { extname, join, normalize } from 'node:path';
+import { extname } from 'node:path';
+import { resolveRequestPath } from './server-path.js';
 
 const root = process.cwd();
 const types = { '.css': 'text/css', '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json' };
 const server = createServer((request, response) => {
-  const path = normalize(join(root, request.url === '/' ? 'index.html' : request.url));
+  const path = resolveRequestPath(root, request.url);
   if (!path.startsWith(root)) return response.writeHead(403).end();
   try {
     if (!statSync(path).isFile()) return response.writeHead(404).end();

@@ -17,7 +17,7 @@ Separar versión física y lógica evita subir la versión de la base por cada c
 - `keyPath`: `draftKey`.
 - índices:
   - `updatedAt`;
-  - `titleSort`;
+  - `titleIndex`;
   - `theme`;
   - `status`.
 - contiene `DraftRecord`, incluido el Source validado.

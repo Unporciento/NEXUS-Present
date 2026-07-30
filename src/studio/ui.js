@@ -28,10 +28,13 @@ function shell() {
     <header>
       <div>
         <p class="brand">NEXUS STUDIO <span class="studio-version">1.0</span></p>
-        <p class="studio-description">Crea, valida y previsualiza presentaciones web estructuradas.</p>
+        <p class="studio-description">Crea, guarda, valida y previsualiza presentaciones web estructuradas.</p>
       </div>
       <div class="studio-header-actions">
         <p id="studio-status" role="status"></p>
+        <p id="save-status" role="status" aria-live="polite"></p>
+        <button type="button" class="primary-action" data-save>Guardar</button>
+        <a class="button-link" href="library.html">Biblioteca</a>
         <button type="button" data-help>Ayuda</button>
       </div>
     </header>
@@ -63,7 +66,7 @@ function shell() {
             <small>Formato JSON · Las imágenes y videos todavía no se empaquetan.</small>
             <p id="export-status" role="status" aria-live="polite"></p>
             <section id="validation-panel" class="validation-panel" aria-labelledby="validation-title"></section>
-            <p>La exportación es local. Almacenamiento y publicación permanecen fuera de esta fase.</p>
+            <p>El borrador se guarda en este navegador. La publicación permanece fuera de esta fase.</p>
           </aside>
         </div>
       </section>
@@ -95,13 +98,13 @@ function shell() {
   <dialog class="guidance-dialog" data-onboarding aria-labelledby="onboarding-title">
     <p class="eyebrow">PRIMEROS PASOS · VERSIÓN 1.0</p>
     <h2 id="onboarding-title">Bienvenido a NEXUS Studio</h2>
-    <p>Crea, valida y previsualiza presentaciones web estructuradas.</p>
+    <p>Crea, guarda, valida y previsualiza presentaciones web estructuradas.</p>
     <ol>
       <li>Define el título, la descripción y el tema.</li>
       <li>Añade escenas y edita su contenido.</li>
+      <li>Guarda el borrador en este dispositivo.</li>
       <li>Corrige los avisos del panel Validación.</li>
-      <li>Abre la vista previa y recorre el Player.</li>
-      <li>Descarga la presentación en formato JSON.</li>
+      <li>Previsualiza o descarga la presentación pública.</li>
     </ol>
     <p>El tutorial puede repetirse en cualquier momento desde Ayuda.</p>
     <div class="studio-action-row">
@@ -111,15 +114,15 @@ function shell() {
   </dialog>
   <dialog class="guidance-dialog" data-help-dialog aria-labelledby="help-title">
     <h2 id="help-title">Ayuda de NEXUS Studio</h2>
-    <p>Empieza con los datos generales, añade escenas y atiende la validación antes de previsualizar.</p>
+    <p>Empieza con los datos generales, añade escenas y guarda antes de volver a la Biblioteca.</p>
     <details open><summary>Tipos de escenas</summary>
       <p>Portada, Declaración, Contenido, Multimedia, Comparación, Evidencia y Cierre.</p>
     </details>
     <details><summary>Temas y vista previa</summary>
       <p>Elige Nexus o Neutral. Actualiza la vista previa después de editar.</p>
     </details>
-    <details><summary>Descarga y límites</summary>
-      <p>Se descarga un JSON público. No se guardan borradores ni se empaquetan imágenes o videos.</p>
+    <details><summary>Guardado y descarga</summary>
+      <p>Guardar conserva el borrador privado local. Descargar genera un JSON público sin estado interno.</p>
     </details>
     <details><summary>Preguntas frecuentes</summary>
       <p>Si aparece un error, activa su mensaje para volver al campo correspondiente.</p>
@@ -288,7 +291,7 @@ export function createStudioApp(root, {
     }
   };
 
-  on('change', '[data-meta]', (_, element) =>
+  on('input', '[data-meta]', (_, element) =>
     controller.dispatch({ type: 'set-metadata', field: element.dataset.meta, value: element.value }));
   on('change', '[data-theme]', (_, element) =>
     controller.dispatch({ type: 'set-theme', theme: element.value }));
@@ -296,7 +299,7 @@ export function createStudioApp(root, {
     const state = controller.getState();
     controller.dispatch({ type: 'update-scene', id: state.selectedSceneId, patch: { layout: element.value } });
   });
-  on('change', '[data-block]', (_, element) => {
+  on('input', '[data-block]', (_, element) => {
     const state = controller.getState();
     const scene = state.draft.scenes.find((item) => item.id === state.selectedSceneId);
     const blocks = scene.blocks.map((block) =>

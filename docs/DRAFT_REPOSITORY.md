@@ -31,17 +31,17 @@ DraftRecord
   draftKey           UUID local, clave primaria
   recordSchema       entero
   revision           entero monotónico
-  source             SourcePresentationDocument validado
-  titleSort          cadena normalizada para índice
+  sourceDocument     SourcePresentationDocument validado
+  titleIndex         cadena normalizada para índice
   theme              id derivado
   status             editable | incompatible | recovery-needed
   createdAt          ISO UTC local del registro
   updatedAt          ISO UTC de última escritura
   lastOpenedAt       ISO UTC opcional
-  savedFingerprint   huella determinista del Source guardado
+  status             estado editorial mínimo
 ```
 
-`draftKey` nunca se exporta como parte de `PublicPresentationDocument`. `titleSort`, `theme`, estado y fingerprint son derivados y se recalculan en cada escritura.
+`draftKey` nunca se exporta como parte de `PublicPresentationDocument`. `titleIndex`, `theme` y estado son derivados y se recalculan en cada escritura.
 
 ## Consistencia y atomicidad
 

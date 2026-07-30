@@ -10,3 +10,5 @@
 - PublicBundle excluye físicamente notas, historial, datos editoriales, rutas locales, secretos y recursos no utilizados.
 - La autenticación de publicación se estudia por proveedor; nunca se resuelve guardando tokens personales en cliente o repositorio.
 - Hallazgos sensibles se reportan de forma privada.
+
+Fase 6 valida tamaño antes de leer, decodifica UTF-8, rechaza claves de prototipo, campos privados, campos desconocidos y rutas locales. La conversión construye un Source nuevo mediante campos permitidos. IndexedDB usa revisiones optimistas y transacciones; un conflicto nunca sobrescribe silenciosamente. Backups se inspeccionan y validan antes de escribir, se restauran como copias y no incluyen assets ni credenciales.

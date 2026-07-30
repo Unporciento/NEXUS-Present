@@ -1,5 +1,13 @@
 # Registro de cambios
 
+## [0.6.0-rc] — 2026-07-29
+
+- Importación estricta de PublicPresentationDocument JSON y conversión aislada a Source.
+- Persistencia IndexedDB mediante DraftRepository con revisiones, recovery y conflictos.
+- Biblioteca local con crear, abrir, renombrar, duplicar, eliminar, backup y restauración.
+- Guardado manual, advertencia de cambios pendientes y BroadcastChannel informativo.
+- Sin assets reales, ZIP, nube, publicación, PWA ni backend.
+
 ## [1.0.0-rc] — 2026-07-29
 
 - Onboarding 1.0 omitible, repetible y con preferencia local limitada.
