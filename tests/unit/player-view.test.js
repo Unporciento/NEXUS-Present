@@ -11,6 +11,23 @@ function setup() { createDefaultRegistry(); const player = createPlayer(), regis
 test('DOM adapter renders demo scenes, controls and progress visibly', () => { const { player, root } = setup(); assert.equal(root.ids.get('player-title').textContent, 'NEXUS'); assert.equal(root.ids.get('previous').disabled, true); assert.equal(root.ids.get('progress').textContent, '1 de 7'); root.ids.get('next').onclick(); assert.equal(root.ids.get('progress').textContent, '2 de 7'); player.goToScene(6); assert.equal(root.ids.get('next').disabled, false); root.ids.get('next').onclick(); assert.equal(root.ids.get('player-status').textContent, 'Presentación finalizada. Puedes reiniciar.'); assert.equal(root.ids.get('next').disabled, true); root.ids.get('restart').onclick(); assert.equal(root.ids.get('progress').textContent, '1 de 7'); });
 test('DOM adapter exposes invalid documents, unsupported renderers and renderer errors', () => { const player = createPlayer(), root = fakeRoot(), registry = createRendererRegistry(); createPlayerView(root, { player, renderers: registry }); player.loadPresentation({}); assert.match(root.ids.get('player-status').textContent,/No fue posible cargar/); createDefaultRegistry(); player.loadPresentation({ ...demoPresentation, scenes: [] }); assert.match(root.ids.get('player-status').textContent,/No fue posible cargar/); player.loadPresentation(demoPresentation); player.start(); assert.equal(root.ids.get('player-title').textContent, 'NEXUS'); registry.register({ typeId: 'cover', render() { throw new Error('renderer failure'); } }); player.restart(); assert.match(root.ids.get('player-status').textContent,/No fue posible mostrar/); assert.equal(root.ids.get('player-title').textContent, 'NEXUS'); });
 
+test('a recovered renderer does not leave a stale scene error visible', () => {
+  createDefaultRegistry();
+  const player = createPlayer(), root = fakeRoot(), registry = createRendererRegistry();
+  createTextRenderers().forEach((renderer) => registry.register(renderer));
+  registry.register({ typeId: 'cover', render() { throw new Error('broken'); } });
+  createPlayerView(root, { player, renderers: registry });
+  const document = {
+    ...demoPresentation,
+    scenes: demoPresentation.scenes.slice(0, 2)
+  };
+  player.loadPresentation(document);
+  player.start();
+  assert.match(root.ids.get('player-status').textContent, /No fue posible mostrar/);
+  player.next();
+  assert.doesNotMatch(root.ids.get('player-status').textContent, /No fue posible mostrar/);
+});
+
 test('DOM adapter removes visible controls and subscriptions on destroy', () => { const { player, root } = setup(); player.destroy(); assert.equal(root.ids.size, 0); assert.equal(player.next(), false); });
 
 test('Player copyright and heading hierarchy are explicit for standalone and embedded use', () => {

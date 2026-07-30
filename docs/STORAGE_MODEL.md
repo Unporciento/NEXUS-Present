@@ -99,3 +99,9 @@ No se mantienen banderas de “guardado correcto” fuera de la misma base, pues
 Los datos permanecen bajo el origen del sitio. Cualquier persona con acceso al perfil del navegador o a un backup descargado puede leerlos; IndexedDB no proporciona cifrado de aplicación. Notas privadas son privadas frente a la audiencia, no confidenciales criptográficamente.
 
 Eliminar un borrador retira su registro y puntos de recuperación en la misma transacción. El navegador puede conservar copias internas fuera del control de NEXUS; la interfaz no promete borrado forense.
+
+## Versión 2 — assets
+
+Fase 7 añade `assets` sin alterar las claves de `drafts`, `recovery` o `meta`. Índices: `draftKey`, `scopeHash`, `hash`, `kind` y `updatedAt`. El Blob vive exclusivamente en este store. `scopeHash` es único por `[draftKey, hash]`.
+
+`AssetRepository` es la única API de dominio para importar, consultar y borrar. La UI no abre transacciones. El paquete portable de Fase 8 leerá assets por este repositorio.

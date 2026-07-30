@@ -82,7 +82,6 @@ button:disabled {
   border: 1px solid var(--nx-border);
   border-radius: var(--nx-radius);
   box-shadow: 0 .75rem 2rem #0002;
-  animation: reveal var(--nx-duration) ease-out;
 }
 .scene h1 {
   margin: 0 0 1rem;
@@ -112,6 +111,9 @@ blockquote {
 }
 .callout { color: var(--nx-text) !important; font-weight: 700; }
 .scene img { max-width: 100%; height: auto; border-radius: var(--nx-radius); }
+.scene video { width: 100%; max-height: min(70vh, 40rem); border-radius: var(--nx-radius); background: #000; }
+.media-frame { min-width: 0; margin: 0; }
+.media-frame [data-resource-status] { margin: .5rem 0 0; }
 .player footer { padding-top: 1rem; border-top: 1px solid var(--nx-border); }
 .player nav { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
 #progress {
@@ -198,6 +200,8 @@ blockquote {
 }
 .empty-state p { margin-top: 0; }
 .validation-panel { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--nx-border); }
+.asset-panel { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--nx-border); }
+.asset-panel label { font-size: .9rem; }
 .validation-panel ul { padding-left: 0; list-style: none; }
 .validation-link { width: 100%; text-align: left; }
 .validation-ok { color: var(--nx-status) !important; }
@@ -297,10 +301,6 @@ dialog::backdrop { background: #020814b3; }
   border-radius: .5rem;
 }
 [hidden] { display: none !important; }
-@keyframes reveal {
-  from { opacity: 0; transform: translateY(.5rem); }
-  to { opacity: 1; transform: none; }
-}
 @media (min-width: 1100px) {
   .studio[data-preview-open=true][data-preview-state=ready] .studio-workspace,
   .studio[data-preview-open=true][data-preview-state=stale] .studio-workspace {

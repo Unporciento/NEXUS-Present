@@ -37,7 +37,8 @@ export function createPreviewBridge({
   rendererFactory = createVisualRenderers,
   viewFactory = createPlayerView,
   keyboardBinder = bindKeyboard,
-  touchBinder = bindTouch
+  touchBinder = bindTouch,
+  resourceManagerFactory = null
 } = {}) {
   let active = null;
   let destroyed = false;
@@ -139,12 +140,14 @@ export function createPreviewBridge({
         const player = playerFactory();
         const renderers = createRendererRegistry();
         rendererFactory().forEach((renderer) => renderers.register(renderer));
+        const resourceManager = resourceManagerFactory?.({ publicDocument: converted.value }) ?? null;
         viewFactory(container, {
           player,
           renderers,
           theme: converted.value.theme,
           showCopyright: false,
-          embedded: true
+          embedded: true,
+          resourceManager
         });
         const loaded = player.loadPresentation(converted.value);
         if (!loaded.valid || !player.start()) throw new Error('Player rejected the public document.');

@@ -12,3 +12,7 @@
 - Hallazgos sensibles se reportan de forma privada.
 
 Fase 6 valida tamaño antes de leer, decodifica UTF-8, rechaza claves de prototipo, campos privados, campos desconocidos y rutas locales. La conversión construye un Source nuevo mediante campos permitidos. IndexedDB usa revisiones optimistas y transacciones; un conflicto nunca sobrescribe silenciosamente. Backups se inspeccionan y validan antes de escribir, se restauran como copias y no incluyen assets ni credenciales.
+
+Fase 7 valida extensión, MIME, firma y tamaño antes de persistir recursos. SVG usa una política conservadora que rechaza scripts, eventos, referencias externas, contenido ejecutable y entidades. Los nombres no admiten rutas, controles ni nombres reservados. Recursos públicos aceptan HTTPS, rutas relativas seguras o `nexus-asset:`; traversal, `file:`, `data:` y JavaScript se rechazan.
+
+Los Blob permanecen en IndexedDB y nunca se insertan como HTML. Object URLs son temporales, cuentan referencias y se revocan al navegar o destruir. Video no usa autoplay con sonido ni continúa al ocultar la pestaña.

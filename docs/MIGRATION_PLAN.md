@@ -116,3 +116,7 @@ No guarda contenido del borrador. Laboratory podrá leer este registro en una fa
 - backup determinista;
 - restauración válida, colisión y falta de cuota;
 - ningún rollback elimina la última copia válida.
+
+## Base IndexedDB v1 → v2
+
+La migración añade únicamente el store `assets` y sus índices. No recorre ni reescribe borradores existentes. `onversionchange` cierra conexiones anteriores para evitar escritura con un esquema obsoleto; un upgrade bloqueado se comunica sin borrar datos.

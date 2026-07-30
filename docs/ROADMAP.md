@@ -17,3 +17,9 @@ Fase 6 está implementada y validada en su rama de programa. La siguiente fase f
 La especificación está en [PHASE_6_PLAN.md](PHASE_6_PLAN.md), [IMPORT_CONTRACT.md](IMPORT_CONTRACT.md), [DRAFT_REPOSITORY.md](DRAFT_REPOSITORY.md), [STORAGE_MODEL.md](STORAGE_MODEL.md) y [MIGRATION_PLAN.md](MIGRATION_PLAN.md).
 
 Fuera de Fase 6 permanecen imágenes y videos reales, ZIP, copia de assets, publicación, GitHub Pages, PWA, Service Worker, Presenter completo, backend, cuentas, sincronización, colaboración e IA.
+
+## Fase 7 — Motor y multimedia real
+
+Implementada en el programa RC: auditoría del motor, store de assets, repositorio, imágenes, video, poster, WebVTT, URLs temporales y movimiento cancelable. Player Core no se reescribió.
+
+La siguiente fase genera e importa un paquete ZIP portable, incluye solo assets usados y contiene un runtime estático verificable. Publicación, Pages, PWA, backend y nube permanecen fuera.

@@ -1,5 +1,14 @@
 # Registro de cambios
 
+## [0.7.0-rc] — 2026-07-29
+
+- AssetRepository e IndexedDB v2 con Blob, SHA-256, deduplicación y limpieza explícita.
+- PNG, JPEG, WebP, SVG seguro, MP4, WebM, poster y WebVTT.
+- ResourceManager, ObjectUrlPool y detección de capacidades con fallbacks recuperables.
+- Transiciones `cut`, `fade`, `slide` y `focus`, cancelables y compatibles con movimiento reducido.
+- Correcciones reproducidas para layout `stack`, error visual obsoleto y mensaje de archivo ausente.
+- Sin ZIP, publicación, PWA, Service Worker ni backend.
+
 ## [0.6.0-rc] — 2026-07-29
 
 - Importación estricta de PublicPresentationDocument JSON y conversión aislada a Source.
