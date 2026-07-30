@@ -1,7 +1,17 @@
 # Roadmap
 
-Fase 5B incorporó formularios guiados, lista de escenas y edición estructurada. Fase 5C implementó validación y vista previa segura con el Player real. Fase 5D implementó exportación JSON local determinista. Fase 5E cierra Studio 1.0 con onboarding, ayuda, terminología, identidad, accesibilidad y responsive; permanece en revisión visual.
+Fase 5 está cerrada en `8c108df` y etiquetada como `phase-5-complete`. Studio 1.0 crea, valida, previsualiza y descarga un PublicPresentationDocument, pero aún no importa ni guarda borradores.
 
-Fuera de la Fase 5 permanecen importación, guardado de presentaciones, empaquetado de assets y videos, publicación, Presenter completo, PWA, backend, colaboración e IA.
+## Fase 6 — Importación y almacenamiento local
 
-La implementación se detiene tras cada bloque 5A–5E para aprobación. Publicación, PWA, cuentas, sincronización y colaboración no pertenecen a esta fase.
+| Bloque | Alcance | Detención |
+|---|---|---|
+| 6A | Importación JSON pública, validación y conversión a Source | aprobación técnica y visual del flujo |
+| 6B | `DraftRepository`, IndexedDB, guardado manual y conflictos | persistencia y recuperación aprobadas |
+| 6C | Biblioteca: nueva, abrir, renombrar, duplicar y eliminar | comportamiento observable aprobado |
+| 6D | Backup individual/completo, restauración y migraciones | rollback y compatibilidad aprobados |
+| 6E | revisión visual, responsive, accesibilidad y cierre | aprobación antes de merge y tags |
+
+La especificación está en [PHASE_6_PLAN.md](PHASE_6_PLAN.md), [IMPORT_CONTRACT.md](IMPORT_CONTRACT.md), [DRAFT_REPOSITORY.md](DRAFT_REPOSITORY.md), [STORAGE_MODEL.md](STORAGE_MODEL.md) y [MIGRATION_PLAN.md](MIGRATION_PLAN.md).
+
+Fuera de Fase 6 permanecen imágenes y videos reales, ZIP, copia de assets, publicación, GitHub Pages, PWA, Service Worker, Presenter completo, backend, cuentas, sincronización, colaboración e IA.
