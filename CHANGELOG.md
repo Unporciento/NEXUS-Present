@@ -5,6 +5,8 @@
 - Paleta de aplicación refinada con base grafito/índigo, identidad cian, acento editorial dorado y estados semánticos diferenciados.
 - Temas `nexus` y `neutral` renovados sin acoplarlos a Biblioteca o Studio.
 - Jerarquía visual reforzada en paneles, acciones, tarjetas y escenas, sin animaciones decorativas nuevas.
+- Tres paletas opcionales nuevas (`aurora`, `ember` y `verdant`) con nombres amigables en Studio.
+- Acciones de Studio agrupadas por finalidad y separadas con espaciado consistente.
 
 ## [1.0.0] — 2026-08-01
 

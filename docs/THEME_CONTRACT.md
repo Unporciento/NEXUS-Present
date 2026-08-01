@@ -2,7 +2,7 @@
 
 Un tema es `{ id, tokens }`. Además de fondo, profundidad visual, superficie, texto y acento, exige tokens de borde, control, texto de control, deshabilitado, foco, estado y footer. `--nx-depth` evita que un Player embebido herede un resplandor incompatible con un tema claro. La validación rechaza temas sin identificador o token obligatorio.
 
-`neutral` es la base legible clara. `nexus` es la identidad inicial: azul profundo, superficies sobrias y acento dorado funcional. Ambos usan fuentes del sistema; no descargan fuentes externas.
+`neutral` es la base editorial clara y `nexus` la identidad oscura principal. `aurora`, `ember` y `verdant` son alternativas opcionales violeta, cálida y verde. Todos usan fuentes del sistema, conservan los mismos tokens contractuales y no descargan recursos externos.
 
 El DOM Adapter aplica tokens al contenedor. Player Core, contratos y renderers no conocen colores ni tipografías. Un tema inexistente no altera el tema actual y devuelve un resultado inválido.
 

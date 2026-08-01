@@ -34,6 +34,9 @@ test('StudioApp mounts preview shell and destroys listeners', () => {
   assert.match(root.html, /preview-host/);
   assert.match(root.html, /data-onboarding/);
   assert.match(root.html, /data-help-dialog/);
+  assert.match(root.html, /studio-action-stack/);
+  assert.match(root.html, /Historial/);
+  assert.match(root.html, /Vista previa y descarga/);
   assert.match(root.html, /product-version">1\.0/);
   assert.match(root.html, /Volver a Biblioteca/);
   assert.match(root.html, /no se sincronizan/);

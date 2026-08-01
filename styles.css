@@ -213,6 +213,15 @@ blockquote {
 .studio-workspace { display: grid; gap: 1rem; }
 .studio-editing { min-width: 0; }
 .studio-action-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+.studio-action-stack { display: grid; gap: 1.25rem; }
+.studio-action-section {
+  display: grid;
+  gap: .75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--app-border, var(--nx-border));
+}
+.studio-action-section h3 { margin: 0; font-size: .92rem; color: var(--app-highlight, var(--nx-accent)); }
+.studio-action-section > button { width: 100%; }
 .primary-action { border-color: var(--nx-accent); }
 .app-surface [data-package-export] { border-color: color-mix(in srgb, var(--app-border), var(--app-highlight) 55%); }
 .empty-state {
