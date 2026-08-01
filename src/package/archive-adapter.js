@@ -1,4 +1,4 @@
-import { unzipSync, zipSync } from '../../node_modules/fflate/esm/browser.js';
+import { unzipSync, zipSync } from '../../vendor/fflate.js';
 import { validateArchivePath } from './path-policy.js';
 
 export const ARCHIVE_LIMITS = Object.freeze({

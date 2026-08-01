@@ -5,6 +5,7 @@ import { bindStudioExport } from './export-ui.js';
 import { bindStudioGuidance } from './guidance-ui.js';
 import { layoutLabel, sceneLabel } from './labels.js';
 import { createPreviewBridge } from './preview-bridge.js';
+import { NEXUS_VERSION } from '../version.js';
 
 const sceneTypes = ['cover', 'statement', 'content', 'media', 'comparison', 'evidence', 'closing'];
 const escape = (value = '') => String(value).replace(/[&<>"']/g, (character) => ({
@@ -27,7 +28,7 @@ function shell() {
   return `<main class="studio" data-studio-view="edit">
     <header>
       <div>
-        <p class="brand">NEXUS STUDIO <span class="studio-version">1.0</span></p>
+        <p class="brand">NEXUS STUDIO <span class="studio-version">${NEXUS_VERSION}</span></p>
         <p class="studio-description">Crea, guarda, valida y previsualiza presentaciones web estructuradas.</p>
       </div>
       <div class="studio-header-actions">

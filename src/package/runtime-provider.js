@@ -6,7 +6,7 @@ export const PORTABLE_RUNTIME_FILES = Object.freeze([
   'src/package/static-resource-manager.js','src/player/events.js','src/player/navigation.js',
   'src/player/player.js','src/player/renderers.js','src/player/state-machine.js',
   'src/player/transitions.js','src/themes/themes.js','src/ui/player-view.js',
-  'portable/runtime-app.js','styles.css'
+  'src/version.js','portable/runtime-app.js','styles.css'
 ]);
 
 export function createRuntimeProvider({

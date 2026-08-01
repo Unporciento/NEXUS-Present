@@ -1,9 +1,10 @@
 import { diagnostic, result } from './errors.js';
 import { validatePublicPresentation, validateSourcePresentation } from './presentation.js';
+import { ENGINE_VERSION } from '../version.js';
 
 export const PUBLIC_PRESENTATION_FIELDS = Object.freeze(['contractVersion','id','version','minimumEngineVersion','maximumEngineVersion','title','description','author','holder','createdAt','updatedAt','theme','metadata','rights','navigation','resources','scenes']);
 
-export function createPublicPresentation(source, engineVersion = '1.0.0') {
+export function createPublicPresentation(source, engineVersion = ENGINE_VERSION) {
   const sourceResult = validateSourcePresentation(source, engineVersion);
   if (!sourceResult.valid) return result(sourceResult.diagnostics);
   const output = Object.fromEntries(PUBLIC_PRESENTATION_FIELDS.filter((key) => key in source).map((key) => [key, structuredClone(source[key])]));
