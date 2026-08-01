@@ -20,9 +20,9 @@ La fragmentación provenía de tokens ausentes en Biblioteca, temas de presentac
 
 ## Artefacto
 
-- Build estático normalizado: 81 archivos, 245.841 bytes.
-- Archivo: `nexus-present-1.0.0.zip`, 100.106 bytes.
-- SHA-256: `44EC9353D1D66B06F4491A7AB499177F8E60A751F620C059001D13E484D412E4`.
+- Build estático normalizado: 82 archivos, 245.841 bytes, incluida la señal `.nojekyll` de Pages.
+- Archivo: `nexus-present-1.0.0.zip`, 100.242 bytes.
+- SHA-256: `A323BA8D3D7F4DF983FB5CBABB6A0D8B722814995FFE7F5F9553BA817EA608AE`.
 - Reproducibilidad: el build normaliza archivos de texto a LF y dos ejecuciones consecutivas produjeron el mismo checksum.
 - Dependencias: `fflate@0.8.3`, sin transitivas; `npm audit --omit=dev`: 0 vulnerabilidades.
 

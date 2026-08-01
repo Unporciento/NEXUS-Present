@@ -27,6 +27,7 @@ for (const entry of await readdir(output)) {
 }
 for (const entry of entries) await cp(resolve(root, entry), resolve(output, entry), { recursive: true });
 await normalizeText(output);
+await writeFile(resolve(output, '.nojekyll'), '', 'utf8');
 const metadata = { product: 'NEXUS Present', version: NEXUS_VERSION, builtAt: null, deploymentReady: true };
 await writeFile(resolve(output, 'build-info.json'), `${JSON.stringify(metadata, null, 2)}\n`, 'utf8');
 
