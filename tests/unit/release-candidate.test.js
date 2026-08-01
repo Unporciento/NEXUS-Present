@@ -5,8 +5,8 @@ import { ENGINE_VERSION, NEXUS_VERSION, PACKAGE_FORMAT_VERSION } from '../../src
 import { createPackageExportService } from '../../src/package/package-export-service.js';
 import { demoPresentation } from '../../demo/public-demo.js';
 
-test('release candidate version is centralized and package format stays compatible', async () => {
-  assert.equal(NEXUS_VERSION, '1.0.0-rc.1');
+test('release version is centralized and package format stays compatible', async () => {
+  assert.equal(NEXUS_VERSION, '1.0.0');
   assert.equal(ENGINE_VERSION, NEXUS_VERSION);
   assert.equal(PACKAGE_FORMAT_VERSION, '1.0.0');
   const draft = structuredClone(demoPresentation); draft.editorial = { studio: { local: true } };

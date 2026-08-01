@@ -17,6 +17,10 @@ Fecha: 01/08/2026. Alcance: rama `phase-9/nexus-1.0-rc`, versión `1.0.0-rc.1`.
 | Persistencia corrupta | validación al leer; revisiones, recovery y rollback transaccional | repositorios |
 | Object URLs | pool con conteo y revocación; descarga revoca en `finally` | pruebas lifecycle |
 
-`fflate` 0.8.3 está fijada, sin dependencias transitivas y vendorizada para el build estático. `npm audit` no se transmitió al registro porque la autorización de red fue rechazada por protección de metadatos; se verificaron lockfile, árbol local, licencia y ausencia de runtime remoto. Esto queda como comprobación externa previa al lanzamiento.
+`fflate` 0.8.3 está fijada, sin dependencias transitivas y vendorizada para el build estático. La auditoría final ejecutó `npm audit --omit=dev` usando el almacén de certificados de Windows y obtuvo 0 vulnerabilidades. También se verificaron lockfile, árbol local, licencia y ausencia de runtime remoto.
 
 No se detectaron secretos, telemetría, endpoints de datos, ejecución dinámica ni publicación. Riesgo residual: codecs, cuotas y políticas de descarga dependen del navegador; los ZIP extremos deben seguir sometidos a límites antes de descomprimir.
+
+## Cierre de lanzamiento
+
+La revisión final añade CSP embebida a las cinco entradas públicas y al HTML portable, rutas relativas compatibles con subdirectorio y separación estricta entre tema de aplicación y contenido. La búsqueda final cubre secretos conocidos, rutas privadas absolutas, endpoints, ejecución dinámica y artefactos internos. El resultado de `npm audit` y los identificadores definitivos se registran en `RELEASE_REPORT_1.0.md`.

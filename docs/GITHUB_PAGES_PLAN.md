@@ -1,14 +1,13 @@
-# Plan propuesto de GitHub Pages
+# Publicación mediante GitHub Pages
 
-Estado actual: desactivado y fuera del alcance autorizado.
+Fuente aprobada: rama `gh-pages`, raíz, con el contenido exacto de `dist/`.
 
-## Propuesta futura
+## Procedimiento
 
-1. Aprobar y fusionar `program/nexus-1.0-rc` en `main` mediante PR.
-2. Generar `dist/` con `npm run build:rc` desde un commit limpio y certificado.
-3. Publicar el contenido exacto del build mediante GitHub Actions oficial o rama dedicada inmutable; no servir el repositorio de desarrollo completo.
-4. Aplicar permisos mínimos: `contents: read`, `pages: write`, `id-token: write` solo al job de deploy.
-5. Mantener CSP y cabeceras dentro de las capacidades reales de Pages; no prometer cabeceras que Pages no controle.
-6. Validar base paths, 404, MIME de módulos, favicon, assets y navegación directa.
+1. Generar `dist/` con `npm run build` desde `main` certificado.
+2. Sustituir de forma no destructiva el contenido de `gh-pages` mediante `git worktree` temporal.
+3. Publicar solo archivos allowlisted del build; nunca fuentes de respaldo, evidencias ni `node_modules`.
+4. Configurar Pages con `build_type: legacy`, rama `gh-pages` y ruta `/`.
+5. Validar base path, 404, MIME, favicon, imports, IndexedDB, importación, Studio, Player y paquetes.
 
-No se crea workflow ni se cambia la configuración remota durante la RC. La URL pública, fuente y dominio se decidirán en la aprobación de lanzamiento.
+URL esperada: `https://unporciento.github.io/NEXUS-Present/`. Desactivar Pages no elimina datos IndexedDB del navegador; solo retira el acceso público.

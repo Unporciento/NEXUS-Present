@@ -33,3 +33,7 @@ La Fase 9 centraliza `1.0.0-rc.1`, ejecuta auditorías integrales y prepara arte
 ## Fase 9 — NEXUS 1.0 RC
 
 Preparada para cierre técnico: versión central, build estático, ZIP RC, seguridad, rendimiento, compatibilidad, legal, despliegue propuesto y rollback. El gate final exige revisión humana y pruebas físicas; `main`, Pages, Release y `v1.0.0` no cambian.
+
+## NEXUS 1.0 — Lanzamiento
+
+Unifica Biblioteca, Studio y Player mediante una carcasa compartida, separa tema de aplicación y tema de presentación, convierte la raíz en entrada útil y publica el build estático. Después de `v1.0.0`, el proyecto entra en mantenimiento; no se añaden subsistemas en este lanzamiento.

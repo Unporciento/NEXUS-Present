@@ -1,5 +1,14 @@
 # Registro de cambios
 
+## [1.0.0] — 2026-08-01
+
+- Carcasa compartida, tokens de aplicación y navegación coherente para Biblioteca y Studio.
+- Temas de presentación aislados al Player; `neutral` ya no transforma la aplicación.
+- Entrada pública útil, demostración en `player.html` y regreso relativo desde Player independiente.
+- Biblioteca profesional con acciones agrupadas y ayuda explícita sobre almacenamiento local.
+- Selección transitoria preservada durante ediciones y recursos, con regresión automatizada.
+- Versión final centralizada, build estático, respaldo, rollback y publicación mediante GitHub Pages.
+
 ## [1.0.0-rc.1] — 2026-08-01
 
 - Versión centralizada para motor, Studio, paquetes y build.

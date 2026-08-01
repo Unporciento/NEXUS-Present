@@ -1,8 +1,12 @@
 import { applyTheme } from '../themes/themes.js';
 import { createTransitionController } from '../player/transitions.js';
+import { NEXUS_VERSION } from '../version.js';
 const normalizeSceneHeading = (html, embedded) =>
   html.replace(/<(\/?)h1(?=[\s>])/g, `<$1h${embedded ? 3 : 2}`);
 const sceneRenderError = 'No fue posible mostrar esta escena. Puedes continuar o reiniciar.';
+const safeReturnUrl = (value) => typeof value === 'string' && /^(?![a-z]+:|\/\/|\/)[\w./?#=&-]+$/i.test(value)
+  ? value
+  : null;
 export function createPlayerView(root, {
   player,
   renderers,
@@ -10,10 +14,12 @@ export function createPlayerView(root, {
   showCopyright = true,
   embedded = false,
   resourceManager = null,
-  transitionController = createTransitionController()
+  transitionController = createTransitionController(),
+  returnUrl = null
 }) {
+  const returnLink = safeReturnUrl(returnUrl);
   applyTheme(root, theme); root.innerHTML = `<main class="player" aria-labelledby="player-title">
-    <header><p class="brand">NEXUS</p><p id="player-status" role="status"></p></header>
+    <header class="player-header"><p class="brand">NEXUS <span class="player-context">Reproductor</span> <span class="player-version">${NEXUS_VERSION}</span></p><div class="player-header-actions"><p id="player-status" role="status"></p>${returnLink ? `<a class="button-link" href="${returnLink}">Volver a NEXUS</a>` : ''}</div></header>
     <section id="scene" aria-live="polite"><${embedded ? 'h3' : 'h1'} id="player-title" class="sr-only"></${embedded ? 'h3' : 'h1'}><div id="scene-body"></div></section>
     <footer>
       <nav aria-label="Presentación"><button id="previous" type="button">Anterior</button><span id="progress"></span><button id="next" type="button">Siguiente</button><button id="restart" type="button">Reiniciar</button></nav>

@@ -4,12 +4,12 @@
 | --- | --- |
 | Proyecto | NEXUS Present |
 | Repositorio | https://github.com/Unporciento/NEXUS-Present |
-| Producción | GitHub Pages no activado |
-| Estado | NEXUS 1.0 Release Candidate preparada en rama independiente |
-| Versión | 1.0.0-rc.1 |
+| Producción | https://unporciento.github.io/NEXUS-Present/ |
+| Estado | NEXUS 1.0 preparado para publicación certificada |
+| Versión | 1.0.0 |
 | Última auditoría | 01/08/2026 |
 | Responsable | Usuario |
 | IA principal | Codex |
 | Documentación | README · CHANGELOG · AI_HANDOFF · LICENSE · docs/ |
-| Último respaldo | 29/07/2026 — `nexus-pre-1.0-rc.bundle`, SHA-256 `77A78904D58C5B0D55EB2A89925491A81AE7BF88FB9820564E0BC0BA029E9ECD` |
-| Próxima fase | Revisión humana y pruebas físicas antes de publicación |
+| Último respaldo | 01/08/2026 — `nexus-pre-release-1.0.0.bundle`, SHA-256 `771F72B2BA690043B79D3FD232D65563D80E92C7A74954ED0A1E0A27559622E0` |
+| Próxima fase | Mantenimiento de NEXUS 1.0; pruebas físicas pendientes |

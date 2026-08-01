@@ -44,3 +44,13 @@ test('Player copyright and heading hierarchy are explicit for standalone and emb
   assert.doesNotMatch(embedded.html, /<h1 id="player-title"/);
   assert.match(embedded.html, /<h3 id="player-title"/);
 });
+
+test('standalone Player may return to NEXUS while embedded and portable views stay autonomous', () => {
+  const player = createPlayer(), registry = createRendererRegistry();
+  const standalone = fakeRoot();
+  createPlayerView(standalone, { player, renderers: registry, returnUrl: 'library.html' });
+  assert.match(standalone.html, /href="library\.html">Volver a NEXUS/);
+  const autonomous = fakeRoot();
+  createPlayerView(autonomous, { player, renderers: registry });
+  assert.doesNotMatch(autonomous.html, /Volver a NEXUS/);
+});

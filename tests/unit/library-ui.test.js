@@ -14,6 +14,9 @@ test('Library exposes required local operations without direct IndexedDB access'
   assert.match(ui, /Eliminar presentación/);
   assert.match(ui, /aria-live="polite"/);
   assert.match(html, /Biblioteca · NEXUS/);
+  assert.match(html, /app-shell\.css/);
+  assert.match(ui, /Crear o importar/);
+  assert.match(ui, /No existe sincronización automática/);
 });
 
 test('Studio bootstraps persistence through repository and keeps storage outside UI', () => {

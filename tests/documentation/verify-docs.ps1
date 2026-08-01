@@ -15,7 +15,8 @@ $required = @(
   'THIRD_PARTY_NOTICES.md','docs/SECURITY_REVIEW_1.0.md','docs/PERFORMANCE_BUDGET_1.0.md',
   'docs/COMPATIBILITY_MATRIX_1.0.md','docs/RELEASE_CANDIDATE_REPORT.md',
   'docs/LAUNCH_CHECKLIST.md','docs/ROLLBACK_PLAN.md','docs/GITHUB_PAGES_PLAN.md',
-  'docs/PRIVACY.md','docs/TERMS.md','docs/FAQ.md','docs/SUPPORT.md'
+  'docs/PRIVACY.md','docs/TERMS.md','docs/FAQ.md','docs/SUPPORT.md',
+  'docs/APP_SHELL.md','docs/RELEASE_REPORT_1.0.md'
 )
 $errors = [System.Collections.Generic.List[string]]::new()
 foreach ($relative in $required) {
@@ -25,8 +26,8 @@ foreach ($relative in $required) {
 }
 $forbiddenUi = Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object {
   $_.FullName -notmatch '[\\/](node_modules|dist|artifacts)[\\/]' -and
-  (($_.Extension -in '.html','.css' -and $_.Name -notin 'index.html','studio.html','library.html','404.html','styles.css') -or
-   ($_.Extension -in '.js','.mjs' -and $_.FullName -notmatch '[\\/](src[\\/](contracts|player|ui|input|themes|layouts|media|studio|import|storage|library|package)|tests|demo|tools|portable|vendor)[\\/]' -and $_.Name -notin 'app.js','studio.js','library.js','version.js'))
+  (($_.Extension -in '.html','.css' -and $_.Name -notin 'index.html','studio.html','library.html','player.html','404.html','styles.css','app-shell.css') -or
+   ($_.Extension -in '.js','.mjs' -and $_.FullName -notmatch '[\\/](src[\\/](contracts|player|ui|input|themes|layouts|media|studio|import|storage|library|package)|tests|demo|tools|portable|vendor)[\\/]' -and $_.Name -notin 'app.js','entry.js','studio.js','library.js','version.js'))
 }
 if ($forbiddenUi) { $errors.Add('Unexpected production code is present.') }
 $secretPattern = '(gh[pousr]_[A-Za-z0-9_]{20,}|github_pat_|AKIA[0-9A-Z]{16}|BEGIN( RSA| EC| OPENSSH)? PRIVATE KEY)'
@@ -46,7 +47,7 @@ $required | Where-Object { $_ -like '*.md' } | ForEach-Object {
     if ($target -notmatch '^https?://' -and -not (Test-Path -LiteralPath (Join-Path (Split-Path $file) $target))) { $errors.Add("Broken link: $target") }
   }
 }
-$main = git -c "safe.directory=$Root" -C $Root rev-parse main 2>$null
-if ($main -ne '8c108df87ce40747405f6dbd7092f582194ecfae') { $errors.Add('main moved from the approved Phase 5 complete commit.') }
+git -c "safe.directory=$Root" -C $Root merge-base --is-ancestor '8c108df87ce40747405f6dbd7092f582194ecfae' main 2>$null
+if ($LASTEXITCODE -ne 0) { $errors.Add('main no longer contains the approved Phase 5 baseline.') }
 if ($errors.Count) { $errors | ForEach-Object { Write-Error $_ }; exit 1 }
 Write-Output 'Documentation verification passed.'

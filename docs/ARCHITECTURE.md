@@ -32,6 +32,8 @@ Studio, Presenter, multimedia, temas, almacenamiento, PWA, publicación y Labora
 
 `src/themes/` aplica tokens al contenedor de interfaz; `src/layouts/` valida composición; renderers transforman bloques públicos en HTML semántico. Esta capa no modifica el estado del Player ni accede a notas. La demostración queda en `demo/` y el estilo global en `styles.css`.
 
+`src/ui/app-shell.js` y `app-shell.css` forman la carcasa de Biblioteca y Studio. Sus tokens `--app-*` no dependen del documento editado. Los temas `nexus` y `neutral` se aplican únicamente al contenedor del Player. `index.html` es la entrada, `library.html` la gestión local, `studio.html` el editor y `player.html` la demostración independiente. Consulta [APP_SHELL.md](APP_SHELL.md).
+
 ## Studio y preview — Fases 5A–5C
 
 `src/studio/controller.js` es la autoridad del borrador y del historial privado. `src/studio/ui.js` representa edición, validación y modo responsive. `src/studio/preview-bridge.js` es el único puente hacia la conversión pública y el Player.

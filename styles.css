@@ -116,6 +116,8 @@ blockquote {
 .media-frame [data-resource-status] { margin: .5rem 0 0; }
 .player footer { padding-top: 1rem; border-top: 1px solid var(--nx-border); }
 .player nav { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+.player-header-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; justify-content: flex-end; }
+.player-context { color: var(--nx-muted); font-size: .75rem; letter-spacing: .08em; }
 #progress {
   min-width: 5rem;
   padding: .65rem .8rem;
@@ -131,6 +133,7 @@ blockquote {
   color: var(--nx-text);
   background: var(--nx-bg);
 }
+.studio, .library { width: min(96rem, 100%); margin: 0 auto; }
 .studio > header { padding-bottom: 1rem; border-bottom: 1px solid var(--nx-border); }
 .studio [role=status] { color: var(--nx-status); }
 .studio-description { margin: .35rem 0 0; }
@@ -192,7 +195,6 @@ blockquote {
 .studio-editing { min-width: 0; }
 .studio-action-row { display: flex; flex-wrap: wrap; gap: .5rem; }
 .primary-action {
-  margin-top: .5rem;
   border-color: var(--nx-accent);
 }
 .empty-state {
@@ -277,6 +279,7 @@ dialog::backdrop { background: #020814b3; }
   border-radius: var(--nx-radius);
 }
 .library-actions h2, .library h1 { margin-top: 0; }
+.library-intro { background: linear-gradient(135deg, var(--nx-surface), color-mix(in srgb, var(--nx-surface), var(--nx-accent) 8%)) !important; }
 .draft-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));

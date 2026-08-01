@@ -1,10 +1,9 @@
 # Publicación
 
-La estrategia prevista es estática y portable. GitHub Pages es candidato inicial mediante un adaptador, no una dependencia del motor; no está activada durante Fase 1.
+NEXUS 1.0 usa una publicación estática y portable. GitHub Pages sirve exclusivamente el contenido generado en `dist/` desde la rama `gh-pages`; el motor no depende de GitHub ni de un backend.
 
-- La publicación futura incluirá favicon, iconos instalables, metadatos, footer y `© {año automático} NEXUS. Todos los derechos reservados.`
-- Habrá página 404 propia, manifest y Service Worker solo después de aprobación.
-- La caché será versionada; una actualización se ofrece al usuario y nunca invalida una sesión silenciosamente.
-- La reversión conservará una versión publicada anterior y una clave de caché recuperable.
-- Antes de publicar: navegación, 404, offline, actualización, móvil, accesibilidad, rendimiento y seguridad.
+- La publicación incluye favicon, metadatos, footer, año automático, derechos y página 404 propia.
+- Manifest y Service Worker quedan fuera de 1.0; no se declara instalación PWA ni funcionamiento offline.
+- La reversión conserva el tag, commit y build anterior; IndexedDB permanece únicamente en cada navegador y no se borra al retirar Pages.
+- Antes de publicar se verifican navegación, subdirectorio, móvil emulado, accesibilidad, rendimiento y seguridad.
 - La URL estable apunta a la release activa; publicaciones y reversión se rigen por `PUBLICATION_CONTRACT.md`.

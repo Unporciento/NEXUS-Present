@@ -1,4 +1,4 @@
-# Presupuesto de rendimiento 1.0 RC
+# Presupuesto de rendimiento 1.0
 
 Los valores son presupuestos de ingeniería, no garantías universales. Se mide primero en servidor HTTP local, navegador de escritorio y datos sintéticos.
 
@@ -25,6 +25,6 @@ Referencia: servidor HTTP local, navegador de escritorio y documentos sintético
 | Navegación sin multimedia | 500 | 0,0015 ms | 0,0056 ms |
 | ZIP portable sin assets | 10 | 2,88 ms | 4,61 ms |
 
-El build estático contiene 77 archivos y ocupa 240.001 bytes. El ZIP de la candidata ocupa 97.034 bytes. Las cifras extremadamente pequeñas de navegación miden únicamente la operación síncrona aislada; no representan pintura, decodificación multimedia ni latencia de dispositivo.
+La medición RC se conserva como referencia histórica. El build final contiene 81 archivos y ocupa 250.124 bytes; el ZIP final ocupa 100.754 bytes. Ambos permanecen por debajo del presupuesto inicial de 350 KiB sin assets. Las cifras extremadamente pequeñas de navegación miden únicamente la operación síncrona aislada; no representan pintura, decodificación multimedia ni latencia de dispositivo.
 
 Pestaña oculta pausa videos gestionados y las transiciones se cancelan. No hay animación permanente, precarga completa de video ni transcodificación. Los assets no forman parte de la carga inicial hasta ser usados.

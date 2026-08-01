@@ -1,10 +1,10 @@
-# Matriz de compatibilidad 1.0 RC
+# Matriz de compatibilidad 1.0
 
 ## Navegadores y dispositivos
 
 | Entorno | Estado | Observación |
 |---|---|---|
-| Chromium escritorio | validado mediante navegador integrado | Biblioteca, Studio, ZIP y Player portable por HTTP |
+| Chromium escritorio | validado mediante navegador integrado | Entrada, Biblioteca, Studio, IndexedDB, multimedia, ZIP y Player por HTTP |
 | Chrome escritorio externo | pendiente de conexión final | no disponible en la sesión de cierre |
 | Safari iPhone físico | pendiente | IndexedDB, descargas, codecs y pantalla completa requieren dispositivo |
 | Safari macOS | pendiente | revisar descargas, video H.264/AAC y VoiceOver |
@@ -15,6 +15,6 @@
 
 Se revisan en navegador real de escritorio con tamaños emulados, no en hardware móvil: 320×568, 360×640, 375×667, 390×844, 412×915, 768×1024, 820×1180, 1024×768, 1366×768 y 1920×1080. Criterios: sin overflow horizontal, controles ≥44 px, foco visible, zoom 200 %, orientación, textos largos y movimiento reducido.
 
-La corrección de Fase 8 añadió tracks `minmax(0, 1fr)`, hijos reducibles y controles de formulario al 100 %. La medición observable confirmó 45.6 px mínimos y ausencia de overflow en 320, 390, 768 y 1366; la matriz completa se repite al cerrar RC.
+El cierre 1.0 ejecutó 40 combinaciones de página/tamaño sobre Entrada, Biblioteca, Studio y Player: ninguna mostró overflow horizontal y el control visible mínimo midió 44 px. La prueba fue emulada en navegador real de escritorio, no en hardware móvil. El zoom nativo automatizado no produjo una señal verificable y permanece como comprobación física/manual.
 
 Codecs nunca se infieren por extensión: `canPlayType` decide y el Player ofrece fallback recuperable. MP4/H.264/AAC y WebM dependen de plataforma; NEXUS no transcodifica.

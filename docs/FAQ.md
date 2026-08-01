@@ -10,7 +10,7 @@ JSON intercambia el documento público. El ZIP añade assets usados y Player; se
 
 ## ¿NEXUS sube mis archivos?
 
-No. Esta candidata no posee backend, nube ni telemetría.
+No. NEXUS 1.0 no posee backend, nube, sincronización ni telemetría.
 
 ## ¿Por qué un video no se reproduce?
 

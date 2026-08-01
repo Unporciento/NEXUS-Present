@@ -2,6 +2,7 @@ import { createImportService } from '../import/import-service.js';
 import { createStudioDraft } from '../studio/controller.js';
 import { createBrowserDownloadAdapter } from '../studio/browser-download-adapter.js';
 import { createBackupService } from '../storage/backup-service.js';
+import { productFooter, productHeader } from '../ui/app-shell.js';
 
 const escape = (value = '') => String(value).replace(/[&<>"']/g, (character) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
@@ -13,23 +14,35 @@ const dateLabel = (value) => new Intl.DateTimeFormat('es-CL', {
 
 function shell() {
   return `<main class="library">
-    <header>
-      <div>
-        <p class="brand">NEXUS <span class="studio-version">BIBLIOTECA</span></p>
-        <h1>Mis presentaciones</h1>
-        <p>Crea, importa y conserva borradores en este dispositivo.</p>
-      </div>
-      <button type="button" data-help>Ayuda</button>
-    </header>
+    ${productHeader({
+      context: 'Biblioteca',
+      description: 'Crea, organiza y presenta experiencias web estructuradas.',
+      actions: '<a class="button-link" href="player.html">Reproductor</a><button type="button" data-help>Ayuda</button>'
+    })}
+    <section class="library-intro" aria-labelledby="library-title">
+      <p class="eyebrow">ESPACIO LOCAL</p>
+      <h1 id="library-title">Mis presentaciones</h1>
+      <p>Crea, importa y conserva borradores en este dispositivo.</p>
+    </section>
     <section class="library-actions" aria-labelledby="library-actions-title">
       <h2 id="library-actions-title">Comenzar</h2>
       <p>Empieza creando una presentación o importando un JSON público. Después podrás abrirla en NEXUS Studio.</p>
-      <div class="studio-action-row">
-        <button type="button" class="primary-action" data-new>Nueva presentación</button>
-        <button type="button" data-import>Importar JSON</button>
-        <button type="button" data-package-import>Importar paquete</button>
-        <button type="button" data-backup>Descargar respaldo</button>
-        <button type="button" data-restore>Restaurar respaldo</button>
+      <div class="action-groups">
+        <div class="action-group">
+          <h3>Crear o importar</h3>
+          <div class="studio-action-row">
+            <button type="button" class="primary-action" data-new>Nueva presentación</button>
+            <button type="button" data-import>Importar JSON</button>
+            <button type="button" data-package-import>Importar paquete</button>
+          </div>
+        </div>
+        <div class="action-group">
+          <h3>Proteger la biblioteca</h3>
+          <div class="studio-action-row">
+            <button type="button" data-backup>Descargar respaldo</button>
+            <button type="button" data-restore>Restaurar respaldo</button>
+          </div>
+        </div>
       </div>
       <input data-import-file hidden type="file" accept=".json,application/json">
       <input data-package-file hidden type="file" accept=".zip,application/zip">
@@ -47,9 +60,10 @@ function shell() {
     </section>
     <aside class="privacy-note">
       <h2>Guardado local</h2>
-      <p>Los borradores permanecen en este navegador. Descarga respaldos para protegerlos frente a limpieza o pérdida del dispositivo.</p>
+      <p>Los borradores permanecen únicamente en este navegador. No se sincronizan automáticamente con tu teléfono u otro computador.</p>
+      <p>Para moverlos, descarga un JSON, paquete o respaldo e impórtalo en el otro dispositivo. Borrar los datos del navegador puede eliminar la biblioteca.</p>
     </aside>
-    <footer>© ${new Date().getFullYear()} NEXUS. Todos los derechos reservados.</footer>
+    ${productFooter()}
   </main>
   <dialog data-rename-dialog aria-labelledby="rename-title">
     <h2 id="rename-title">Renombrar presentación</h2>
@@ -71,6 +85,9 @@ function shell() {
     <h2 id="library-help-title">Ayuda de la Biblioteca</h2>
     <p>Nueva presentación abre Studio. Importar JSON valida el archivo antes de crear un borrador.</p>
     <p>Renombrar, duplicar y eliminar afectan solo la copia local. Descargar respaldo conserva todos los borradores en un archivo privado.</p>
+    <h3>Usar NEXUS en otro dispositivo</h3>
+    <p>No existe sincronización automática entre dispositivos. Descarga un JSON, un paquete portable o un respaldo e impórtalo en el otro navegador.</p>
+    <p>Los borradores pueden perderse al borrar los datos del navegador. Crea respaldos periódicos y consérvalos en un lugar seguro.</p>
     <button type="button" data-help-close>Cerrar ayuda</button>
   </dialog>`;
 }
@@ -82,7 +99,7 @@ function cards(records) {
       <p>Tema: ${escape(record.theme)} · Modificada ${escape(dateLabel(record.updatedAt))}</p>
       <p>Estado: ${record.status === 'editable' ? 'Lista para editar' : escape(record.status)}</p>
     </div>
-    <div class="studio-action-row">
+    <div class="studio-action-row draft-card-actions">
       <button type="button" class="primary-action" data-open="${escape(record.draftKey)}">Abrir</button>
       <button type="button" data-rename="${escape(record.draftKey)}">Renombrar</button>
       <button type="button" data-duplicate="${escape(record.draftKey)}">Duplicar</button>

@@ -45,5 +45,9 @@
 | D-045 | Importar paquetes crea copias con IDs locales nuevos y rollback compensatorio | implementada |
 | D-046 | El runtime portable reutiliza Player y requiere HTTP estático; `file://` no se garantiza | implementada |
 | D-047 | La candidata usa una única fuente `src/version.js` con `1.0.0-rc.1` | implementada |
+| D-048 | `AppShell` controla la aplicación y `src/themes/` controla solo presentaciones | aprobada |
+| D-049 | `index.html` es entrada mínima; la demo independiente vive en `player.html` | aprobada |
+| D-050 | GitHub Pages sirve únicamente el build estático desde `gh-pages` | aprobada |
+| D-051 | NEXUS 1.0 no sincroniza borradores entre dispositivos | aprobada |
 | D-048 | El build estático es un artefacto reproducible, no un despliegue | implementada |
 | D-049 | Pages y `v1.0.0` requieren gate humano, pruebas físicas y autorización separada | aprobada |
