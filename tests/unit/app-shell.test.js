@@ -23,6 +23,15 @@ test('application shell stays separate from presentation themes', () => {
   assert.match(appCss, /\.product-identity:focus-visible/);
 });
 
+test('application palette separates primary, editorial and semantic colors', () => {
+  const appCss = readFileSync(new URL('../../app-shell.css', import.meta.url), 'utf8');
+  for (const token of ['--app-accent','--app-highlight','--app-success','--app-warning','--app-danger']) {
+    assert.match(appCss, new RegExp(`${token}:`));
+  }
+  assert.match(appCss, /\.primary-action[\s\S]*background:\s*var\(--app-accent\)/);
+  assert.match(appCss, /\.validation-error[\s\S]*var\(--app-danger\)/);
+});
+
 test('public entry opens the Library and standalone Player has its own route', () => {
   const entry = readFileSync(new URL('../../index.html', import.meta.url), 'utf8');
   const player = readFileSync(new URL('../../player.html', import.meta.url), 'utf8');

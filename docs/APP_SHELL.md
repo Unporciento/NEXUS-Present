@@ -11,4 +11,12 @@
 - Player independiente puede recibir `returnUrl`; el runtime portable no lo recibe y permanece autónomo.
 - Controles visibles miden al menos 44 px y la marca posee foco explícito.
 
+## Dirección cromática
+
+- La carcasa combina grafito e índigo para aportar profundidad sin competir con el contenido.
+- El cian identifica marca y acciones principales; el dorado se reserva para contexto editorial y acciones de paquete.
+- Verde, ámbar y rojo conservan funciones semánticas de éxito, advertencia y error.
+- Los temas `nexus`, `neutral`, `aurora`, `ember` y `verdant` mantienen paletas propias y no alteran los tokens de Biblioteca o Studio.
+- Los fondos usan capas estáticas: no se añaden animaciones ambientales ni consumo continuo de batería.
+
 La entrada `index.html` es una portada mínima que conduce a `library.html`. La demostración independiente vive en `player.html`.
