@@ -39,3 +39,9 @@ test('static build cleans generated contents without removing the dist root', ()
   assert.match(source, /readdir\(output\)/);
   assert.doesNotMatch(source, /rm\(output,/);
 });
+
+test('static build normalizes text files for cross-platform reproducibility', () => {
+  const source = readFileSync(new URL('../../tools/build-static.js', import.meta.url), 'utf8');
+  assert.match(source, /replaceAll\('\\r\\n', '\\n'\)/);
+  assert.match(source, /textExtensions/);
+});
