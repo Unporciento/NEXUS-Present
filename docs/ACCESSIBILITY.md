@@ -26,3 +26,5 @@ En 5E se verifica un solo `h1`, jerarquía posterior, etiquetas, foco visible y 
 La auditoría final confirmó que Escape cierra Ayuda mediante el comportamiento nativo del diálogo y el evento `close` restaura el foco. A 320×568, `Repetir tutorial` y `Cerrar ayuda` permanecen alcanzables sin desbordamiento horizontal.
 
 Los atajos se limitan al contenedor del Player y se ignoran sobre formularios. En móvil solo se muestra Editar o Previsualizar; todos los controles visibles mantienen al menos 44 px. La revisión fue en Chrome de escritorio con tamaños emulados, no lector de pantalla ni dispositivo físico.
+
+En 1.0, la carcasa común conserva navegación semántica, nombres contextuales, foco visible de 3 px, acciones textuales y áreas táctiles mínimas. El tema de aplicación no depende del tema de la presentación, por lo que cambiar una presentación a `neutral` no reduce el contraste de Biblioteca o Studio. La matriz final y sus límites verificables están en `RESPONSIVE_REVIEW.md`.

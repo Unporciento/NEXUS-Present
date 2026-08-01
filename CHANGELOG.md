@@ -1,5 +1,48 @@
 # Registro de cambios
 
+## [1.0.0] — 2026-08-01
+
+- Carcasa compartida, tokens de aplicación y navegación coherente para Biblioteca y Studio.
+- Temas de presentación aislados al Player; `neutral` ya no transforma la aplicación.
+- Entrada pública útil, demostración en `player.html` y regreso relativo desde Player independiente.
+- Biblioteca profesional con acciones agrupadas y ayuda explícita sobre almacenamiento local.
+- Selección transitoria preservada durante ediciones y recursos, con regresión automatizada.
+- Versión final centralizada, build estático, respaldo, rollback y publicación mediante GitHub Pages.
+
+## [1.0.0-rc.1] — 2026-08-01
+
+- Versión centralizada para motor, Studio, paquetes y build.
+- Build estático reproducible y artefacto RC con SHA-256, sin despliegue.
+- Revisión integral de seguridad, rendimiento, accesibilidad, responsive, legal y compatibilidad.
+- 404, privacidad, términos, FAQ, soporte, lanzamiento, Pages y rollback documentados.
+- La publicación, Pages, GitHub Release, `v1.0.0`, PWA y Service Worker permanecen ausentes.
+
+## [0.8.0-rc] — 2026-08-01
+
+- Paquete ZIP portable determinista con documento público, assets usados, manifiesto, runtime y LEEME.
+- Exportación desde Studio e importación validada como copia desde Biblioteca.
+- SHA-256, lista cerrada, límites anti-bomba, rutas seguras y rollback compensatorio.
+- Runtime estático que reutiliza Player y requiere HTTP.
+- `fflate` 0.8.3 fijada como única dependencia ZIP, sin CDN ni dependencias transitivas.
+- Sin publicación, Pages, PWA, Service Worker ni backend.
+
+## [0.7.0-rc] — 2026-07-29
+
+- AssetRepository e IndexedDB v2 con Blob, SHA-256, deduplicación y limpieza explícita.
+- PNG, JPEG, WebP, SVG seguro, MP4, WebM, poster y WebVTT.
+- ResourceManager, ObjectUrlPool y detección de capacidades con fallbacks recuperables.
+- Transiciones `cut`, `fade`, `slide` y `focus`, cancelables y compatibles con movimiento reducido.
+- Correcciones reproducidas para layout `stack`, error visual obsoleto y mensaje de archivo ausente.
+- Sin ZIP, publicación, PWA, Service Worker ni backend.
+
+## [0.6.0-rc] — 2026-07-29
+
+- Importación estricta de PublicPresentationDocument JSON y conversión aislada a Source.
+- Persistencia IndexedDB mediante DraftRepository con revisiones, recovery y conflictos.
+- Biblioteca local con crear, abrir, renombrar, duplicar, eliminar, backup y restauración.
+- Guardado manual, advertencia de cambios pendientes y BroadcastChannel informativo.
+- Sin assets reales, ZIP, nube, publicación, PWA ni backend.
+
 ## [1.0.0-rc] — 2026-07-29
 
 - Onboarding 1.0 omitible, repetible y con preferencia local limitada.

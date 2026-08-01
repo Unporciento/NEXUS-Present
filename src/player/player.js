@@ -2,8 +2,9 @@ import { validatePublicPresentation } from '../contracts/index.js';
 import { createEventBus } from './events.js';
 import { createNavigation } from './navigation.js';
 import { createStateMachine } from './state-machine.js';
+import { ENGINE_VERSION } from '../version.js';
 
-export function createPlayer({ engineVersion = '1.0.0' } = {}) {
+export function createPlayer({ engineVersion = ENGINE_VERSION } = {}) {
   const machine = createStateMachine(), events = createEventBus(), cleanups = new Set(); let document = null, navigation = null;
   const emitScene = () => events.emit('scene-changed', { index: navigation.index, sceneId: navigation.scene.id, progress: navigation.progress });
   const fail = (diagnostics) => { machine.transition('error'); events.emit('player-error', { diagnostics }); return { valid: false, diagnostics }; };

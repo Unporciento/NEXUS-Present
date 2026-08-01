@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="title">
+  <title id="title">Diagrama local azul de NEXUS</title>
+  <rect width="640" height="360" rx="32" fill="#071426"/>
+  <circle cx="184" cy="180" r="88" fill="#4f8fff"/>
+  <path d="M300 238 392 112l64 78 56-50 72 98Z" fill="#d7b26d"/>
+</svg>

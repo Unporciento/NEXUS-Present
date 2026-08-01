@@ -1,0 +1,26 @@
+{
+  "contractVersion": "1.0.0",
+  "id": "phase-6-import",
+  "version": "1.0.0",
+  "minimumEngineVersion": "1.0.0",
+  "title": "Importación segura",
+  "description": "Fixture público para validar la importación local.",
+  "createdAt": "2026-07-29T00:00:00Z",
+  "updatedAt": "2026-07-29T00:00:00Z",
+  "theme": "nexus",
+  "resources": [],
+  "scenes": [
+    {
+      "id": "scene-cover",
+      "type": "cover",
+      "layout": "hero",
+      "blocks": [
+        {
+          "id": "block-cover-heading",
+          "type": "heading",
+          "text": "Importación segura"
+        }
+      ]
+    }
+  ]
+}

@@ -1,11 +1,18 @@
 {
   "name": "nexus-present",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "node tools/local-server.js",
+    "build": "node tools/build-static.js",
+    "package:release": "node tools/package-release-candidate.js",
+    "build:rc": "node tools/build-static.js",
+    "package:rc": "node tools/package-release-candidate.js",
     "test": "node --test tests/unit/*.test.js",
     "verify:quick": "node --test tests/unit/*.test.js"
+  },
+  "dependencies": {
+    "fflate": "0.8.3"
   }
 }

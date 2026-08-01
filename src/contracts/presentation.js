@@ -3,6 +3,7 @@ import { duplicateDiagnostics, validateIdentifier } from './identifiers.js';
 import { checkEngineCompatibility, validateSemver } from './semver.js';
 import { getBlockType, getSceneType } from './registry.js';
 import { validateAssets } from './assets.js';
+import { ENGINE_VERSION } from '../version.js';
 
 const SOURCE_FIELDS = new Set(['contractVersion','id','version','minimumEngineVersion','maximumEngineVersion','title','description','author','holder','createdAt','updatedAt','theme','metadata','rights','navigation','resources','scenes','presenter','editorial','history','privateData']);
 const PUBLIC_FIELDS = new Set([...SOURCE_FIELDS].filter((key) => !['presenter','editorial','history','privateData'].includes(key)));
@@ -39,23 +40,23 @@ export function validateScene(scene, index) {
   return result(diagnostics);
 }
 
-export function validateSourcePresentation(document, engineVersion = '1.0.0') {
+export function validateSourcePresentation(document, engineVersion = ENGINE_VERSION) {
   const diagnostics = baseDiagnostics(document, SOURCE_FIELDS, 'source');
   if (!document || typeof document !== 'object') return result(diagnostics);
   diagnostics.push(...checkEngineCompatibility({ minimumEngineVersion: document.minimumEngineVersion, maximumEngineVersion: document.maximumEngineVersion, engineVersion }));
   if (Array.isArray(document.scenes)) { diagnostics.push(...duplicateDiagnostics(document.scenes, 'id', 'scenes')); document.scenes.forEach((scene, index) => diagnostics.push(...validateScene(scene, index).diagnostics)); }
-  const used = Array.isArray(document.scenes) ? document.scenes.flatMap((scene) => scene.blocks ?? []).flatMap((block) => block.assetId ? [block.assetId] : []) : [];
+  const used = Array.isArray(document.scenes) ? document.scenes.flatMap((scene) => scene.blocks ?? []).flatMap((block) => [block.assetId, block.posterAssetId, block.captionsAssetId].filter(Boolean)) : [];
   diagnostics.push(...validateAssets(document.resources ?? [], used).diagnostics);
   return result(diagnostics);
 }
 
-export function validatePublicPresentation(document, engineVersion = '1.0.0') {
+export function validatePublicPresentation(document, engineVersion = ENGINE_VERSION) {
   const diagnostics = baseDiagnostics(document, PUBLIC_FIELDS, 'public');
   ['presenter','editorial','history','privateData'].forEach((field) => { if (field in (document ?? {})) diagnostics.push(diagnostic('private-field-public', field, 'Private field appears in public document.')); });
   if (document && typeof document === 'object') {
     diagnostics.push(...checkEngineCompatibility({ minimumEngineVersion: document.minimumEngineVersion, maximumEngineVersion: document.maximumEngineVersion, engineVersion }));
     if (Array.isArray(document.scenes)) { diagnostics.push(...duplicateDiagnostics(document.scenes, 'id', 'scenes')); document.scenes.forEach((scene, index) => diagnostics.push(...validateScene(scene, index).diagnostics)); }
-    const used = (document.scenes ?? []).flatMap((scene) => scene.blocks ?? []).flatMap((block) => block.assetId ? [block.assetId] : []);
+    const used = (document.scenes ?? []).flatMap((scene) => scene.blocks ?? []).flatMap((block) => [block.assetId, block.posterAssetId, block.captionsAssetId].filter(Boolean));
     diagnostics.push(...validateAssets(document.resources ?? [], used, true).diagnostics);
   }
   return result(diagnostics);

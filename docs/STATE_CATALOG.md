@@ -1,5 +1,9 @@
 # Catálogo de estados
 
+## Paquete portable
+
+Exportación: `idle → validating → collecting → archiving → ready`, con salidas `cancelled` o `recoverable-error`. Importación: `idle → reading → inspecting → verifying → importing → ready`, con `incompatible`, `integrity-error`, `quota-error` y `rollback`. Ningún error inicia publicación ni sobrescribe borradores.
+
 La máquina del Player usa `idle`, `loading`, `ready`, `presenting`, `paused`, `completed`, `error` y `destroyed`. Las transiciones no permitidas se rechazan; la referencia operativa es [PLAYER_CONTRACT.md](PLAYER_CONTRACT.md).
 
 | Estado | Interfaz mínima | Recuperación |
@@ -43,3 +47,21 @@ PreviewBridge usa `idle`, `validating`, `invalid`, `transforming`, `rendering`, 
 | tutorial actualizado | La versión cambió | Mostrar nuevamente |
 | ayuda abierta | Referencia breve disponible | Cerrar o repetir tutorial |
 | almacenamiento no disponible | No puede recordarse la preferencia | Continuar sin bloquear |
+
+## Biblioteca y almacenamiento — Fase 6
+
+- Importación: `idle`, `reading`, `parsing`, `invalid`, `ready`, `destroyed`.
+- Repositorio: `closed`, `opening`, `ready`, `loading`, `saving`, `recovering`, `conflict`, `error`, `destroyed`.
+- Sesión Studio: `clean`, `dirty`, `saving`, `saved`, `conflict`, `error`, `destroyed`.
+- Biblioteca: carga, vacío, lista, error de importación, error de almacenamiento y confirmación de eliminación.
+
+Un error conserva el borrador en memoria. Conflicto no sobrescribe. Recovery solo se aplica por acción explícita.
+
+## Recursos y movimiento — Fase 7
+
+- Recurso: `idle`, `loading`, `ready`, `failed`, `unsupported`.
+- Importación de asset: validando, inspeccionando firma, sanitizando, calculando hash, guardando, listo o error recuperable.
+- Video: metadata pendiente, listo, reproducción controlada, pausado por usuario o pestaña oculta, fallo recuperable.
+- Transición: inactiva o activa; una navegación nueva cancela la activa. Movimiento reducido y pestaña oculta equivalen a `cut`.
+
+`failed` y `unsupported` conservan controles de navegación. Cuota no borra recursos existentes. `destroy` libera listeners, elementos multimedia y URLs temporales.

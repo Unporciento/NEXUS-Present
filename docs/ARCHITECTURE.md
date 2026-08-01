@@ -32,6 +32,8 @@ Studio, Presenter, multimedia, temas, almacenamiento, PWA, publicación y Labora
 
 `src/themes/` aplica tokens al contenedor de interfaz; `src/layouts/` valida composición; renderers transforman bloques públicos en HTML semántico. Esta capa no modifica el estado del Player ni accede a notas. La demostración queda en `demo/` y el estilo global en `styles.css`.
 
+`src/ui/app-shell.js` y `app-shell.css` forman la carcasa de Biblioteca y Studio. Sus tokens `--app-*` no dependen del documento editado. Los temas `nexus` y `neutral` se aplican únicamente al contenedor del Player. `index.html` es la entrada, `library.html` la gestión local, `studio.html` el editor y `player.html` la demostración independiente. Consulta [APP_SHELL.md](APP_SHELL.md).
+
 ## Studio y preview — Fases 5A–5C
 
 `src/studio/controller.js` es la autoridad del borrador y del historial privado. `src/studio/ui.js` representa edición, validación y modo responsive. `src/studio/preview-bridge.js` es el único puente hacia la conversión pública y el Player.
@@ -54,3 +56,43 @@ El servicio contractual es independiente del DOM y reutiliza `createPublicPresen
 `StudioApp → bindStudioGuidance → OnboardingPreference`
 
 La guía no accede al Controller. Solo la preferencia versionada del tutorial usa almacenamiento local; los borradores continúan exclusivamente en memoria. `sceneLabels` mantiene separada la terminología visible de los contratos. `createPlayerView({ showCopyright })` conserva derechos por defecto y permite ocultarlos explícitamente al embeber el Player en Studio.
+
+## Importación y almacenamiento — Fase 6
+
+```text
+library.html → LibraryApp → ImportService → PublicToSourceConverter
+                          → DraftRepository → IndexedDbAdapter
+studio.html  → StudioApp + PersistenceSession → DraftRepository
+```
+
+`ImportService` limita y valida archivos públicos antes de convertirlos. `draftKey` identifica el registro local y permanece separado del `id` contractual. `DraftRepository` valida SourcePresentationDocument y es la única capa que conoce el adaptador IndexedDB. La UI usa resultados estructurados; no accede a `indexedDB`.
+
+La base `nexus-present` contiene `drafts`, `recovery` y `meta`. Guardar compara `expectedRevision`, escribe la nueva revisión y su punto de recuperación en una transacción. `BroadcastChannel` solo avisa entre pestañas; la revisión almacenada es la autoridad.
+
+## Motor y multimedia — Fase 7
+
+```text
+Studio Assets UI → AssetRepository → AssetIndexedDbAdapter → assets
+PlayerView → ResourceManager → AssetRepository + ObjectUrlPool
+PlayerView → TransitionController → TransitionRegistry
+```
+
+El store `assets` se añadió mediante la versión 2 de la base. Documento y Blob permanecen separados: `assetId` es estable; `nexus-asset:` es una referencia lógica, no una ruta. El ResourceManager resuelve solo dentro del `draftKey`, comprueba capacidades, monta recursos y libera elementos, decoders y Object URLs en navegación o `destroy`.
+
+Renderer Registry continúa produciendo HTML semántico inerte. Los hooks `data-nexus-asset` no contienen código ni datos privados. El DOM Adapter coordina ResourceManager y transiciones, pero Player Core no conoce IndexedDB, Blob, video ni animaciones.
+
+Contratos detallados: [ASSET_ARCHITECTURE.md](ASSET_ARCHITECTURE.md), [MEDIA_CONTRACT.md](MEDIA_CONTRACT.md), [MOTION_SYSTEM.md](MOTION_SYSTEM.md) y [ENGINE_AUDIT_PHASE_7.md](ENGINE_AUDIT_PHASE_7.md).
+
+## Paquete portable — Fase 8
+
+```text
+Studio → PackageExportService → RuntimeProvider + AssetRepository → ArchiveAdapter
+ZIP → ArchiveAdapter → ManifestValidator → IntegrityVerifier
+    → PackageImportService → AssetRepository + DraftRepository
+```
+
+`src/package/` no conoce el DOM. Los bindings de Studio y Biblioteca solo coordinan archivos, estados y descarga. La importación valida antes de escribir y ejecuta rollback compensatorio. El runtime portable reutiliza el Player existente y reemplaza IndexedDB por rutas estáticas verificadas. Consulta [PACKAGE_CONTRACT.md](PACKAGE_CONTRACT.md) y [PORTABLE_RUNTIME.md](PORTABLE_RUNTIME.md).
+
+## Release Candidate — Fase 9
+
+`src/version.js` es la fuente de versión del motor. `tools/build-static.js` copia una lista cerrada a `dist/`; `tools/package-release-candidate.js` genera un ZIP y SHA-256 en `artifacts/`. Ambos directorios son generados e ignorados por Git. La copia local de `fflate` permite ejecutar Studio sin `node_modules` ni CDN. Ningún script despliega o configura Pages.

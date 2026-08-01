@@ -26,3 +26,28 @@
 | D-026 | Preview usa conversión pública y Player aislado; exportación es local | aprobada |
 | D-027 | Toda fase que modifica interfaz requiere revisión visual y aprobación antes del merge | aprobada |
 | D-028 | PreviewBridge es el único puente entre el borrador privado y el Player público; preview se actualiza de forma explícita | aprobada |
+| D-029 | Fase 6 se divide en importación, repositorio, biblioteca, recuperación y cierre | implementada |
+| D-030 | IndexedDB será la persistencia de presentaciones; `localStorage` seguirá limitado al onboarding | implementada |
+| D-031 | `draftKey` local y `id` contractual son identidades distintas | implementada |
+| D-032 | Guardar usa revisión optimista y transacción atómica; no existe sobrescritura silenciosa | implementada |
+| D-033 | Importación acepta solo PublicPresentationDocument estricto y crea un Source aislado | implementada |
+| D-034 | Fase 6 usa guardado manual; autosave continuo y sincronización quedan fuera | implementada |
+| D-035 | Backups y restauraciones son locales, versionados, validados y sin assets | implementada |
+| D-036 | Assets usan un store IndexedDB separado y referencias `assetId`; nunca rutas privadas | implementada |
+| D-037 | Hash SHA-256 y scope del borrador evitan duplicar el mismo Blob local | implementada |
+| D-038 | SVG se acepta solo bajo sanitización conservadora sin referencias externas | implementada |
+| D-039 | Video conserva controles nativos, precarga de metadata y no se transcodifica | implementada |
+| D-040 | Object URLs tienen referencias y se revocan en navegación o destroy | implementada |
+| D-041 | Movimiento usa un registro limitado, cancelable y reducido a cut cuando corresponde | implementada |
+| D-042 | Player Core permanece ajeno a IndexedDB, Blob, codecs y animación | implementada |
+| D-043 | El paquete portable usa ZIP determinista, manifiesto versionado y hashes SHA-256 | implementada |
+| D-044 | `fflate` 0.8.3 es la única dependencia ZIP, fijada, sin CDN y documentada | implementada |
+| D-045 | Importar paquetes crea copias con IDs locales nuevos y rollback compensatorio | implementada |
+| D-046 | El runtime portable reutiliza Player y requiere HTTP estático; `file://` no se garantiza | implementada |
+| D-047 | La candidata usa una única fuente `src/version.js` con `1.0.0-rc.1` | implementada |
+| D-048 | `AppShell` controla la aplicación y `src/themes/` controla solo presentaciones | aprobada |
+| D-049 | `index.html` es entrada mínima; la demo independiente vive en `player.html` | aprobada |
+| D-050 | GitHub Pages sirve únicamente el build estático desde `gh-pages` | aprobada |
+| D-051 | NEXUS 1.0 no sincroniza borradores entre dispositivos | aprobada |
+| D-048 | El build estático es un artefacto reproducible, no un despliegue | implementada |
+| D-049 | Pages y `v1.0.0` requieren gate humano, pruebas físicas y autorización separada | aprobada |

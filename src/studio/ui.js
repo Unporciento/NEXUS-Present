@@ -1,10 +1,12 @@
 import { getSceneType } from '../contracts/index.js';
-import { applyTheme, themes } from '../themes/themes.js';
+import { themes } from '../themes/themes.js';
 import { createStudioController } from './controller.js';
 import { bindStudioExport } from './export-ui.js';
 import { bindStudioGuidance } from './guidance-ui.js';
 import { layoutLabel, sceneLabel } from './labels.js';
 import { createPreviewBridge } from './preview-bridge.js';
+import { NEXUS_VERSION } from '../version.js';
+import { productFooter, productHeader } from '../ui/app-shell.js';
 
 const sceneTypes = ['cover', 'statement', 'content', 'media', 'comparison', 'evidence', 'closing'];
 const escape = (value = '') => String(value).replace(/[&<>"']/g, (character) => ({
@@ -25,16 +27,12 @@ const previewMessages = {
 
 function shell() {
   return `<main class="studio" data-studio-view="edit">
-    <header>
-      <div>
-        <p class="brand">NEXUS STUDIO <span class="studio-version">1.0</span></p>
-        <p class="studio-description">Crea, valida y previsualiza presentaciones web estructuradas.</p>
-      </div>
-      <div class="studio-header-actions">
-        <p id="studio-status" role="status"></p>
-        <button type="button" data-help>Ayuda</button>
-      </div>
-    </header>
+    ${productHeader({
+      context: 'Studio',
+      description: 'Crea, guarda, valida y previsualiza presentaciones web estructuradas.',
+      status: '<p id="studio-status" role="status"></p><p id="save-status" role="status" aria-live="polite"></p>',
+      actions: '<a class="button-link" href="library.html">Volver a Biblioteca</a><button type="button" class="primary-action" data-save>Guardar</button><button type="button" data-help>Ayuda</button>'
+    })}
     <nav class="studio-mode" aria-label="Vista del Studio">
       <button type="button" data-show-edit aria-pressed="true">Editar</button>
       <button type="button" data-show-preview aria-pressed="false">Previsualizar</button>
@@ -60,10 +58,12 @@ function shell() {
             </div>
             <button type="button" class="primary-action" data-preview>Previsualizar</button>
             <button type="button" class="primary-action" data-export>Descargar presentación</button>
-            <small>Formato JSON · Las imágenes y videos todavía no se empaquetan.</small>
+            <button type="button" data-package-export>Descargar paquete portable</button>
+            <small>Formato JSON para intercambio · ZIP para conservar el Player y los recursos.</small>
             <p id="export-status" role="status" aria-live="polite"></p>
+            <p id="package-export-status" role="status" aria-live="polite"></p>
             <section id="validation-panel" class="validation-panel" aria-labelledby="validation-title"></section>
-            <p>La exportación es local. Almacenamiento y publicación permanecen fuera de esta fase.</p>
+            <p>El borrador se guarda en este navegador. NEXUS no publica presentaciones individuales automáticamente.</p>
           </aside>
         </div>
       </section>
@@ -82,7 +82,7 @@ function shell() {
         <div id="preview-host" class="preview-host" tabindex="-1" aria-label="Vista previa de la presentación"></div>
       </section>
     </div>
-    <footer>© ${new Date().getFullYear()} NEXUS. Todos los derechos reservados.</footer>
+    ${productFooter()}
   </main>
   <dialog data-confirm aria-labelledby="confirm-title">
     <h2 id="confirm-title">Eliminar escena</h2>
@@ -95,13 +95,13 @@ function shell() {
   <dialog class="guidance-dialog" data-onboarding aria-labelledby="onboarding-title">
     <p class="eyebrow">PRIMEROS PASOS · VERSIÓN 1.0</p>
     <h2 id="onboarding-title">Bienvenido a NEXUS Studio</h2>
-    <p>Crea, valida y previsualiza presentaciones web estructuradas.</p>
+    <p>Crea, guarda, valida y previsualiza presentaciones web estructuradas.</p>
     <ol>
       <li>Define el título, la descripción y el tema.</li>
       <li>Añade escenas y edita su contenido.</li>
+      <li>Guarda el borrador en este dispositivo.</li>
       <li>Corrige los avisos del panel Validación.</li>
-      <li>Abre la vista previa y recorre el Player.</li>
-      <li>Descarga la presentación en formato JSON.</li>
+      <li>Previsualiza o descarga la presentación pública.</li>
     </ol>
     <p>El tutorial puede repetirse en cualquier momento desde Ayuda.</p>
     <div class="studio-action-row">
@@ -111,15 +111,19 @@ function shell() {
   </dialog>
   <dialog class="guidance-dialog" data-help-dialog aria-labelledby="help-title">
     <h2 id="help-title">Ayuda de NEXUS Studio</h2>
-    <p>Empieza con los datos generales, añade escenas y atiende la validación antes de previsualizar.</p>
+    <p>Empieza con los datos generales, añade escenas y guarda antes de volver a la Biblioteca.</p>
     <details open><summary>Tipos de escenas</summary>
       <p>Portada, Declaración, Contenido, Multimedia, Comparación, Evidencia y Cierre.</p>
     </details>
     <details><summary>Temas y vista previa</summary>
       <p>Elige Nexus o Neutral. Actualiza la vista previa después de editar.</p>
     </details>
-    <details><summary>Descarga y límites</summary>
-      <p>Se descarga un JSON público. No se guardan borradores ni se empaquetan imágenes o videos.</p>
+    <details><summary>Guardado y descarga</summary>
+      <p>Guardar conserva el borrador privado local. Descargar genera un JSON público sin estado interno.</p>
+    </details>
+    <details><summary>Usar otro dispositivo</summary>
+      <p>Los borradores se guardan solo en este navegador y no se sincronizan. Descarga un JSON, paquete o respaldo e impórtalo en el otro dispositivo.</p>
+      <p>Borrar los datos del navegador puede eliminar tus borradores locales. Crea respaldos periódicos.</p>
     </details>
     <details><summary>Preguntas frecuentes</summary>
       <p>Si aparece un error, activa su mensaje para volver al campo correspondiente.</p>
@@ -221,7 +225,6 @@ export function createStudioApp(root, {
 
   const renderStudio = (state) => {
     if (destroyed) return;
-    applyTheme(root, state.draft.theme);
     const signature = JSON.stringify(state.draft);
     if (draftSignature !== null && signature !== draftSignature) previewBridge.markStale();
     draftSignature = signature;
@@ -288,7 +291,7 @@ export function createStudioApp(root, {
     }
   };
 
-  on('change', '[data-meta]', (_, element) =>
+  on('input', '[data-meta]', (_, element) =>
     controller.dispatch({ type: 'set-metadata', field: element.dataset.meta, value: element.value }));
   on('change', '[data-theme]', (_, element) =>
     controller.dispatch({ type: 'set-theme', theme: element.value }));
@@ -296,7 +299,7 @@ export function createStudioApp(root, {
     const state = controller.getState();
     controller.dispatch({ type: 'update-scene', id: state.selectedSceneId, patch: { layout: element.value } });
   });
-  on('change', '[data-block]', (_, element) => {
+  on('input', '[data-block]', (_, element) => {
     const state = controller.getState();
     const scene = state.draft.scenes.find((item) => item.id === state.selectedSceneId);
     const blocks = scene.blocks.map((block) =>
