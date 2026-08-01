@@ -9,6 +9,7 @@ import { NEXUS_VERSION } from '../version.js';
 import { productFooter, productHeader } from '../ui/app-shell.js';
 
 const sceneTypes = ['cover', 'statement', 'content', 'media', 'comparison', 'evidence', 'closing'];
+const themeLabels = { neutral: 'Neutral editorial', nexus: 'NEXUS', aurora: 'Aurora', ember: 'Brasa', verdant: 'Verde profundo' };
 const escape = (value = '') => String(value).replace(/[&<>"']/g, (character) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
 }[character]));
@@ -52,14 +53,19 @@ function shell() {
           <section id="editor-panel" aria-labelledby="studio-editor-title"></section>
           <aside aria-labelledby="studio-actions-title">
             <h2 id="studio-actions-title">Acciones</h2>
-            <div class="studio-action-row">
-              <button type="button" data-undo>Deshacer</button>
-              <button type="button" data-redo>Rehacer</button>
+            <div class="studio-action-stack">
+              <section class="studio-action-section" aria-labelledby="history-actions-title">
+                <h3 id="history-actions-title">Historial</h3>
+                <div class="studio-action-row"><button type="button" data-undo>Deshacer</button><button type="button" data-redo>Rehacer</button></div>
+              </section>
+              <section class="studio-action-section" aria-labelledby="output-actions-title">
+                <h3 id="output-actions-title">Vista previa y descarga</h3>
+                <button type="button" class="primary-action" data-preview>Previsualizar</button>
+                <button type="button" class="primary-action" data-export>Descargar presentación</button>
+                <button type="button" data-package-export>Descargar paquete portable</button>
+                <small>Formato JSON para intercambio · ZIP para conservar el Player y los recursos.</small>
+              </section>
             </div>
-            <button type="button" class="primary-action" data-preview>Previsualizar</button>
-            <button type="button" class="primary-action" data-export>Descargar presentación</button>
-            <button type="button" data-package-export>Descargar paquete portable</button>
-            <small>Formato JSON para intercambio · ZIP para conservar el Player y los recursos.</small>
             <p id="export-status" role="status" aria-live="polite"></p>
             <p id="package-export-status" role="status" aria-live="polite"></p>
             <section id="validation-panel" class="validation-panel" aria-labelledby="validation-title"></section>
@@ -116,7 +122,7 @@ function shell() {
       <p>Portada, Declaración, Contenido, Multimedia, Comparación, Evidencia y Cierre.</p>
     </details>
     <details><summary>Temas y vista previa</summary>
-      <p>Elige Nexus o Neutral. Actualiza la vista previa después de editar.</p>
+      <p>Elige entre NEXUS, Neutral editorial, Aurora, Brasa o Verde profundo. Actualiza la vista previa después de editar.</p>
     </details>
     <details><summary>Guardado y descarga</summary>
       <p>Guardar conserva el borrador privado local. Descargar genera un JSON público sin estado interno.</p>
@@ -164,7 +170,7 @@ function editorContent(state) {
     <label>Descripción <textarea data-meta="description">${escape(draft.description)}</textarea></label>
     <label>Tema
       <select data-theme>${Object.keys(themes).map((theme) =>
-        `<option ${theme === draft.theme ? 'selected' : ''}>${escape(theme)}</option>`).join('')}</select>
+        `<option value="${escape(theme)}" ${theme === draft.theme ? 'selected' : ''}>${escape(themeLabels[theme] ?? theme)}</option>`).join('')}</select>
     </label>
     ${selected ? sceneEditor(selected).replace('<h1 id="studio-editor-title">Editar presentación</h1>', '') :
       '<div class="empty-state"><p>Selecciona una escena para editarla o añade una nueva.</p><button type="button" data-add>Añadir escena</button></div>'}`;
