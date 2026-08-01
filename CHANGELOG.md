@@ -1,5 +1,11 @@
 # Registro de cambios
 
+## [No publicado]
+
+- Paleta de aplicación refinada con base grafito/índigo, identidad cian, acento editorial dorado y estados semánticos diferenciados.
+- Temas `nexus` y `neutral` renovados sin acoplarlos a Biblioteca o Studio.
+- Jerarquía visual reforzada en paneles, acciones, tarjetas y escenas, sin animaciones decorativas nuevas.
+
 ## [1.0.0] — 2026-08-01
 
 - Carcasa compartida, tokens de aplicación y navegación coherente para Biblioteca y Studio.

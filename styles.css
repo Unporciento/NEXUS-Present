@@ -47,6 +47,9 @@ button {
 }
 .button-link:focus-visible { outline: 3px solid var(--nx-focus); outline-offset: 3px; }
 button:hover:not(:disabled) { border-color: var(--nx-accent); }
+.app-surface button:hover:not(:disabled), .app-surface .button-link:hover {
+  background: color-mix(in srgb, var(--app-control), var(--app-accent) 14%);
+}
 button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
   outline: 3px solid var(--nx-focus);
   outline-offset: 3px;
@@ -83,6 +86,15 @@ button:disabled {
   border-radius: var(--nx-radius);
   box-shadow: 0 .75rem 2rem #0002;
 }
+.scene::before {
+  display: block;
+  width: 3.5rem;
+  height: .2rem;
+  margin-bottom: 1.4rem;
+  background: var(--nx-accent);
+  border-radius: 999px;
+  content: '';
+}
 .scene h1 {
   margin: 0 0 1rem;
   color: var(--nx-text);
@@ -118,6 +130,7 @@ blockquote {
 .player nav { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
 .player-header-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; justify-content: flex-end; }
 .player-context { color: var(--nx-muted); font-size: .75rem; letter-spacing: .08em; }
+.player .brand { color: var(--nx-accent); }
 #progress {
   min-width: 5rem;
   padding: .65rem .8rem;
@@ -166,6 +179,12 @@ blockquote {
   border: 1px solid var(--nx-border);
   border-radius: var(--nx-radius);
 }
+.app-surface .studio-grid > aside:first-child {
+  background: linear-gradient(160deg, var(--app-surface), #17213a);
+}
+.app-surface .studio-grid > aside:last-child {
+  background: linear-gradient(160deg, var(--app-surface), #15243a);
+}
 .studio h1, .studio h2, .studio label { color: var(--nx-text); }
 .studio p { color: var(--nx-muted); }
 .studio label {
@@ -194,9 +213,8 @@ blockquote {
 .studio-workspace { display: grid; gap: 1rem; }
 .studio-editing { min-width: 0; }
 .studio-action-row { display: flex; flex-wrap: wrap; gap: .5rem; }
-.primary-action {
-  border-color: var(--nx-accent);
-}
+.primary-action { border-color: var(--nx-accent); }
+.app-surface [data-package-export] { border-color: color-mix(in srgb, var(--app-border), var(--app-highlight) 55%); }
 .empty-state {
   margin-top: 1rem;
   padding: 1rem;
@@ -211,7 +229,7 @@ blockquote {
 .validation-panel ul { padding-left: 0; list-style: none; }
 .validation-link { width: 100%; text-align: left; }
 .validation-ok { color: var(--nx-status) !important; }
-.validation-error { color: var(--nx-focus) !important; font-weight: 700; }
+.validation-error { color: var(--app-danger, var(--nx-focus)) !important; font-weight: 700; }
 .studio-preview-panel {
   min-width: 0;
   padding: 1rem;
@@ -279,7 +297,11 @@ dialog::backdrop { background: #020814b3; }
   border-radius: var(--nx-radius);
 }
 .library-actions h2, .library h1 { margin-top: 0; }
-.library-intro { background: linear-gradient(135deg, var(--nx-surface), color-mix(in srgb, var(--nx-surface), var(--nx-accent) 8%)) !important; }
+.library-intro {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--app-surface), var(--app-accent) 8%), color-mix(in srgb, var(--app-surface), var(--app-highlight) 7%)) !important;
+  border-top-color: var(--app-accent) !important;
+}
 .draft-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
@@ -293,7 +315,7 @@ dialog::backdrop { background: #020814b3; }
   gap: 1rem;
   min-width: 0;
   padding: 1rem;
-  background: var(--nx-bg);
+  background: var(--app-surface-raised, var(--nx-bg));
   border: 1px solid var(--nx-border);
   border-radius: var(--nx-radius);
 }
