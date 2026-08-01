@@ -7,6 +7,7 @@
 - Entrada pública útil, demostración en `player.html` y regreso relativo desde Player independiente.
 - Biblioteca profesional con acciones agrupadas y ayuda explícita sobre almacenamiento local.
 - Selección transitoria preservada durante ediciones y recursos, con regresión automatizada.
+- Build normalizado a LF para producir el mismo artefacto desde checkouts Windows o Unix.
 - Versión final centralizada, build estático, respaldo, rollback y publicación mediante GitHub Pages.
 
 ## [1.0.0-rc.1] — 2026-08-01
