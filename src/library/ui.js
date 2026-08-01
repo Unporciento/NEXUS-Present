@@ -27,10 +27,12 @@ function shell() {
       <div class="studio-action-row">
         <button type="button" class="primary-action" data-new>Nueva presentación</button>
         <button type="button" data-import>Importar JSON</button>
+        <button type="button" data-package-import>Importar paquete</button>
         <button type="button" data-backup>Descargar respaldo</button>
         <button type="button" data-restore>Restaurar respaldo</button>
       </div>
       <input data-import-file hidden type="file" accept=".json,application/json">
+      <input data-package-file hidden type="file" accept=".zip,application/zip">
       <input data-restore-file hidden type="file" accept=".json,application/json">
       <p id="library-status" role="status" aria-live="polite">Abriendo almacenamiento local…</p>
     </section>
@@ -91,6 +93,7 @@ function cards(records) {
 
 export function createLibraryApp(root, {
   repository,
+  packageImportService = null,
   importService = createImportService(),
   backupService = createBackupService({ repository }),
   downloadAdapter = createBrowserDownloadAdapter(),
@@ -161,6 +164,13 @@ export function createLibraryApp(root, {
     if (created.ok) navigate(`studio.html?draft=${encodeURIComponent(created.value.draftKey)}`);
     else status(created.error.message);
   });
+  on('click', '[data-package-import]', () => query('[data-package-file]')?.click());
+  on('change', '[data-package-file]', async (_, input) => {
+    status('Verificando paquete, manifiesto y recursos…');
+    const imported = await packageImportService?.importFile(input.files?.[0]);
+    if (imported?.ok) navigate(`studio.html?draft=${encodeURIComponent(imported.draftKey)}`);
+    else status(imported?.diagnostics?.[0]?.message ?? imported?.error?.message ?? 'No fue posible importar el paquete.');
+  });
   on('click', '[data-rename]', (_, button) => {
     pending = records.find((record) => record.draftKey === button.dataset.rename);
     query('[data-rename-title]').value = pending?.title ?? '';
@@ -223,6 +233,7 @@ export function createLibraryApp(root, {
       destroyed = true;
       removers.forEach((remove) => remove());
       importService.destroy();
+      packageImportService?.destroy();
       downloadAdapter.destroy();
       repository.destroy();
       root.replaceChildren();

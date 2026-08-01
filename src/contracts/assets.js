@@ -2,7 +2,7 @@ import { diagnostic, result } from './errors.js';
 import { duplicateDiagnostics, validateIdentifier } from './identifiers.js';
 
 const MIME_BY_TYPE = { image: /^image\//, video: /^video\//, audio: /^audio\//, captions: /^text\/vtt$/ };
-const safeUrl = /^(?:https:\/\/|nexus-asset:[A-Za-z0-9][A-Za-z0-9._-]{0,63}$|\.?\/?[A-Za-z0-9][A-Za-z0-9._/-]*)$/i;
+const safeUrl = /^(?:https:\/\/|nexus-asset:[A-Za-z0-9][A-Za-z0-9._-]{0,63}$|\.?\/?[A-Za-z0-9][A-Za-z0-9._/%-]*)$/i;
 export function validateAssets(assets = [], usedAssetIds = [], isPublic = false) {
   const diagnostics = [...duplicateDiagnostics(assets, 'id', 'assets')];
   const available = new Set(assets.map((asset) => asset?.id));

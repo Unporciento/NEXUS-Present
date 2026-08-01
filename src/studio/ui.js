@@ -63,8 +63,10 @@ function shell() {
             </div>
             <button type="button" class="primary-action" data-preview>Previsualizar</button>
             <button type="button" class="primary-action" data-export>Descargar presentación</button>
-            <small>Formato JSON · Las imágenes y videos todavía no se empaquetan.</small>
+            <button type="button" data-package-export>Descargar paquete portable</button>
+            <small>Formato JSON para intercambio · ZIP para conservar el Player y los recursos.</small>
             <p id="export-status" role="status" aria-live="polite"></p>
+            <p id="package-export-status" role="status" aria-live="polite"></p>
             <section id="validation-panel" class="validation-panel" aria-labelledby="validation-title"></section>
             <p>El borrador se guarda en este navegador. La publicación permanece fuera de esta fase.</p>
           </aside>

@@ -9,4 +9,11 @@ test('layouts and renderers accept the public demo', () => { const renderers = c
 test('every Studio default layout has a renderer contract', () => {
   assert.equal(validateLayout('stack', [{ type: 'heading' }, { type: 'paragraph' }]).valid, true);
 });
+test('Studio grid children may shrink without horizontal overflow on narrow viewports', () => {
+  const css = readFileSync(new URL('../../styles.css', import.meta.url), 'utf8');
+  assert.match(css, /\.studio-editing\s*\{\s*min-width:\s*0/);
+  assert.match(css, /\.studio-grid\s*>\s*\*\s*\{\s*min-width:\s*0/);
+  assert.match(css, /grid-template-columns:\s*minmax\(0,\s*1fr\)/);
+  assert.match(css, /\.studio input,[\s\S]*?width:\s*100%;[\s\S]*?max-width:\s*100%/);
+});
 test('resource fixtures expose accessible safe states', () => { assert.deepEqual(resourceStates,['idle','loading','ready','failed','unsupported']); assert.match(resourceFallback('failed').message,/no está disponible/); assert.equal(resourceFallback('unsupported').recoverable,true); });
