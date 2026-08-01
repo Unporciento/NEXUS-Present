@@ -1,0 +1,39 @@
+import { layoutClass, validateLayout } from '../layouts/layouts.js';
+export function createRendererRegistry() { const renderers = new Map(); return { register(renderer) { renderers.set(renderer.typeId, renderer); }, get(typeId) { return renderers.get(typeId) ?? null; } }; }
+const escape = (value = '') => String(value).replace(/[&<>"']/g, (char) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[char]));
+const safeUrl = (value) => {
+  const url = String(value ?? '');
+  return /^(?:https:\/\/|\.{0,2}\/|assets\/)[^\s]*$/i.test(url) ? escape(url) : '';
+};
+const resource = (item, kind) => {
+  const assetId = escape(item.assetId);
+  if (!assetId) return '<p class="resource-error" role="status">Recurso no disponible. Puedes continuar.</p>';
+  const alt = kind === 'image' ? ` alt="${escape(item.alt)}"` : '';
+  const element = kind === 'image'
+    ? `<img data-nexus-asset="${assetId}" data-asset-kind="image"${alt}>`
+    : `<video data-nexus-asset="${assetId}" data-asset-kind="video"${item.posterAssetId ? ` data-poster-asset="${escape(item.posterAssetId)}"` : ''}${item.captionsAssetId ? ` data-captions-asset="${escape(item.captionsAssetId)}"` : ''} controls preload="metadata" aria-label="${escape(item.title ?? 'Vídeo')}"></video>`;
+  return `<figure data-resource-container class="media-frame">${element}<p data-resource-status role="status">Cargando recurso…</p></figure>`;
+};
+const block = (item) => {
+  const text = escape(item.text);
+  if (item.type === 'heading') return `<h1>${text}</h1>`;
+  if (item.type === 'paragraph') return `<p>${text}</p>`;
+  if (item.type === 'list') return `<ul>${(item.items ?? []).map((value) => `<li>${escape(value)}</li>`).join('')}</ul>`;
+  if (item.type === 'metric') return `<p class="metric"><strong>${text}</strong><span>${escape(item.label)}</span></p>`;
+  if (item.type === 'quote') return `<blockquote>${text}</blockquote>`;
+  if (item.type === 'comparison') return `<div class="comparison"><p>${escape(item.left)}</p><p>${escape(item.right)}</p></div>`;
+  if (item.type === 'image') {
+    if (item.assetId) return resource(item, 'image');
+    const src = safeUrl(item.src);
+    return src && item.alt ? `<img src="${src}" alt="${escape(item.alt)}">` : '<p class="resource-error" role="status">Imagen no disponible. Puedes continuar.</p>';
+  }
+  if (item.type === 'video') {
+    if (item.assetId) return resource(item, 'video');
+    const src = safeUrl(item.src);
+    return src ? `<video src="${src}" controls preload="metadata" aria-label="${escape(item.title ?? 'Vídeo')}"></video>` : '<p class="resource-error" role="status">Vídeo no disponible. Puedes continuar.</p>';
+  }
+  if (item.type === 'callToAction') return `<p class="callout">${text}</p>`;
+  return '';
+};
+export function createVisualRenderers() { return ['cover','statement','content','media','comparison','evidence','closing'].map((typeId) => ({ typeId, render(scene) { const layout = scene.layout === 'hero' ? 'centered' : scene.layout; if (!validateLayout(layout, scene.blocks).valid) throw new Error('Invalid layout'); return { html: `<article class="scene ${layoutClass(layout)}" data-motion="${escape(scene.motion ?? 'reveal')}">${scene.blocks.map(block).join('')}</article>` }; }, dispose() {} })); }
+export const createTextRenderers = createVisualRenderers;
