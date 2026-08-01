@@ -22,6 +22,7 @@ test('static build is allowlisted, keeps 404 and contains no deployment command'
   const notFound = readFileSync(new URL('../../404.html', import.meta.url), 'utf8');
   assert.match(build, /const entries = \[/);
   assert.match(build, /'404\.html'/);
+  assert.match(build, /\.nojekyll/);
   assert.match(notFound, /Página no encontrada/);
   assert.doesNotMatch(`${build}\n${packageRc}`, /gh\s+pages|npm\s+run\s+deploy|git\s+push|pages:write|force-push/i);
 });
