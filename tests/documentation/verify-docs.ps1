@@ -12,7 +12,10 @@ $required = @(
   'docs/STORAGE_MODEL.md','docs/MIGRATION_PLAN.md',
   'docs/ASSET_ARCHITECTURE.md','docs/MEDIA_CONTRACT.md','docs/MOTION_SYSTEM.md',
   'docs/ENGINE_AUDIT_PHASE_7.md','docs/PACKAGE_CONTRACT.md','docs/PORTABLE_RUNTIME.md',
-  'THIRD_PARTY_NOTICES.md'
+  'THIRD_PARTY_NOTICES.md','docs/SECURITY_REVIEW_1.0.md','docs/PERFORMANCE_BUDGET_1.0.md',
+  'docs/COMPATIBILITY_MATRIX_1.0.md','docs/RELEASE_CANDIDATE_REPORT.md',
+  'docs/LAUNCH_CHECKLIST.md','docs/ROLLBACK_PLAN.md','docs/GITHUB_PAGES_PLAN.md',
+  'docs/PRIVACY.md','docs/TERMS.md','docs/FAQ.md','docs/SUPPORT.md'
 )
 $errors = [System.Collections.Generic.List[string]]::new()
 foreach ($relative in $required) {
@@ -20,7 +23,11 @@ foreach ($relative in $required) {
   if (-not (Test-Path -LiteralPath $path)) { $errors.Add("Missing: $relative"); continue }
   if ((Get-Content -LiteralPath $path).Count -gt 400) { $errors.Add("Over 400 lines: $relative") }
 }
-$forbiddenUi = Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object { $_.FullName -notmatch '[\\/]node_modules[\\/]' -and (($_.Extension -in '.html','.css' -and $_.Name -notin 'index.html','studio.html','library.html','styles.css') -or ($_.Extension -in '.js','.mjs' -and $_.FullName -notmatch '[\\/](src[\\/](contracts|player|ui|input|themes|layouts|media|studio|import|storage|library|package)|tests|demo|tools|portable)[\\/]' -and $_.Name -notin 'app.js','studio.js','library.js')) }
+$forbiddenUi = Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object {
+  $_.FullName -notmatch '[\\/](node_modules|dist|artifacts)[\\/]' -and
+  (($_.Extension -in '.html','.css' -and $_.Name -notin 'index.html','studio.html','library.html','404.html','styles.css') -or
+   ($_.Extension -in '.js','.mjs' -and $_.FullName -notmatch '[\\/](src[\\/](contracts|player|ui|input|themes|layouts|media|studio|import|storage|library|package)|tests|demo|tools|portable|vendor)[\\/]' -and $_.Name -notin 'app.js','studio.js','library.js','version.js'))
+}
 if ($forbiddenUi) { $errors.Add('Unexpected production code is present.') }
 $secretPattern = '(gh[pousr]_[A-Za-z0-9_]{20,}|github_pat_|AKIA[0-9A-Z]{16}|BEGIN( RSA| EC| OPENSSH)? PRIVATE KEY)'
 Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object { $_.Extension -eq '.md' -or $_.Name -eq 'LICENSE' } | ForEach-Object {

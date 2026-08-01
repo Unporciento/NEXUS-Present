@@ -44,3 +44,6 @@
 | D-044 | `fflate` 0.8.3 es la única dependencia ZIP, fijada, sin CDN y documentada | implementada |
 | D-045 | Importar paquetes crea copias con IDs locales nuevos y rollback compensatorio | implementada |
 | D-046 | El runtime portable reutiliza Player y requiere HTTP estático; `file://` no se garantiza | implementada |
+| D-047 | La candidata usa una única fuente `src/version.js` con `1.0.0-rc.1` | implementada |
+| D-048 | El build estático es un artefacto reproducible, no un despliegue | implementada |
+| D-049 | Pages y `v1.0.0` requieren gate humano, pruebas físicas y autorización separada | aprobada |

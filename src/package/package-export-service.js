@@ -3,6 +3,7 @@ import { createArchiveAdapter } from './archive-adapter.js';
 import { sha256Bytes } from './integrity-verifier.js';
 import { packageSlug, safePackageSegment } from './path-policy.js';
 import { createRuntimeProvider } from './runtime-provider.js';
+import { ENGINE_VERSION, PACKAGE_FORMAT_VERSION } from '../version.js';
 
 const text = (value) => new TextEncoder().encode(`${JSON.stringify(value, null, 2)}\n`);
 const usedIds = (document) => new Set((document.scenes ?? []).flatMap((scene) => scene.blocks ?? [])
@@ -15,8 +16,8 @@ export function createPackageExportService({
   assetRepository,
   runtimeProvider = createRuntimeProvider(),
   archive = createArchiveAdapter(),
-  engineVersion = '1.0.0',
-  packageVersion = '1.0.0',
+  engineVersion = ENGINE_VERSION,
+  packageVersion = PACKAGE_FORMAT_VERSION,
   cryptoApi = globalThis.crypto
 } = {}) {
   let destroyed = false;

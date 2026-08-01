@@ -90,3 +90,7 @@ ZIP → ArchiveAdapter → ManifestValidator → IntegrityVerifier
 ```
 
 `src/package/` no conoce el DOM. Los bindings de Studio y Biblioteca solo coordinan archivos, estados y descarga. La importación valida antes de escribir y ejecuta rollback compensatorio. El runtime portable reutiliza el Player existente y reemplaza IndexedDB por rutas estáticas verificadas. Consulta [PACKAGE_CONTRACT.md](PACKAGE_CONTRACT.md) y [PORTABLE_RUNTIME.md](PORTABLE_RUNTIME.md).
+
+## Release Candidate — Fase 9
+
+`src/version.js` es la fuente de versión del motor. `tools/build-static.js` copia una lista cerrada a `dist/`; `tools/package-release-candidate.js` genera un ZIP y SHA-256 en `artifacts/`. Ambos directorios son generados e ignorados por Git. La copia local de `fflate` permite ejecutar Studio sin `node_modules` ni CDN. Ningún script despliega o configura Pages.

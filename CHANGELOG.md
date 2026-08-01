@@ -1,5 +1,13 @@
 # Registro de cambios
 
+## [1.0.0-rc.1] — 2026-08-01
+
+- Versión centralizada para motor, Studio, paquetes y build.
+- Build estático reproducible y artefacto RC con SHA-256, sin despliegue.
+- Revisión integral de seguridad, rendimiento, accesibilidad, responsive, legal y compatibilidad.
+- 404, privacidad, términos, FAQ, soporte, lanzamiento, Pages y rollback documentados.
+- La publicación, Pages, GitHub Release, `v1.0.0`, PWA y Service Worker permanecen ausentes.
+
 ## [0.8.0-rc] — 2026-08-01
 
 - Paquete ZIP portable determinista con documento público, assets usados, manifiesto, runtime y LEEME.

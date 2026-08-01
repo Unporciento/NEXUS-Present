@@ -29,3 +29,7 @@ La siguiente fase genera e importa un paquete ZIP portable, incluye solo assets 
 Implementada en el programa RC: contrato ZIP 1.0.0, manifiesto SHA-256, límites anti-bomba, exportación desde Studio, importación como copia desde Biblioteca y Player estático reutilizable. La única dependencia añadida es `fflate` 0.8.3, fijada y auditada.
 
 La Fase 9 centraliza `1.0.0-rc.1`, ejecuta auditorías integrales y prepara artefactos y planes de lanzamiento sin desplegar ni modificar `main`.
+
+## Fase 9 — NEXUS 1.0 RC
+
+Preparada para cierre técnico: versión central, build estático, ZIP RC, seguridad, rendimiento, compatibilidad, legal, despliegue propuesto y rollback. El gate final exige revisión humana y pruebas físicas; `main`, Pages, Release y `v1.0.0` no cambian.

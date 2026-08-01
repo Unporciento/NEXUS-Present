@@ -4,7 +4,7 @@ NEXUS Present es un motor local y modular para crear y reproducir presentaciones
 
 ## Estado
 
-Fase 8 implementada en el programa NEXUS 1.0 RC: además de recursos locales, Studio exporta un ZIP portable verificable y Biblioteca lo importa como copia segura. No incluye publicación, PWA, Service Worker ni cuentas.
+NEXUS `1.0.0-rc.1` está preparado en una rama de programa independiente: Biblioteca local, Studio, multimedia, Player y paquetes portables verificables. No está publicado y no incluye PWA, Service Worker, backend ni cuentas.
 
 La especificación exacta está en [EXPORT_SERVICE.md](docs/EXPORT_SERVICE.md).
 
@@ -23,6 +23,8 @@ Abrir `library.html` para crear, importar y administrar borradores guardados en 
 - [Arquitectura](docs/ARCHITECTURE.md), [PreviewBridge](docs/PREVIEW_BRIDGE.md), [contrato del Player](docs/PLAYER_CONTRACT.md), [temas](docs/THEME_CONTRACT.md) y [layouts](docs/LAYOUT_CONTRACT.md).
 - [Recursos](docs/ASSET_ARCHITECTURE.md), [multimedia](docs/MEDIA_CONTRACT.md), [movimiento](docs/MOTION_SYSTEM.md) y [auditoría del motor](docs/ENGINE_AUDIT_PHASE_7.md).
 - [Paquete portable](docs/PACKAGE_CONTRACT.md), [runtime portable](docs/PORTABLE_RUNTIME.md) y [avisos de terceros](THIRD_PARTY_NOTICES.md).
+- [Informe RC](docs/RELEASE_CANDIDATE_REPORT.md), [seguridad](docs/SECURITY_REVIEW_1.0.md), [rendimiento](docs/PERFORMANCE_BUDGET_1.0.md) y [compatibilidad](docs/COMPATIBILITY_MATRIX_1.0.md).
+- [Privacidad](docs/PRIVACY.md), [términos](docs/TERMS.md), [FAQ](docs/FAQ.md) y [soporte](docs/SUPPORT.md).
 - [Contrato de presentación](docs/PRESENTATION_CONTRACT.md), [contrato de escenas](docs/SCENE_CONTRACT.md) y [catálogo de estados](docs/STATE_CATALOG.md).
 - [Revisión responsive](docs/RESPONSIVE_REVIEW.md), [accesibilidad](docs/ACCESSIBILITY.md) y [seguridad](docs/SECURITY.md).
 - [Estándar de desarrollo](docs/DEVELOPMENT_STANDARD.md), [ficha técnica](FICHA_TECNICA.md), [continuidad](AI_HANDOFF.md), [decisiones](docs/DECISIONS.md), [cambios](CHANGELOG.md) y [licencia](LICENSE).
