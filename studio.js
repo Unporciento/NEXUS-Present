@@ -7,6 +7,7 @@ import { createBrowserAssetRepository } from './src/storage/browser-asset-reposi
 import { bindStudioAssets } from './src/studio/assets-ui.js';
 import { createPreviewBridge } from './src/studio/preview-bridge.js';
 import { createResourceManager } from './src/media/resource-manager.js';
+import { bindPackageExport } from './src/studio/package-export-ui.js';
 
 async function boot() {
   const root = document.querySelector('#app');
@@ -43,7 +44,12 @@ async function boot() {
     repository: assetRepository,
     getDraftKey: () => session.getState().draftKey
   });
+  const packageExport = bindPackageExport(root, controller, {
+    assetRepository,
+    getDraftKey: () => session.getState().draftKey
+  });
   addEventListener('pagehide', () => {
+    packageExport.destroy();
     assets.destroy();
     persistence.destroy();
     app.destroy();

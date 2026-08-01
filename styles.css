@@ -155,6 +155,7 @@ blockquote {
   gap: 1rem;
   margin: 1rem 0;
 }
+.studio-grid > * { min-width: 0; }
 .studio aside, .studio-grid > section {
   padding: 1rem;
   color: var(--nx-text);
@@ -171,6 +172,8 @@ blockquote {
   font-weight: 650;
 }
 .studio input, .studio textarea, .studio select {
+  width: 100%;
+  max-width: 100%;
   min-height: 44px;
   padding: .6rem;
   color: var(--nx-control-text);
@@ -186,6 +189,7 @@ blockquote {
 }
 .studio-mode { display: none; }
 .studio-workspace { display: grid; gap: 1rem; }
+.studio-editing { min-width: 0; }
 .studio-action-row { display: flex; flex-wrap: wrap; gap: .5rem; }
 .primary-action {
   margin-top: .5rem;
@@ -312,7 +316,7 @@ dialog::backdrop { background: #020814b3; }
   .studio[data-preview-open=true][data-preview-state=stale] .studio-editing { min-width: 0; }
 }
 @media (max-width: 800px) {
-  .studio-grid { grid-template-columns: 1fr; }
+  .studio-grid { grid-template-columns: minmax(0, 1fr); }
   .studio-mode { display: flex; gap: .5rem; margin-top: 1rem; }
   .studio-mode button { flex: 1; }
   .studio[data-studio-view=preview] .studio-editing { display: none; }

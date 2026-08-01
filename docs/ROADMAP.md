@@ -23,3 +23,9 @@ Fuera de Fase 6 permanecen imágenes y videos reales, ZIP, copia de assets, publ
 Implementada en el programa RC: auditoría del motor, store de assets, repositorio, imágenes, video, poster, WebVTT, URLs temporales y movimiento cancelable. Player Core no se reescribió.
 
 La siguiente fase genera e importa un paquete ZIP portable, incluye solo assets usados y contiene un runtime estático verificable. Publicación, Pages, PWA, backend y nube permanecen fuera.
+
+## Fase 8 — Paquete portable
+
+Implementada en el programa RC: contrato ZIP 1.0.0, manifiesto SHA-256, límites anti-bomba, exportación desde Studio, importación como copia desde Biblioteca y Player estático reutilizable. La única dependencia añadida es `fflate` 0.8.3, fijada y auditada.
+
+La Fase 9 centraliza `1.0.0-rc.1`, ejecuta auditorías integrales y prepara artefactos y planes de lanzamiento sin desplegar ni modificar `main`.

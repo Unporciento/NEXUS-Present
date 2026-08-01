@@ -1,5 +1,9 @@
 # Catálogo de estados
 
+## Paquete portable
+
+Exportación: `idle → validating → collecting → archiving → ready`, con salidas `cancelled` o `recoverable-error`. Importación: `idle → reading → inspecting → verifying → importing → ready`, con `incompatible`, `integrity-error`, `quota-error` y `rollback`. Ningún error inicia publicación ni sobrescribe borradores.
+
 La máquina del Player usa `idle`, `loading`, `ready`, `presenting`, `paused`, `completed`, `error` y `destroyed`. Las transiciones no permitidas se rechazan; la referencia operativa es [PLAYER_CONTRACT.md](PLAYER_CONTRACT.md).
 
 | Estado | Interfaz mínima | Recuperación |

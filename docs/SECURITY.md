@@ -16,3 +16,5 @@ Fase 6 valida tamaño antes de leer, decodifica UTF-8, rechaza claves de prototi
 Fase 7 valida extensión, MIME, firma y tamaño antes de persistir recursos. SVG usa una política conservadora que rechaza scripts, eventos, referencias externas, contenido ejecutable y entidades. Los nombres no admiten rutas, controles ni nombres reservados. Recursos públicos aceptan HTTPS, rutas relativas seguras o `nexus-asset:`; traversal, `file:`, `data:` y JavaScript se rechazan.
 
 Los Blob permanecen en IndexedDB y nunca se insertan como HTML. Object URLs son temporales, cuentan referencias y se revocan al navegar o destruir. Video no usa autoplay con sonido ni continúa al ocultar la pestaña.
+
+Fase 8 inspecciona el directorio central del ZIP antes de descomprimir y limita bytes comprimidos, bytes expandidos, entradas y proporción. Rechaza traversal, rutas absolutas, nombres reservados, archivos inesperados, claves de prototipo, versiones incompatibles y hashes incorrectos. El runtime es código propio en lista cerrada; presentaciones y SVG nunca se evalúan como código.

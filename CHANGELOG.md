@@ -1,5 +1,14 @@
 # Registro de cambios
 
+## [0.8.0-rc] — 2026-08-01
+
+- Paquete ZIP portable determinista con documento público, assets usados, manifiesto, runtime y LEEME.
+- Exportación desde Studio e importación validada como copia desde Biblioteca.
+- SHA-256, lista cerrada, límites anti-bomba, rutas seguras y rollback compensatorio.
+- Runtime estático que reutiliza Player y requiere HTTP.
+- `fflate` 0.8.3 fijada como única dependencia ZIP, sin CDN ni dependencias transitivas.
+- Sin publicación, Pages, PWA, Service Worker ni backend.
+
 ## [0.7.0-rc] — 2026-07-29
 
 - AssetRepository e IndexedDB v2 con Blob, SHA-256, deduplicación y limpieza explícita.

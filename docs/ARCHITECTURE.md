@@ -80,3 +80,13 @@ El store `assets` se añadió mediante la versión 2 de la base. Documento y Blo
 Renderer Registry continúa produciendo HTML semántico inerte. Los hooks `data-nexus-asset` no contienen código ni datos privados. El DOM Adapter coordina ResourceManager y transiciones, pero Player Core no conoce IndexedDB, Blob, video ni animaciones.
 
 Contratos detallados: [ASSET_ARCHITECTURE.md](ASSET_ARCHITECTURE.md), [MEDIA_CONTRACT.md](MEDIA_CONTRACT.md), [MOTION_SYSTEM.md](MOTION_SYSTEM.md) y [ENGINE_AUDIT_PHASE_7.md](ENGINE_AUDIT_PHASE_7.md).
+
+## Paquete portable — Fase 8
+
+```text
+Studio → PackageExportService → RuntimeProvider + AssetRepository → ArchiveAdapter
+ZIP → ArchiveAdapter → ManifestValidator → IntegrityVerifier
+    → PackageImportService → AssetRepository + DraftRepository
+```
+
+`src/package/` no conoce el DOM. Los bindings de Studio y Biblioteca solo coordinan archivos, estados y descarga. La importación valida antes de escribir y ejecuta rollback compensatorio. El runtime portable reutiliza el Player existente y reemplaza IndexedDB por rutas estáticas verificadas. Consulta [PACKAGE_CONTRACT.md](PACKAGE_CONTRACT.md) y [PORTABLE_RUNTIME.md](PORTABLE_RUNTIME.md).

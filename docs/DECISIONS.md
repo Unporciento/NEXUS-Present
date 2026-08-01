@@ -40,3 +40,7 @@
 | D-040 | Object URLs tienen referencias y se revocan en navegación o destroy | implementada |
 | D-041 | Movimiento usa un registro limitado, cancelable y reducido a cut cuando corresponde | implementada |
 | D-042 | Player Core permanece ajeno a IndexedDB, Blob, codecs y animación | implementada |
+| D-043 | El paquete portable usa ZIP determinista, manifiesto versionado y hashes SHA-256 | implementada |
+| D-044 | `fflate` 0.8.3 es la única dependencia ZIP, fijada, sin CDN y documentada | implementada |
+| D-045 | Importar paquetes crea copias con IDs locales nuevos y rollback compensatorio | implementada |
+| D-046 | El runtime portable reutiliza Player y requiere HTTP estático; `file://` no se garantiza | implementada |
