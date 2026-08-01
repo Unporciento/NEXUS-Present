@@ -5,7 +5,7 @@
 | Proyecto | NEXUS Present |
 | Repositorio | https://github.com/Unporciento/NEXUS-Present |
 | Producción | https://unporciento.github.io/NEXUS-Present/ |
-| Estado | NEXUS 1.0 preparado para publicación certificada |
+| Estado | Estable y publicado |
 | Versión | 1.0.0 |
 | Última auditoría | 01/08/2026 |
 | Responsable | Usuario |

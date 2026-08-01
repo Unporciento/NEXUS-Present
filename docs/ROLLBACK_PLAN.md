@@ -4,7 +4,7 @@
 
 - Base previa al programa: rama `backup/pre-nexus-1.0-rc`, tag `backup-pre-nexus-1.0-rc` y bundle externo verificado.
 - Checkpoints: `rc-phase-6-complete`, `rc-phase-7-complete`, `rc-phase-8-complete`, `rc-phase-9-complete`.
-- `main` permanece en `8c108df87ce40747405f6dbd7092f582194ecfae` hasta autorización humana.
+- Main anterior: `8c108df87ce40747405f6dbd7092f582194ecfae`. Release certificada: `ae08c592dbdb5ecd455ec9c3cf563c3a818446eb` y tag inmutable `v1.0.0`.
 - Respaldo inmediato del lanzamiento: rama `backup/pre-nexus-1.0-release`, tag `backup-pre-nexus-1.0-release` y bundle `nexus-pre-release-1.0.0.bundle` con SHA-256 `771F72B2BA690043B79D3FD232D65563D80E92C7A74954ED0A1E0A27559622E0`.
 
 ## Procedimiento

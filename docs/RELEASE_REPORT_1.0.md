@@ -26,4 +26,14 @@ La fragmentación provenía de tokens ausentes en Biblioteca, temas de presentac
 - Reproducibilidad: el build normaliza archivos de texto a LF y dos ejecuciones consecutivas produjeron el mismo checksum.
 - Dependencias: `fflate@0.8.3`, sin transitivas; `npm audit --omit=dev`: 0 vulnerabilidades.
 
-Los valores definitivos de commit, Pages y smoke test público se registran al completar el despliegue.
+## Publicación verificada
+
+- Rama release: `af81f62f8f938b94584a8b29990f7c9f002df757`.
+- Commit certificado y destino de `v1.0.0`: `ae08c592dbdb5ecd455ec9c3cf563c3a818446eb`.
+- Pages: rama `gh-pages`, commit `15898fe87eae81a59c957973a4d4ff0413ecd455`, raíz `/`, HTTPS forzado.
+- Producción: `https://unporciento.github.io/NEXUS-Present/`.
+- GitHub Release: `https://github.com/Unporciento/NEXUS-Present/releases/tag/v1.0.0`.
+- Smoke test público: entrada, Biblioteca, IndexedDB, creación, guardado, importación JSON, Studio, paquete portable, Player, finalización, reinicio y viewport móvil emulado.
+- Descarga pública del ZIP: 100.242 bytes y checksum idéntico al certificado.
+
+No existe sincronización: los borradores creados durante el smoke test pertenecen solo al origen y perfil de navegador usados.

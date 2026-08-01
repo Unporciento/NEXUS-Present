@@ -6,6 +6,8 @@ NEXUS Present es una aplicación local y modular para crear, organizar y reprodu
 
 NEXUS `1.0.0` incluye Biblioteca local, Studio, multimedia, Player y paquetes portables verificables. No incluye PWA, Service Worker, backend, cuentas ni sincronización entre dispositivos.
 
+Producción: [https://unporciento.github.io/NEXUS-Present/](https://unporciento.github.io/NEXUS-Present/). Release estable: [NEXUS 1.0.0](https://github.com/Unporciento/NEXUS-Present/releases/tag/v1.0.0).
+
 La especificación exacta está en [EXPORT_SERVICE.md](docs/EXPORT_SERVICE.md).
 
 El cierre de experiencia está descrito en [ONBOARDING.md](docs/ONBOARDING.md) y [HELP_SYSTEM.md](docs/HELP_SYSTEM.md).

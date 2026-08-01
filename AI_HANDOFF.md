@@ -2,7 +2,7 @@
 
 ## Estado actual
 
-NEXUS `1.0.0` se cierra en `release/nexus-1.0.0` con carcasa compartida, versión final, respaldo y plan de Pages. Leer [RELEASE_REPORT_1.0.md](docs/RELEASE_REPORT_1.0.md), [APP_SHELL.md](docs/APP_SHELL.md), [SECURITY_REVIEW_1.0.md](docs/SECURITY_REVIEW_1.0.md) y [ROLLBACK_PLAN.md](docs/ROLLBACK_PLAN.md).
+NEXUS `1.0.0` está publicado y estable. El tag `v1.0.0` apunta al commit certificado `ae08c592dbdb5ecd455ec9c3cf563c3a818446eb`; Pages se sirve desde `gh-pages` en [producción](https://unporciento.github.io/NEXUS-Present/). Leer [RELEASE_REPORT_1.0.md](docs/RELEASE_REPORT_1.0.md), [APP_SHELL.md](docs/APP_SHELL.md), [SECURITY_REVIEW_1.0.md](docs/SECURITY_REVIEW_1.0.md) y [ROLLBACK_PLAN.md](docs/ROLLBACK_PLAN.md).
 
 ## Límites firmes
 
